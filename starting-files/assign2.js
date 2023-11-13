@@ -9,7 +9,6 @@ const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.p
 addEventListener("DOMContentLoaded", async (event) =>{
 
    var music = localStorage.getItem("data");
-   var artists = await fetchData('C:/Users/rapha/Downloads/f2023-assign2-master/f2023-assign2-master/starting-files/genres.json');
 
    if(music ===null){
       music = await fetchData(api);
