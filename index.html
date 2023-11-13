@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raph's Music App</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        button{color: white;}
+
+        header {
+          
+           
+            top: 0px;
+            padding-bottom: 3px;
+            height: 200px;
+            text-align: center;
+        }
+        header, footer
+        
+        {
+            background-color: #b22ede;
+            text-align: center;
+        }
+        footer {
+           
+            
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        header img{
+            left: 0px;
+            width: 175px;
+            display: inline;
+            margin: 0 60px;
+
+        }
+
+        h1{
+            margin:0% auto;
+          display: inline;
+            
+        }
+
+        h2{
+            line-height: 0.0;
+
+        }
+        .header-div{
+            line-height: 0.0;
+            padding: 6px;
+            
+            border:  1px solid grey;
+            border-radius: 10px;
+            background-color: rgba(43, 87, 105, 0.7);
+            display: inline-block;
+
+            font-size: 30px;
+            height: 35px;
+        }
+
+        .header-div:hover{
+
+            background-color: rgba(80, 109, 212, 0.9);
+
+        }
+
+
+        .hide{
+
+            display: none;
+        }
+     
+
+        main{
+            
+            background-image:url(./images/https___cdn.evbuc.com_images_602106279_200284926746_1_original.jpg);
+            min-height: 790px;
+            background-size: contain;
+            color:cornsilk;
+        
+            text-align: center;
+            padding: 20px;
+        
+        }
+
+        main>div>div{
+
+            background-color: rgba(28, 81, 146, 0.9);
+            border-radius: 20px;
+
+            min-height: 100%;
+
+
+
+        }
+
+        main>div{
+            min-height: 100%;
+            max-height: 500px;
+
+            margin:0% auto;
+
+        }
+
+        #left{
+
+
+          
+            right: 10px;
+
+            margin-bottom: 0%;
+
+
+
+        }
+
+        h1 img{
+            height: 170px;
+            width: 350px;
+        }
+
+        form div{
+            
+            margin: 15px;
+        }
+   
+
+        .select, option {
+
+            width: 150px;
+            color: aliceblue;
+            color: black;
+        }
+
+        form button{
+            color:black;
+        }
+
+        table{
+            overflow-y: auto;
+            max-height: 100%;
+
+        }
+
+
+      
+
+       
+    </style>
+
+
+    <script src="./starting-files/assign2.js"></script>
+</head>
+<body>
+
+    <header>
+
+      
+
+       
+        
+      
+        <img src="./images/disc-jockey-phonograph-record-dj-mix-anime-scratching-anime-removebg-preview.png" id ="logo2">
+        <h1><img src="./images/image-removebg-preview.png" alt="Epic Music Hub Logo"></h1>
+
+        <img src="./images/anime_girl_dj_render_by_arshavlr-d763epy.png" id = "left">
+
+        <div id = "homeButtons">
+            <button class="header-div" id = "browse">
+                Browse
+            </button>
+            <button class="header-div" id = "playlist">
+                Playlist
+            </button>
+            <button class="header-div" id = "home">
+                Home
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <div data-id = "home">
+            <h1 style="background-color:rgba(28, 81, 146, 0.9); padding: 15px; border-radius: 10px;
+                       
+            
+            font-size: 40px; position:relative; top: 150px; height:20%">Welcome to a whole new world of Music</h1>
+
+        </div>
+            
+    <div data-id ="browse" class="hide">
+        <div style=" float:left; width: 25%; " >
+            <h2>Search/Filter</h2>
+
+            <form id ="filter">
+                <div>
+                    <input type="radio" data-id="genre" name="searchOption" value="artist">
+                    <label for="genre">Genre</label><br>
+                    <select name="genre" id="genre"  class="select" disabled>
+                        <option disabled selected>Please Select a genre</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="radio" data-id="artist" name="searchOption" value="title">
+                    <label for="artist">Artist</label><br>
+                    <select name="artist" id="artist" class="select" disabled>
+                        <option disabled selected>Please Select an artist</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="radio" data-id="title" name="searchOption" value="title">
+                    <label for="title">Song Title</label><br>
+                    <input type="text" name="title" id="title"  class="select" disabled>
+                     
+                    
+                </div>
+
+                <button type="button" id="listSongs">Search</button>
+                <button id="clear" type="reset">Clear</button>
+            </form>
+
+        </div>
+        
+        <div style=" float:right; width: 70%; max-height: 90%; " >
+            <h2>Results</h2>
+            <table style="width: 90%;">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody id="searchList" style="max-height: 90%">
+                
+            </tbody>
+        </table>
+
+        </div>
+    
+    </div>
+        
+
+    </main>
+
+   
+
+    <footer>
+        <p>&copy; 2023 Raphtastic Music</p>
+    </footer>
+
+</body>
+</html>
