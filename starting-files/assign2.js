@@ -10,6 +10,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var music = await localStorage.getItem("data");
    var artists = await localStorage.getItem("./starting-files/genres.json");
 
+   console.log('got the other data');
+
    if(music ===null){
       music = await fetchData(api);
       console.log("getting the data");
