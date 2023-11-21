@@ -82,7 +82,7 @@
         main{
             
             background-image:url(./images/https___cdn.evbuc.com_images_602106279_200284926746_1_original.jpg);
-            min-height: 790px;
+            min-height: 700px;
             background-size: contain;
             color:cornsilk;
         
@@ -202,23 +202,23 @@
 
             <form id ="filter">
                 <div>
-                    <input type="radio" data-id="genre" name="searchOption" value="artist">
+                    <input type="radio" data-id="genre" name="searchOption">
                     <label for="genre">Genre</label><br>
                     <select name="genre" id="genre"  class="select" disabled>
                         <option disabled selected>Please Select a genre</option>
                     </select>
                 </div>
                 <div>
-                    <input type="radio" data-id="artist" name="searchOption" value="title">
+                    <input type="radio" data-id="artist" name="searchOption">
                     <label for="artist">Artist</label><br>
                     <select name="artist" id="artist" class="select" disabled>
                         <option disabled selected>Please Select an artist</option>
                     </select>
                 </div>
                 <div>
-                    <input type="radio" data-id="title" name="searchOption" value="title">
+                    <input type="radio" data-id="title" name="searchOption">
                     <label for="title">Song Title</label><br>
-                    <input type="text" name="title" id="title"  class="select" disabled>
+                    <input type="text"  id="title"  class="select" disabled>
                      
                     
                 </div>
@@ -229,7 +229,7 @@
 
         </div>
         
-        <div style=" float:right; width: 70%; max-height: 90%; " >
+        <div style=" float:right; width: 70%; max-height: 500px; overflow-y:scroll" >
             <h2>Results</h2>
             <table style="width: 90%;">
             <thead>

@@ -8,7 +8,6 @@ const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.p
 
 addEventListener("DOMContentLoaded", async (event) =>{
    var music = await localStorage.getItem("data");
-   var artists = await localStorage.getItem("./starting-files/genres.json");
 
    console.log('got the other data');
 
@@ -35,6 +34,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    console.log("Loaded");
 
+   
 
   
    var pages = Array.from(document.querySelector("main").children);
@@ -43,13 +43,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       pages.forEach(function(page) {
 
-
+         if(event.target.classList.contains("header-div")){
          if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
          
          
          (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
             page.classList.toggle("hide");
-         }
+         }}
      });
 
    }
@@ -57,6 +57,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
   
    
    );
+
+   function populateSearch(selectBox, populator, ){
+      for(item of populator){
+
+         selectBox.add
+      }
+
+   }
 
    var filter= document.querySelector("#filter");
    var selectBars = document.querySelectorAll(".select");
@@ -84,9 +92,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
    });
 
 
-   document.querySelector("#listSongs").addEventListener("click", (event) =>{
+   document.querySelector("#filter").addEventListener("click", (event) =>{
 
-      
+
+      if(event.target.id="listSongs"){
 
          for(song of music){
              var newRow = document.createElement("tr");
@@ -99,7 +108,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
             document.querySelector("#searchList").appendChild(newRow);
          }
       
+      }
 
+      if(event.target.type === "reset"){
+
+         document.querySelector("#searchList").innerHTML="";
+
+
+      }
 
    })
 
