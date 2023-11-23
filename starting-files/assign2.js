@@ -216,7 +216,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       th.addEventListener('click', (event) => {
 
 
-         if(event.target.tagName ==='h3'){
+         if(event.target.tagName ==='th'){
 
             console.log('code executing');
             if(event.target.dataset.id ==='title'){
@@ -225,7 +225,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             }
             else if(event.target.dataset.id ==='genre'){
 
-               selectedSort = titleList;
+               selectedSort = genreList;
             }
 
             else if(event.target.dataset.id ==='year'){
