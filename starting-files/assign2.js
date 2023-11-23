@@ -215,10 +215,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       table.innerHTML="";
 
-      for(item of list){
+      for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
        
-         newRow.innerHTML = `${item}`;
+         newRow.innerHTML = `${list[i]}`;
         table.appendChild(newRow);
      }
    }
@@ -231,6 +231,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    populateTopTable(document.querySelector('#topArtists'), topArtists);
    populateTopTable(document.querySelector('#topGenres'), topGenres);
+   populateTopTable(document.querySelector('#topSongs'), music.toSorted((a,b) =>{
+
+      a.details.popularity - b.details.popularity;
+   }));
 
 
 
