@@ -12,7 +12,9 @@
             padding: 0;
             color: white;
         }
-        button{color: white;
+        button{
+            
+            color: white;
             font-size: 20px;
             background-color: rgba(52, 22, 105, 0.7);
             border-radius: 15px;
@@ -187,6 +189,11 @@
 
             font-size: 28px;
         }
+
+        th>h3{
+
+            cursor: pointer;
+        }
       
        
     </style>
@@ -296,16 +303,16 @@
                 <table style="width: 90%;">
                 <thead>
                     <tr>
-                        <th><h3>Title </h3><button class="rearrange" type="button"></button></th>
-                        <th><h3>Artist</h3><button class="rearrange" type="button"></button></th>
-                        <th><h3>Genre</h3><button class="rearrange" type="button"></button></th>
-                        <th><h3>Year</h3><button class="rearrange" type="button"></button></th>
+                        <th><h3 data-id="title">Title</h3></th>
+                        <th><h3 data-id="artist">Artist</h3></th>
+                        <th><h3 data-id="genre">Genre</h3></th>
+                        <th><h3 data-id="year">Year</h3></th>
                     </tr>
                 </thead>
                 <tbody id="searchList" style="max-height: 90%">
                     
                 </tbody>
-            </table>
+                </table>
 
             </div>
         
