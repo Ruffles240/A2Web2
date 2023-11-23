@@ -25,7 +25,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-   var yearList = music.toSorted((a,b) => (a.year - b.year));
+   var yearList = music.toSorted((a,b) => (b.year - a.year));
    var genreList = music.toSorted((a,b) => (a.genre.name.localeCompare(b.genre.name)));
    
    var titleList = music.toSorted((a,b) => (a.title.localeCompare(b.title)));
