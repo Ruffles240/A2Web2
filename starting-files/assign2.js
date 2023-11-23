@@ -40,8 +40,30 @@ addEventListener("DOMContentLoaded", async (event) =>{
   }
 
    console.log("Loaded");
-   
 
+   populateSelect(genres ,document.querySelector('#genre'));
+   populateSelect(artists ,document.querySelector('#artist'));
+
+   
+  function populateSelect(populator, select){
+
+   for(item of populator){
+      let option = document.createElement('option');
+
+      option.innerHTML=item.name;
+      option.value=item.id;
+
+      select.appendChild(option);
+
+
+
+
+   }
+
+
+
+
+  }
 
    
 
