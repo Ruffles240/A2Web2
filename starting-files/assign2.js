@@ -181,6 +181,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          <td>${song.artist.name}</td>
          <td>${song.genre.name}</td>
          <td>${song.year}</td>
+         <td<button type= 'button' data-id = '${song_id}'>Add</button></td>
+
         `;
         table.appendChild(newRow);
      }
