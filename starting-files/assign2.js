@@ -218,7 +218,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             console.log('code executing 1');
 
 
-         if(event.target.tagName ==='th'){
+         if(event.target.classList.contains('rearrange')){
 
             console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
