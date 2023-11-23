@@ -224,17 +224,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
   
-/*
-   var topSongs = findFreq('genre', 1);
+
+   var topArtists = findFreq('artist','name');
 
   
-   populateTopTable(document.querySelector('#topSongs'), topSongs);
+   populateTopTable(document.querySelector('#topArtists'), topArtists);
 
 
 
 
 
-   function findFreq(discriminator) {
+   function findFreq(discriminator,) {
       let freqs = {};
       
     
@@ -264,7 +264,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
      
      return mostFreq;
   }
-*/
+
    });
 
  
