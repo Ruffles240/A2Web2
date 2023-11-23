@@ -30,7 +30,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    var titleList = music.toSorted((a,b) => (a.title.localeCompare(b.title)));
 
-   console.log(yearListList);
+   console.log(yearList);
 
 
    console.log(music);
