@@ -212,13 +212,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    document.querySelectorAll('thead tr').forEach((th) => {
 
+      console.log('code executing 0');
 
       th.addEventListener('click', (event) => {
+            console.log('code executing 1');
 
 
          if(event.target.tagName ==='th'){
 
-            console.log('code executing');
+            console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
 
                selectedSort = titleList;
