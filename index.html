@@ -164,6 +164,12 @@
 
         }
 
+        .selectedSort{
+
+            background-color:#8c2ede8f;
+
+        }
+
         #homeView div{
 
             height: 450px;
@@ -270,21 +276,29 @@
                 <h2>Search/Filter</h2>
 
                     <form id ="filter">
+
                         <div>
+
                             <input type="radio" data-id="genre" name="searchOption">
                             <label for="genre">Genre</label><br>
                             <select name="genre" id="genre"  class="select" disabled>
                                 <option disabled selected  value="">Please Select a genre</option>
                             </select>
+
                         </div>
+                        
                         <div>
+
                             <input type="radio" data-id="artist" name="searchOption">
                             <label for="artist">Artist</label><br>
                             <select name="artist" id="artist" class="select" disabled>
                                 <option disabled selected  value="">Please Select an artist</option>
                             </select>
+
                         </div>
+
                         <div>
+
                             <input type="radio" data-id="title" name="searchOption">
                             <label for="title">Song Title</label><br>
                             <input type="text"  id="title"  class="select" disabled>
@@ -294,6 +308,7 @@
 
                         <button type="button" class="buttons" id="listSongs">Search</button>
                         <button id="clear" class= "buttons " type="reset">Clear</button>
+
                 </form>
 
             </div>

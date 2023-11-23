@@ -220,6 +220,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          if(event.target.classList.contains('rearrange')){
 
+            event.target.classList.add('selectedSort');
+
+
             console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
 
@@ -235,6 +238,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             else if(event.target.dataset.id ==='genre'){
 
                if(selectedSort===genreList){
+                  
 
                   selectedSort = genreList.toReversed();
                }
@@ -258,7 +262,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
             else if(event.target.dataset.id ==='artist'){
                
                if(selectedSort===artistList){
-
 
 
                   selectedSort = artistList.toReversed();
