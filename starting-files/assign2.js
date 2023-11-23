@@ -135,8 +135,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(typeof filter ==='object'){
 
          filter = filter['id'];
-
-         return filter===value;
+         console.log(value + ' ' + filter);
+         return filter==value;
       }
 
       console.log(value + ' ' + filter);
