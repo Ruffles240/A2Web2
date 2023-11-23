@@ -19,6 +19,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       localStorage.setItem("data", JSON.stringify(music));
 
    }
+   
    else {
       console.log("got the data");
       music = JSON.parse(music);
