@@ -218,7 +218,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          if(event.target.tagName ==='h3'){
 
-            
+            console.log('code executing');
             if(event.target.dataset.id ==='title'){
 
                selectedSort = titleList;
