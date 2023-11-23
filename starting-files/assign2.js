@@ -25,6 +25,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
+
+
    var yearList = music.toSorted((a,b) => (b.year - a.year));
    var genreList = music.toSorted((a,b) => (a.genre.name.localeCompare(b.genre.name)));
    
@@ -33,7 +35,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
    console.log(yearList);
 
 
-   console.log(music);
 
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
@@ -241,7 +242,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    populateTopTable(document.querySelector('#topGenres'), topGenres);
    populateTopTable(document.querySelector('#topSongs'), music.toSorted((a,b) =>{
 
-      a.details.popularity - b.details.popularity;
+      b.details.popularity - a.details.popularity;
    }));
 
 
