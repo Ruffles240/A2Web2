@@ -227,8 +227,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var topArtists = findFreq('artist','name');
 
-  
+   var topGenres = findFreq('genre','name');
+
    populateTopTable(document.querySelector('#topArtists'), topArtists);
+   populateTopTable(document.querySelector('#topGenres'), topGenres);
 
 
 
