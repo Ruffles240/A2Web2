@@ -121,14 +121,20 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(thisSearch!=null){
             let searchedValue = thisSearch.id;
 
+            if(searchedValue.value=''){
+               alert('Please choose an option.')
 
-            populateTable(searchTable, music.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
+
+            }
+            else{
+
+            populateTable(searchTable, music.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}
             
          }
 
          else{
 
-            alert('Please choose a select option.')
+            alert('Please choose a search option.')
          }
 
          }
