@@ -19,7 +19,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       localStorage.setItem("data", JSON.stringify(music));
 
    }
-   
+
    else {
       console.log("got the data");
       music = JSON.parse(music);
@@ -28,12 +28,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
 
-   var yearList = music.toSorted((a,b) => (b.year - a.year));
-   var genreList = music.toSorted((a,b) => (a.genre.name.localeCompare(b.genre.name)));
+   var yearList = music.toSorted((a,b) => { return b.year - a.year});
+   var genreList = music.toSorted((a,b) => {return a.genre.name.localeCompare(b.genre.name)});
+   var artistList = music.toSorted((a,b) => {return a.artist.name.localeCompare(b.artist.name)});
    
-   var titleList = music.toSorted((a,b) => (a.title.localeCompare(b.title)));
+   var titleList = music.toSorted((a,b) => { return a.title.localeCompare(b.title)});
+   var selectedSort = music;
 
-   console.log(yearList);
 
 
 
@@ -93,7 +94,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
       if(event.target.type==="radio"){
-         populateTable(document.querySelector('#searchList'), music);
+         populateTable(document.querySelector('#searchList'), selectedSort);
 
          resetBoxes(selectBars);
          document.querySelector(`#${event.target.dataset.id}`).disabled = false;
@@ -105,7 +106,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    })});
 
-   populateTable(document.querySelector('#searchList'), music);
+   populateTable(document.querySelector('#searchList'), selectedSort);
 
 
    
@@ -129,7 +130,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             }
             else{
 
-            populateTable(searchTable, music.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}
+            populateTable(searchTable, selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}
             
          }
 
@@ -159,7 +160,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       event.stopPropagation();
   
             resetBoxes(selectBars);
-            populateTable(document.querySelector('#searchList'), music);
+            populateTable(document.querySelector('#searchList'), selectedSort);
          
       }
    )
@@ -207,6 +208,50 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
    
    );
+
+
+   document.querySelectorAll('thead tr').forEach((th) => {
+
+
+      th.addEventListener('click', (event) => {
+
+
+         if(event.target.tagName ==='h3'){
+
+            
+            if(event.target.dataset.id ==='title'){
+
+               selectedSort = titleList;
+            }
+            else if(event.target.dataset.id ==='genre'){
+
+               selectedSort = titleList;
+            }
+
+            else if(event.target.dataset.id ==='year'){
+
+               selectedSort = yearList;
+            }
+            else if(event.target.dataset.id ==='artist'){
+
+               selectedSort = artistList;
+            }
+
+            populateTable(document.querySelector(`#${event.target.dataset.table}`), selectedSort);
+
+
+         }
+
+
+
+
+
+
+      } 
+
+      )
+
+   })
 
    function resetBoxes(resetted){
 

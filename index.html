@@ -269,31 +269,31 @@
             <div style=" float:left; width: 25%; " class="section">
                 <h2>Search/Filter</h2>
 
-                <form id ="filter">
-                    <div>
-                        <input type="radio" data-id="genre" name="searchOption">
-                        <label for="genre">Genre</label><br>
-                        <select name="genre" id="genre"  class="select" disabled>
-                            <option disabled selected  value="">Please Select a genre</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="radio" data-id="artist" name="searchOption">
-                        <label for="artist">Artist</label><br>
-                        <select name="artist" id="artist" class="select" disabled>
-                            <option disabled selected  value="">Please Select an artist</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="radio" data-id="title" name="searchOption">
-                        <label for="title">Song Title</label><br>
-                        <input type="text"  id="title"  class="select" disabled>
-                        
-                        
-                    </div>
+                    <form id ="filter">
+                        <div>
+                            <input type="radio" data-id="genre" name="searchOption">
+                            <label for="genre">Genre</label><br>
+                            <select name="genre" id="genre"  class="select" disabled>
+                                <option disabled selected  value="">Please Select a genre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="radio" data-id="artist" name="searchOption">
+                            <label for="artist">Artist</label><br>
+                            <select name="artist" id="artist" class="select" disabled>
+                                <option disabled selected  value="">Please Select an artist</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input type="radio" data-id="title" name="searchOption">
+                            <label for="title">Song Title</label><br>
+                            <input type="text"  id="title"  class="select" disabled>
+                            
+                            
+                        </div>
 
-                    <button type="button" class="buttons" id="listSongs">Search</button>
-                    <button id="clear" class= "buttons " type="reset">Clear</button>
+                        <button type="button" class="buttons" id="listSongs">Search</button>
+                        <button id="clear" class= "buttons " type="reset">Clear</button>
                 </form>
 
             </div>
@@ -303,10 +303,10 @@
                 <table style="width: 90%;">
                 <thead>
                     <tr>
-                        <th><h3 data-id="title">Title</h3></th>
-                        <th><h3 data-id="artist">Artist</h3></th>
-                        <th><h3 data-id="genre">Genre</h3></th>
-                        <th><h3 data-id="year">Year</h3></th>
+                        <th><h3 data-id="title" data-table="searchList">Title</h3></th>
+                        <th><h3 data-id="artist" data-table="searchList">Artist</h3></th>
+                        <th><h3 data-id="genre" data-table="searchList">Genre</h3></th>
+                        <th><h3 data-id="year" data-table="searchList">Year</h3></th>
                     </tr>
                 </thead>
                 <tbody id="searchList" style="max-height: 90%">
