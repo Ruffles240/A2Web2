@@ -217,7 +217,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
-       
+         
+         if(typeof list[i] === "object"){
+
+            newRow.innerHTML = `${list[i['title']]}`;
+
+         }
+
          newRow.innerHTML = `${list[i]}`;
         table.appendChild(newRow);
      }
