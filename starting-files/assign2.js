@@ -238,12 +238,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var topGenres = findFreq('genre','name');
 
+   let popularitySort= music.toSorted((a,b) => {
+      return a.details.popularity - b.details.popularity;
+
+
+   })
+
    populateTopTable(document.querySelector('#topArtists'), topArtists);
    populateTopTable(document.querySelector('#topGenres'), topGenres);
-   populateTopTable(document.querySelector('#topSongs'), music.toSorted((a,b) =>{
-
-      b.details.popularity - a.details.popularity;
-   }));
+   populateTopTable(document.querySelector('#topSongs'), popularitySort);
 
 
 
