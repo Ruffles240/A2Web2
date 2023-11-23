@@ -132,13 +132,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
    )
 
    function checkFilter(value, filter) {
-      console.log(value + ' '+ filter);
       if(typeof filter ==='object'){
 
          filter = filter['id'];
       }
 
-      
+      console.log(value + ' ' + filter);
+
       return filter.toLowerCase().includes(value.toLowerCase());
     }
       
