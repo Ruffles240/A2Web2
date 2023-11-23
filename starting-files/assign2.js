@@ -234,7 +234,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
 
-   function findFreq(discriminator,) {
+   function findFreq(discriminator, location) {
       let freqs = {};
       
     
