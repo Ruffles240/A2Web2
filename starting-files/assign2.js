@@ -220,12 +220,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          if(event.target.classList.contains('rearrange')){
 
-            document.querySelectorAll('.rearrange').forEach((background)
-            
-            => background.classList.remove('selectedSort');
-            
-            
-            )
+            document.querySelectorAll('.rearrange').forEach((background) => {background.classList.remove('selectedSort')})
 
             event.target.classList.add('selectedSort');
 
