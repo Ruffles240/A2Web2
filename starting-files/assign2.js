@@ -49,20 +49,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    for(item of populator){
       let option = document.createElement('option');
-
       option.innerHTML=item.name;
       option.value=item.id;
 
       select.appendChild(option);
-
-
-
-
    }
-
-
-
-
   }
 
    
@@ -142,6 +133,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    function checkFilter(value, filter) {
 
+      if(typeof filter ==='object'){
+
+         filter = filter['id'];
+      }
+
       console.log(value + filter);
       return filter.toLowerCase().includes(value.toLowerCase());
     }
@@ -168,7 +164,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(song.title.length>25){
             shortenedTitle = shortenedTitle.substring(0, 23);
             shortenedTitle += `<button class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
-
          }
          newRow.innerHTML = `
          <td>${shortenedTitle}</td>
@@ -189,24 +184,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
    searchTable.addEventListener('click', (event)=>
    
    {
-
-      
          if(event.target.classList.contains('titleEllipse'))
-         
          {
-
             const thisSong = music.find((song) => {
-               
                return song.song_id == event.target.dataset.id});
-
-
             alert(`${thisSong.title}`);
-
          }
-      
-
-
-
    }
    
    );
