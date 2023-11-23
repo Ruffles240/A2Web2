@@ -223,8 +223,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.innerHTML = `${list[i['title']]}`;
 
          }
-
-         newRow.innerHTML = `${list[i]}`;
+         else{
+         newRow.innerHTML = `${list[i]}`;}
         table.appendChild(newRow);
      }
    }
