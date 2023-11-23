@@ -91,11 +91,11 @@
         
         }
 
-        main>div>div{
+        .section {
 
             background-color: rgba(28, 81, 146, 0.9);
             border-radius: 20px;
-
+            font-size: 18px;
             min-height: 100%;
 
 
@@ -150,9 +150,41 @@
 
         }
 
+        .titleEllipse{
+            background: none;
+            border: none;
+            padding: 0px;
+            cursor: pointer;
 
+
+        }
+
+        #homeView div{
+
+            height: 450px;
+
+
+            margin:15px;
+        }
+
+        #homeView{
+
+            display: flex;
+
+
+            justify-content: center;
+        }
+        
+        h2{
+
+            font-size: 32px;
+        }
+
+        h3{
+
+            font-size: 28px;
+        }
       
-
        
     </style>
 
@@ -188,66 +220,93 @@
 
     <main>
 
-        <div data-id = "home">
-            <h1 style="background-color:rgba(28, 81, 146, 0.9); padding: 15px; border-radius: 10px;
-                       
-            
-            font-size: 40px; position:relative; top: 150px; height:20%">Welcome to a whole new world of Music</h1>
+        <div data-id = "home" >
+            <div id="homeView">
+                <div style="width: 22%;" class="section">
 
+                    <h2>Top Artists</h2>
+
+                    <ol id="topArtists">
+                        
+
+
+                    </ol>
+                </div>
+                <div style="width: 22%;" class="section">
+
+                    <h2 >Top Genres</h2>
+                    <ol id="topGenres">
+                        
+
+
+                    </ol>
+
+                </div>
+                <div style="width: 40%;" class="section">
+                    <h2>Most Popular Songs</h2>
+
+                    <ol id="topSongs">
+                        
+
+
+                    </ol>
+
+                </div>
+            </div>
         </div>
             
-    <div data-id ="browse" class="hide">
-        <div style=" float:left; width: 25%; " >
-            <h2>Search/Filter</h2>
+        <div data-id ="browse" class="hide">
+            <div style=" float:left; width: 25%; " class="section">
+                <h2>Search/Filter</h2>
 
-            <form id ="filter">
-                <div>
-                    <input type="radio" data-id="genre" name="searchOption">
-                    <label for="genre">Genre</label><br>
-                    <select name="genre" id="genre"  class="select" disabled>
-                        <option disabled selected>Please Select a genre</option>
-                    </select>
-                </div>
-                <div>
-                    <input type="radio" data-id="artist" name="searchOption">
-                    <label for="artist">Artist</label><br>
-                    <select name="artist" id="artist" class="select" disabled>
-                        <option disabled selected>Please Select an artist</option>
-                    </select>
-                </div>
-                <div>
-                    <input type="radio" data-id="title" name="searchOption">
-                    <label for="title">Song Title</label><br>
-                    <input type="text"  id="title"  class="select" disabled>
-                     
+                <form id ="filter">
+                    <div>
+                        <input type="radio" data-id="genre" name="searchOption">
+                        <label for="genre">Genre</label><br>
+                        <select name="genre" id="genre"  class="select" disabled>
+                            <option disabled selected>Please Select a genre</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="radio" data-id="artist" name="searchOption">
+                        <label for="artist">Artist</label><br>
+                        <select name="artist" id="artist" class="select" disabled>
+                            <option disabled selected>Please Select an artist</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="radio" data-id="title" name="searchOption">
+                        <label for="title">Song Title</label><br>
+                        <input type="text"  id="title"  class="select" disabled>
+                        
+                        
+                    </div>
+
+                    <button type="button" class="buttons" id="listSongs">Search</button>
+                    <button id="clear" class= "buttons " type="reset">Clear</button>
+                </form>
+
+            </div>
+            
+            <div style=" float:right; width: 70%; max-height: 500px; overflow-y:scroll" class="section">
+                <h2>Results</h2>
+                <table style="width: 90%;">
+                <thead>
+                    <tr>
+                        <th><h3>Title </h3><button class="rearrange" type="button"></button></th>
+                        <th><h3>Artist</h3><button class="rearrange" type="button"></button></th>
+                        <th><h3>Genre</h3><button class="rearrange" type="button"></button></th>
+                        <th><h3>Year</h3><button class="rearrange" type="button"></button></th>
+                    </tr>
+                </thead>
+                <tbody id="searchList" style="max-height: 90%">
                     
-                </div>
+                </tbody>
+            </table>
 
-                <button type="button" id="listSongs">Search</button>
-                <button id="clear" type="reset">Clear</button>
-            </form>
-
-        </div>
+            </div>
         
-        <div style=" float:right; width: 70%; max-height: 500px; overflow-y:scroll" >
-            <h2>Results</h2>
-            <table style="width: 90%;">
-            <thead>
-                <tr>
-                    <th>Title <button class="rearrange" type="button"></button></th>
-                    <th>Artist<button class="rearrange" type="button"></button></th>
-                    <th>Genre<button class="rearrange" type="button"></button></th>
-                    <th>Year<button class="rearrange" type="button"></button></th>
-                </tr>
-            </thead>
-            <tbody id="searchList" style="max-height: 90%">
-                
-            </tbody>
-        </table>
-
         </div>
-    
-    </div>
         
 
     </main>

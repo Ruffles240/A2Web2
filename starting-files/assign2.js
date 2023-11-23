@@ -21,7 +21,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
       music = JSON.parse(music);
 
    }
-      
+
+   var yearList = music.toSorted((a,b) => (a.year - b.year));
+   var genreList = music.toSorted((a,b) => (a.genre.name.localeCompare(b.genre.name)));
+   
+   var titleList = music.toSorted((a,b) => (a.title.localeCompare(b.title)));
+
 
    console.log(music);
 
@@ -59,23 +64,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    );
 
-   function populateSearch(selectBox, populator, ){
-      for(item of populator){
-
-         selectBox.add
-      }
-
-   }
-
+  
    var filter= document.querySelector("#filter");
-   var selectBars = document.querySelectorAll(".select");
+   const selectBars = Array.from(document.querySelectorAll(".select"));
 
-   filter.addEventListener("change", (event)=>{
+   document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
 
 
 
       if(event.target.type==="radio"){
-       
+         populateTable(document.querySelector('#searchList'), music);
+
          resetBoxes(selectBars);
          document.querySelector(`#${event.target.dataset.id}`).disabled = false;
 
@@ -84,42 +83,108 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       
 
-   });
+   })});
 
+   populateTable(document.querySelector('#searchList'), music);
 
 
    
 
-   document.querySelector("#filter").addEventListener("click", (event) =>{
+   document.querySelector("#listSongs").addEventListener("click", (event) =>{
+      
+         event.stopPropagation();
+         const thisSearch = selectBars.find((bar) => {
 
 
-      if(event.target.id="listSongs"){
-         blue = music.toSorted((a,b) => (b.year - a.year));
-         for(song of music){
-             var newRow = document.createElement("tr");
-             newRow.innerHTML = `
-             <td>${song.title}</td>
-             <td>${song.artist.name}</td>
-             <td>${song.genre.name}</td>
-             <td>${song.year}</td>
-            `;
-            document.querySelector("#searchList").appendChild(newRow);
+            return bar.disabled === false;
+         });
+
+         if(thisSearch!=null){
+            let searchedValue = thisSearch.id;
+
+
+            populateTable(searchTable, music.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
+            
+         }
+
+         else{
+
+            alert('Please choose a select option.')
+         }
+
+         }
+   )
+
+   function checkFilter(value, filter) {
+
+      console.log(value + filter);
+      return filter.toLowerCase().includes(value.toLowerCase());
+    }
+      
+   document.querySelector("#clear").addEventListener("click", (event) =>{
+
+      event.stopPropagation();
+  
+            resetBoxes(selectBars);
+            populateTable(document.querySelector('#searchList'), music);
+         
+      }
+   )
+
+
+
+   function populateTable(table, list){
+
+      table.innerHTML="";
+
+      for(song of list){
+         var newRow = document.createElement("tr");
+         var shortenedTitle= song.title.substring(0,24);
+         if(song.title.length>25){
+            shortenedTitle = shortenedTitle.substring(0, 23);
+            shortenedTitle += `<button class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
+
+         }
+         newRow.innerHTML = `
+         <td>${shortenedTitle}</td>
+         <td>${song.artist.name}</td>
+         <td>${song.genre.name}</td>
+         <td>${song.year}</td>
+        `;
+        table.appendChild(newRow);
+     }
+
+
+     
+
+   }
+
+   var searchTable = document.querySelector('#searchList');
+
+   searchTable.addEventListener('click', (event)=>
+   
+   {
+
+      
+         if(event.target.classList.contains('titleEllipse'))
+         
+         {
+
+            const thisSong = music.find((song) => {
+               
+               return song.song_id == event.target.dataset.id});
+
+
+            alert(`${thisSong.title}`);
+
          }
       
-      }
-
-      if(event.target.type === "reset"){
-         resetBoxes(selectBars);
-
-         document.querySelector("#searchList").innerHTML="";
 
 
-      }
 
-   })
-
-
-   });
+   }
+   
+   );
 
    function resetBoxes(resetted){
 
@@ -132,6 +197,68 @@ addEventListener("DOMContentLoaded", async (event) =>{
       })
       
    }
+
+
+   console.log(topSongs);
+
+   function populateTopTable(table, list){
+
+      table.innerHTML="";
+
+      for(item of list){
+         var newRow = document.createElement("li");
+       
+         newRow.innerHTML = `${item}`;
+        table.appendChild(newRow);
+     }
+   }
+
+  
+/*
+   var topSongs = findFreq('genre', 1);
+
+  
+   populateTopTable(document.querySelector('#topSongs'), topSongs);
+
+
+
+
+
+   function findFreq(discriminator) {
+      let freqs = {};
+      
+    
+      for (let song of music) {
+
+         if (freqs[song[discriminator][location]] === undefined) { 
+            freqs[song[discriminator][location]] = 1; 
+         } else {
+            freqs[song[discriminator][location]] += 1;
+         }
+   }
+      
+
+      let frequencyArray = [];
+      for (key in freqs) {
+          frequencyArray.push([freqs[key], key]);
+      }
+
+      frequencyArray.sort((a, b) => {
+         return b[0] - a[0];
+     });
+     
+     mostFreq = [];
+     for (let i = 0; i < 15; i++) {
+         mostFreq.push(frequencyArray[i][1]);
+     }
+     
+     return mostFreq;
+  }
+*/
+   });
+
+ 
+   
 
    
 
