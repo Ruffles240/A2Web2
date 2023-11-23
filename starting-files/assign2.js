@@ -239,7 +239,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var topGenres = findFreq('genre','name');
 
    let popularitySort= music.toSorted((a,b) => {
-      return a.details.popularity - b.details.popularity;
+      return b.details.popularity - a.details.popularity;
 
 
    })
