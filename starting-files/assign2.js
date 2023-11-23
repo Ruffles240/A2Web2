@@ -223,20 +223,50 @@ addEventListener("DOMContentLoaded", async (event) =>{
             console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
 
-               selectedSort = titleList;
+               if(selectedSort===titleList){
+
+                  selectedSort = titleList.toReversed();
+               }
+
+               else{
+
+               selectedSort = titleList;}
             }
             else if(event.target.dataset.id ==='genre'){
 
-               selectedSort = genreList;
+               if(selectedSort===genreList){
+
+                  selectedSort = genreList.toReversed();
+               }
+               else{
+               selectedSort = genreList;}
             }
 
             else if(event.target.dataset.id ==='year'){
 
-               selectedSort = yearList;
+               if(selectedSort===yearList){
+
+
+
+                  selectedSort = yearList.toReversed();
+               }
+
+               else{
+
+               selectedSort = yearList;}
             }
             else if(event.target.dataset.id ==='artist'){
+               
+               if(selectedSort===artistList){
 
-               selectedSort = artistList;
+
+
+                  selectedSort = artistList.toReversed();
+               }
+
+               else{
+
+               selectedSort = artistList;}
             }
 
             populateTable(document.querySelector(`#${event.target.dataset.table}`), selectedSort);
