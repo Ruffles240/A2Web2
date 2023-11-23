@@ -220,7 +220,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          
          if(typeof list[i] === "object"){
 
-            newRow.innerHTML = `${list[i['title']]}`;
+            newRow.innerHTML = `${list[i]['title']}`;
 
          }
          else{
