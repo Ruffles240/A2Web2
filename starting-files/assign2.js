@@ -90,7 +90,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       popup.style.display = "block";
 
 
-      setTimeout((popup) => {
+      setTimeout(() => {
 
          popup.style.display = "none";
          
