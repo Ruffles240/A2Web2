@@ -368,11 +368,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       }
       else if(event.target.classList.contains('removePlaylist')){
- 
+         console.log(thisSong.title + "gots");
+
          playlist = playlist.filter((song)=>{
 
             return !(thisSong.song_id == song.song_id);
          })
+         console.log(thisSong.title);
 
          populateTable(document.querySelector('#playlistTable'), playlist);
          localStorage.setItem('playlist', JSON.stringify(playlist));
