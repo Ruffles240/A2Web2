@@ -10,6 +10,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var playlist = localStorage.getItem('playlist');
 
+   localStorage.clear();
+
    if(playlist ===null){
 
       playlist = [];
@@ -100,9 +102,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
   
    
    );
-
-  
-   var filter= document.querySelector("#filter");
    const selectBars = Array.from(document.querySelectorAll(".select"));
 
    document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
@@ -312,21 +311,36 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       if(event.target.classList.contains("addPlaylist")){
 
-         const thisSong = music.find((song) =>{
-
-            return song.song_id == event.target.dataset.id;
-         })
-
-         playlist.push([thisSong]);
-
-         localStorage.setItem('playlist', JSON.stringify(playlist));
 
 
-         console.log(thisSong.title + playlist );
+         if(typeof (playlist.find((playlistSong) => 
+         {
+
+            return playlistSong.song_id == event.target.dataset.id
+         }
+         
+         )) !== 'undefined'){
+
+            alert('This song is already in the playlist');
+            
+
 
          }
 
-      }
+         else{
+            const thisSong = music.find((song) =>{
+
+               return song.song_id == event.target.dataset.id;
+            })
+
+            playlist.push(thisSong);
+
+            localStorage.setItem('playlist', JSON.stringify(playlist));
+            console.log(thisSong.title + playlist );
+
+         }
+
+      }}
    
    
    );
