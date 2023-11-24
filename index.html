@@ -239,6 +239,21 @@
             }
         }
       
+
+        @media screen and (max-width: 768px) {
+            tr td:nth-child(2),  /* targets the second child */
+            tr td:nth-child(3),
+             tr th:nth-child(2),
+             tr th:nth-child(3),tr th:nth-child(4),
+             tr td:nth-child(4)
+             { /* targets the third child */
+                display: none;
+            }
+
+
+
+
+        }
        
     </style>
 
@@ -352,7 +367,7 @@
 
             </div>
             
-            <div style=" min-width: 65%; max-height: 500px; overflow-y:scroll" class="section">
+            <div style=" min-width: 50%; max-height: 500px; overflow-y:scroll" class="section">
                 <h2>Results</h2>
                 <table style="width: 90%;">
                 <thead>
