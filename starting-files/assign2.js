@@ -190,7 +190,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          <td data-type = "artist">${song.artist.name}</td>
          <td data-type = "genre">${song.genre.name}</td>
          <td data-type = "year">${song.year}</td>
-         <td><button type= 'button' data-id = '${song.song_id}' ${type} </button></td>
+         <td data-type="button"><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>
         `;
         table.appendChild(newRow);
      }
