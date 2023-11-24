@@ -185,13 +185,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
 
          newRow.dataset.id = song.song_id;
-         newRow.innerHTML = `
-         <td data-type = "title" data-id="${song.title}">${shortenedTitle}</td>
-         <td data-type = "artist" data-id="${song.artist.id}">${song.artist.name}</td>
-         <td data-type = "genre" data-id="${song.genre.id}">${song.genre.name}</td>
-         <td data-type = "year" data="${song.year}">${song.year}</td>
-         <td data-type="button"><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>
-        `;
+         newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id="${song.artist.id}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.id}">${song.genre.name}</td><td data-type = "year" data="${song.year}">${song.year}</td><td data-type="button"><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
         table.appendChild(newRow);
      }
 
@@ -226,7 +220,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
                   if (childNode.nodeType ==="td" && childNode.dataset.type === event.target.dataset.id) {
 
-                     console.log(childNode.dataset.type);
+                     console.log(childNode.dataset.id);
 
                     var aData = childNode;
                     break;
@@ -235,6 +229,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
         
                 for (const childNode of b.childNodes) {
                   if (childNode.nodeType ==="td" && childNode.dataset.type === event.target.dataset.id) {
+                     console.log(childNode.dataset.id);
+
                     var bData = childNode;
                     break;
                   }
