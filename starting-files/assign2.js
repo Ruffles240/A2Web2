@@ -217,6 +217,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(event.target.classList.contains('rearrange')){
             var tbody = document.querySelector(`#${event.target.dataset.table}`);
             var rows = Array.from(tbody.childNodes);
+            var criteria = event.target.dataset.id;
+            console.log(criteria);
             rows.sort((a,b)=>{
 
 
