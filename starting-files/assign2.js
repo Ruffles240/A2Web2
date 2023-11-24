@@ -337,20 +337,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    table.addEventListener('click', (event) =>{
 
+      if(target.type="button"){
+
       const thisSong =music.find((song) =>{
-      
          return song.song_id == event.target.dataset.id}
-         
          );
-
-    
       if(event.target.classList.contains("addPlaylist")){
-
-
-        
          if(typeof (playlist.find((playlistSong) => 
          {
-
             return playlistSong.song_id == event.target.dataset.id
          }
          )) !== 'undefined'){
@@ -365,7 +359,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
             console.log(thisSong.title + playlist );
          }
-
       }
       else if(event.target.classList.contains('removePlaylist')){
          console.log(thisSong.title + "gots");
@@ -375,14 +368,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
             return !(thisSong.song_id == song.song_id);
          })
          console.log(thisSong.title);
-
-         populateTable(document.querySelector('#playlistTable'), playlist);
-         localStorage.setItem('playlist', JSON.stringify(playlist));
-
       }
-   
-   
-   
+      else if(event.target.classList.contains('clearPlaylist')){
+         playlist = [];
+      }
+      localStorage.setItem('playlist', JSON.stringify(playlist));
+      populateTable(document.querySelector('#playlistTable'), playlist);
+      }
    
    }
    
