@@ -8,7 +8,21 @@ const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.p
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
-   const playlist = [];
+   var playlist = localStorage.getItem('playlist');
+
+   if(playlist ===null){
+
+      playlist = [];
+   }
+
+   else{
+
+      console.log(playlist);
+
+      playlist = JSON.parse(playlist);
+   }
+
+
    var music = await localStorage.getItem("data");
    var artists = await fetchData("./starting-files/artists.json");
    var genres = await fetchData("./starting-files/genres.json");
@@ -304,6 +318,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          })
 
          playlist.push([thisSong]);
+
+         localStorage.setItem('playlist', JSON.stringify(playlist));
 
 
          console.log(thisSong.title + playlist );
