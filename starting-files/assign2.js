@@ -306,7 +306,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          playlist.push[thisSong];
 
 
-         console.log(thisSong + playlist );
+         console.log(thisSong.title + playlist );
 
          }
 
