@@ -218,12 +218,22 @@ addEventListener("DOMContentLoaded", async (event) =>{
             var tbody = document.querySelector(`#${event.target.dataset.table}`);
             var rows = Array.from(tbody.childNodes);
             rows.sort((a,b)=>{
-               a = a.childNodes.find((td)=>{
-                  return event.target.dataset.id == td.dataset.type;
-               })
-               b = b.childNodes.find((td2)=>{
-                  return event.target.dataset.id == td2.dataset.type;
-               })
+
+
+               for (const childNode of a.childNodes) {
+                  if (childNode.dataset.type === event.target.dataset.id) {
+                    a = childNode;
+                    break;
+                  }
+                }
+        
+                for (const childNode of b.childNodes) {
+                  if (childNode.dataset.type === event.target.dataset.id) {
+                    b = childNode;
+                    break;
+                  }
+                }
+
                if(Number.isInteger(a.textContent)){
                   return b.textContent - a.textContent;
                }
