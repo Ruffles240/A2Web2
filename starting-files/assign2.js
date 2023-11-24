@@ -336,46 +336,49 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    
    table.addEventListener('click', (event) =>{
+      console.log("Click working");
 
       if(event.target.type="button"){
 
-      const thisSong =music.find((song) =>{
-         return song.song_id == event.target.dataset.id}
-         );
-      if(event.target.classList.contains("addPlaylist")){
-         if(typeof (playlist.find((playlistSong) => 
-         {
-            return playlistSong.song_id == event.target.dataset.id
+         console.log("Click working");
+
+         const thisSong =music.find((song) =>{
+            return song.song_id == event.target.dataset.id}
+            );
+         if(event.target.classList.contains("addPlaylist")){
+            if(typeof (playlist.find((playlistSong) => 
+            {
+               return playlistSong.song_id == event.target.dataset.id
+            }
+            )) !== 'undefined'){
+
+               alert('This song is already in the playlist');
+            }
+            else{
+               playlist.push(thisSong);
+
+               localStorage.setItem('playlist', JSON.stringify(playlist));
+               populateTable(document.querySelector('#playlistTable'), playlist);
+
+               console.log(thisSong.title + playlist );
+            }
          }
-         )) !== 'undefined'){
+         else if(event.target.classList.contains('removePlaylist')){
+            console.log(thisSong.title + "gots");
 
-            alert('This song is already in the playlist');
+            playlist = playlist.filter((song)=>{
+
+               return !(thisSong.song_id == song.song_id);
+            })
+            console.log(thisSong.title);
          }
-         else{
-            playlist.push(thisSong);
-
-            localStorage.setItem('playlist', JSON.stringify(playlist));
-            populateTable(document.querySelector('#playlistTable'), playlist);
-
-            console.log(thisSong.title + playlist );
+         else if(event.target.classList.contains('clearPlaylist')){
+            playlist = [];
          }
-      }
-      else if(event.target.classList.contains('removePlaylist')){
-         console.log(thisSong.title + "gots");
+         localStorage.setItem('playlist', JSON.stringify(playlist));
+         populateTable(document.querySelector('#playlistTable'), playlist);
+         }
 
-         playlist = playlist.filter((song)=>{
-
-            return !(thisSong.song_id == song.song_id);
-         })
-         console.log(thisSong.title);
-      }
-      else if(event.target.classList.contains('clearPlaylist')){
-         playlist = [];
-      }
-      localStorage.setItem('playlist', JSON.stringify(playlist));
-      populateTable(document.querySelector('#playlistTable'), playlist);
-      }
-   
    }
    
    
