@@ -336,12 +336,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    
    table.addEventListener('click', (event) =>{
-      const thisSong =music.find((song) =>{
-      
-         return song.song_id == event.target.id}
-         
-         );
+    
       if(event.target.classList.contains("addPlaylist")){
+
+
+         const thisSong =music.find((song) =>{
+      
+            return song.song_id == event.target.dataset.id}
+            
+            );
 
          if(typeof (playlist.find((playlistSong) => 
          {
