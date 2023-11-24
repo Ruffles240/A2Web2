@@ -8,6 +8,9 @@ const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
+
+   localStorage.clear();
+
    var playlist = localStorage.getItem('playlist');
    populateTable(document.querySelector('#playlistTable'), playlist);
 
