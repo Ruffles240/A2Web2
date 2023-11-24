@@ -303,7 +303,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             return song.song_id == event.target.dataset.id;
          })
 
-         playlist.push[thisSong];
+         playlist.push([thisSong]);
 
 
          console.log(thisSong.title + playlist );
