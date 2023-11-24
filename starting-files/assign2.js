@@ -374,7 +374,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             return !(thisSong.song_id == song.song_id);
          })
 
-         populateTable(document.querySelector(('#playlistTable'), playlist));
+         populateTable(document.querySelector('#playlistTable'), playlist);
          localStorage.setItem('playlist', JSON.stringify(playlist));
 
       }
