@@ -300,7 +300,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          const thisSong = music.find((song) =>{
 
-            return song.id === event.target.dataset.id;
+            return song.id == event.target.dataset.id;
          })
 
          playlist.push[thisSong];
