@@ -14,7 +14,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
    localStorage.clear();
 
    var playlist = localStorage.getItem('playlist');
-   populateTable(document.querySelector('#playlistTable'), playlist);
 
    if(playlist ===null){
 
@@ -27,6 +26,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       playlist = JSON.parse(playlist);
    }
+   populateTable(document.querySelector('#playlistTable'), playlist);
 
 
    var music = await localStorage.getItem("data");
