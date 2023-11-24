@@ -150,7 +150,7 @@
 
         .select, option {
 
-            width: 150px;
+            width: 10%;
             color: aliceblue;
             color: black;
         }
@@ -226,6 +226,16 @@
 
         
 
+        }
+
+        @media screen and (max-width: 600px) {
+            tr td:nth-child(2),  /* targets the second child */
+            tr td:nth-child(3),
+             tr th:nth-child(2),
+             tr th:nth-child(3)
+             { /* targets the third child */
+                display: none;
+            }
         }
       
        
