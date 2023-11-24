@@ -7,6 +7,8 @@ const api = 'http://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.p
 
 
 addEventListener("DOMContentLoaded", async (event) =>{
+
+   const playlist = [];
    var music = await localStorage.getItem("data");
    var artists = await fetchData("./starting-files/artists.json");
    var genres = await fetchData("./starting-files/genres.json");
@@ -183,7 +185,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          <td>${song.artist.name}</td>
          <td>${song.genre.name}</td>
          <td>${song.year}</td>
-         <td><button type= 'button' data-id = '${song.id}'>Add</button></td>
+         <td><button type= 'button' data-id = '${song.id}' class= 'addPlaylist'>Add</button></td>
 
         `;
         table.appendChild(newRow);
@@ -210,7 +212,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    );
 
 
-   document.querySelectorAll('thead tr').forEach((th) => {
+   document.querySelectorAll('thead').forEach((th) => {
 
       console.log('code executing 0');
 
@@ -291,6 +293,29 @@ addEventListener("DOMContentLoaded", async (event) =>{
       )
 
    })
+
+   document.querySelector('searchList').addEventListener('click', (event) =>{
+
+      if(event.target.classList.contains("addPlaylist")){
+
+         let thisSong = music.find((song) =>{
+
+            return song.id === event.target.dataset.id;
+         })
+
+         playlist.push[thisSong];
+
+
+         console.log(thisSong + playlist );
+
+         }
+
+      }
+   
+   
+   );
+
+
 
    function resetBoxes(resetted){
 
