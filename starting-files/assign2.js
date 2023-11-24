@@ -185,7 +185,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
 
          newRow.dataset.id = song.song_id;
-         newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id="${song.artist.id}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.id}">${song.genre.name}</td><td data-type = "year" data="${song.year}">${song.year}</td><td data-type="button"><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
+         newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.id}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.id}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
         table.appendChild(newRow);
      }
 
