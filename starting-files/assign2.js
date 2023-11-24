@@ -228,7 +228,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var shortenedTitle= song.title.substring(0,24);
          if(song.title.length>25){
             shortenedTitle = shortenedTitle.substring(0, 23);
-            shortenedTitle += `<button class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
+            shortenedTitle += `<button type='button' class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
          }
          newRow.innerHTML = `
          <td>${shortenedTitle}</td>
