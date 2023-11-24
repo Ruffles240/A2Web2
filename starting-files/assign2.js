@@ -294,7 +294,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    })
 
-   document.querySelector('searchList').addEventListener('click', (event) =>{
+   document.querySelector('#searchList').addEventListener('click', (event) =>{
 
       if(event.target.classList.contains("addPlaylist")){
 
