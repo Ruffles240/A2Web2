@@ -206,33 +206,30 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    
    ));
-   document.querySelectorAll('thead').forEach((th) => {
+   var tableHeads= document.querySelectorAll('thead')
+   
+   tableHeads.forEach((th) => {
       th.addEventListener('click', (event) => {
          if(event.target.classList.contains('rearrange')){
             var tbody = document.querySelector(`#${event.target.dataset.table}`);
+            console.log(tbody.dataset.id);
             var rows = Array.from(tbody.childNodes);
             var criteria = event.target.dataset.id;
             console.log(criteria);
             rows.sort((a,b)=>{
-
                for (const childNode of a.childNodes) {
-                  console.log(childNode);
 
                   if (childNode.dataset.type === event.target.dataset.id) {
                     var aData = childNode;
                     break;
                   }
                 }
-        
-                for (const childNode of b.childNodes) {
-                  if (childNode.dataset.type === event.target.dataset.id) {
-                     console.log(childNode.dataset.type);
-                    var bData = childNode;
-                    break;
+               for (const childNode of b.childNodes) {
+                  if (childNode.dataset.type === event.target.dataset.id) { 
+                     var bData = childNode;
+                     break;
                   }
-                }
-               console.log(bData);
-               console.log(aData);
+               }
 
                if(Number.isInteger(bData.dataset.id)){
                   return aData.dataset.id - bData.dataset.id;
@@ -253,7 +250,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    const tbodies = document.querySelectorAll('table');
    tbodies.forEach((table) =>{
-   
    
    table.addEventListener('click', (event) =>{
 
