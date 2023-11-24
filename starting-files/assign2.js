@@ -130,11 +130,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
          });
          if(thisSearch!=null){
             let searchedValue = thisSearch.id;
-            if(thisSearch.value=''){
+            if(searchedValue.value=''){
                alert('Please choose an option.')
             }
             else{
-            populateTable(searchList, selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}  
+            populateTable(searchList, selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
+         
+         
+         
+         }  
          }
          else{
 
