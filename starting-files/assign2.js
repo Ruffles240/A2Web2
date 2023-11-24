@@ -4,6 +4,8 @@
 /* url of song api --- https versions hopefully a little later this semester */	
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
 
+console.log('this is secure');
+
 
 
 addEventListener("DOMContentLoaded", async (event) =>{
