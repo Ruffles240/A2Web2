@@ -83,7 +83,22 @@ addEventListener("DOMContentLoaded", async (event) =>{
   }
 
    
+  function popupText(text){
+      let popup = document.querySelector('#popupElement')
 
+      popup.textContent=text;
+      popup.style.display = "block";
+
+
+      setTimeout((popup) => {
+
+         popup.style.display = "none";
+         
+      }, 5000);
+
+
+
+  };
   
    var pages = Array.from(document.querySelector("main").children);
 
@@ -222,7 +237,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             {
                const thisSong = music.find((song) => {
                   return song.song_id == event.target.dataset.id});
-               alert(`${thisSong.title}`);
+               popupText(`${thisSong.title}`);
             }
       }
    
