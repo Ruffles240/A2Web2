@@ -298,7 +298,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       if(event.target.classList.contains("addPlaylist")){
 
-         let thisSong = music.find((song) =>{
+         const thisSong = music.find((song) =>{
 
             return song.id === event.target.dataset.id;
          })
