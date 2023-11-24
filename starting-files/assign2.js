@@ -238,6 +238,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   return aData.dataset.id.localeCompare(bData.dataset.id);
                }
             })
+
+            console.log(rows);
             tbody.innerHTML-'';
 
             for(var row of rows){
