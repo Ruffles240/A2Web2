@@ -223,7 +223,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                for (const childNode of a.childNodes) {
                   console.log(childNode);
 
-                  if (childNode.dataset.type == event.target.dataset.id) {
+                  if (childNode.nodeType ==="td" && childNode.dataset.type == event.target.dataset.id) {
 
                     a = childNode;
                     break;
@@ -231,7 +231,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 }
         
                 for (const childNode of b.childNodes) {
-                  if (childNode.dataset.type === event.target.dataset.id) {
+                  if (childNode.nodeType ==="td" && childNode.dataset.type === event.target.dataset.id) {
                     b = childNode;
                     break;
                   }
