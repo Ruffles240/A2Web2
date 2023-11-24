@@ -245,7 +245,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                }
                else{
 
-                  return a.textContent.localeCompare(b.textContent);
+                  return a.dataset.id.localeCompare(b.dataset.id);
                }
             })
 
