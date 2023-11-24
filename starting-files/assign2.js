@@ -336,50 +336,37 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    
    table.addEventListener('click', (event) =>{
-
-      
-
       if(event.target.classList.contains("addPlaylist")){
-
-
 
          if(typeof (playlist.find((playlistSong) => 
          {
 
             return playlistSong.song_id == event.target.dataset.id
          }
-         
          )) !== 'undefined'){
 
             alert('This song is already in the playlist');
-            
-
-
          }
-
          else{
-           
-
             playlist.push(thisSong);
 
             localStorage.setItem('playlist', JSON.stringify(playlist));
             populateTable(document.querySelector('#playlistTable'), playlist);
 
             console.log(thisSong.title + playlist );
-
          }
 
       }
       else if(event.target.classList.contains('removePlaylist')){
-
-         
+ 
          playlist = playlist.filter((song)=>{
-
 
             return !(thisSong.id == song.song_id);
          })
 
-         
+         populateTable(document.querySelector('#playlistTable', playlist));
+         localStorage.setItem('playlist', JSON.stringify(playlist));
+
       }
    
    
