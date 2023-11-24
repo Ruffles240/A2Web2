@@ -215,7 +215,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    document.querySelectorAll('thead').forEach((th) => {
       th.addEventListener('click', (event) => {
          if(event.target.classList.contains('rearrange')){
-            var tbody = document.querySelector(`#${event.target.dataset.id}`);
+            var tbody = document.querySelector(`#${event.target.dataset.table}`);
             var rows = Array.from(tbody.childNodes);
             rows.sort((a,b)=>{
                a = a.childNodes.find((td)=>{
