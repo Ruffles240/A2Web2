@@ -19,8 +19,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    else{
 
-      console.log(playlist);
-
       playlist = JSON.parse(playlist);
    }
    populateTable(document.querySelector('#playlistTable'), playlist);
@@ -30,17 +28,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var artists = await fetchData("./starting-files/artists.json");
    var genres = await fetchData("./starting-files/genres.json");
 
-   console.log('got the other data');
-
    if(music ===null){
       music = await fetchData(api);
-      console.log("getting the data");
       localStorage.setItem("data", JSON.stringify(music));
 
    }
 
    else {
-      console.log("got the data");
       music = JSON.parse(music);
 
    }
@@ -51,18 +45,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var titleList = music.toSorted((a,b) => { return a.title.localeCompare(b.title)});
    var selectedSort = music;
 
+
+
+
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
-      console.log(response);
       return response;
   }
-
-   console.log("Loaded");
 
    populateSelect(genres ,document.querySelector('#genre'));
    populateSelect(artists ,document.querySelector('#artist'));
 
-   
   function populateSelect(populator, select){
 
    for(item of populator){
@@ -150,11 +143,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(typeof filter ==='object'){
 
          filter = filter['id'];
-         console.log(value + ' ' + filter);
          return filter==value;
       }
-
-      console.log(value + ' ' + filter);
 
       return filter.toLowerCase().includes(value.toLowerCase());
     }
@@ -168,8 +158,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          
       }
    )
-
-
 
    function populateTable(table, list){
 
@@ -195,13 +183,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
             shortenedTitle = shortenedTitle.substring(0, 23);
             shortenedTitle += `<button type='button' class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
          }
-         newRow.innerHTML = `
-         <td>${shortenedTitle}</td>
-         <td>${song.artist.name}</td>
-         <td>${song.genre.name}</td>
-         <td>${song.year}</td>
-         <td><button type= 'button' data-id = '${song.song_id}' ${type} </button></td>
 
+         newRow.dataset.id = song.song_id;
+         newRow.innerHTML = `
+         <td data-type = "title">${shortenedTitle}</td>
+         <td data-type = "artist">${song.artist.name}</td>
+         <td data-type = "genre">${song.genre.name}</td>
+         <td data-type = "year">${song.year}</td>
+         <td><button type= 'button' data-id = '${song.song_id}' ${type} </button></td>
         `;
         table.appendChild(newRow);
      }
@@ -224,45 +213,32 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    ));
    document.querySelectorAll('thead').forEach((th) => {
-      console.log('code executing 0');
       th.addEventListener('click', (event) => {
-            console.log('code executing 1');
          if(event.target.classList.contains('rearrange')){
-            document.querySelectorAll('.rearrange').forEach((background) => {background.classList.remove('selectedSort')})
-            event.target.classList.add('selectedSort');
-            console.log('code executing 2');
-            if(event.target.dataset.id ==='title'){
-               if(selectedSort===titleList){
-                  selectedSort = titleList.toReversed();
+            var tbody = document.querySelector(`#${event.target.dataset.id}`);
+            var rows = Array.from(tbody.childNodes);
+            rows.sort((a,b)=>{
+               a = a.childNodes.find((td)=>{
+                  return event.target.dataset.id == td.dataset.type;
+               })
+               b = b.childNodes.find((td2)=>{
+                  return event.target.dataset.id == td2.dataset.type;
+               })
+               if(Number.isInteger(a.textContent)){
+                  return b.textContent - a.textContent;
                }
                else{
-               selectedSort = titleList;}
-            }
-            else if(event.target.dataset.id ==='genre'){
-               if(selectedSort===genreList){
-                  selectedSort = genreList.toReversed();
-               }
-               else{
-               selectedSort = genreList;}
-            }
-            else if(event.target.dataset.id ==='year'){
-               if(selectedSort===yearList){
-                  selectedSort = yearList.toReversed();
-               }
-               else{
-               selectedSort = yearList;}
-            }
-            else if(event.target.dataset.id ==='artist'){
-               if(selectedSort===artistList){
-                  selectedSort = artistList.toReversed();
-               }
-               else{
-               selectedSort = artistList;}
-            }
 
+                  return a.textContent.localeCompare(b.textContent);
+               }
+            })
 
-            if(event.target.dataset.table===""){}
-            populateTable(document.querySelector(`#${event.target.dataset.table}`), selectedSort);
+            tbody.innerHTML-'';
+
+            for(var row of rows){
+
+               tbody.appendChild(row);
+            }
          }
       } 
       )
@@ -273,11 +249,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    
    table.addEventListener('click', (event) =>{
-      console.log("Click working");
 
       if(event.target.type="button"){
-
-         console.log("Click working");
 
          const thisSong =music.find((song) =>{
             return song.song_id == event.target.dataset.id}
@@ -297,17 +270,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
                localStorage.setItem('playlist', JSON.stringify(playlist));
                populateTable(document.querySelector('#playlistTable'), playlist);
 
-               console.log(thisSong.title + playlist );
             }
          }
          else if(event.target.classList.contains('removePlaylist')){
-            console.log(thisSong.title + "gots");
 
             playlist = playlist.filter((song)=>{
 
                return !(thisSong.song_id == song.song_id);
             })
-            console.log(thisSong.title);
          }
          else if(event.target.classList.contains('clearPlaylist')){
             playlist = [];
@@ -326,12 +296,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       
          option.disabled = true;
          
-
       })
       
    }
-
-   console.log(topSongs);
 
    function populateTopTable(table, list){
 
