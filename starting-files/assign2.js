@@ -217,14 +217,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
             var criteria = event.target.dataset.id;
             rows.sort((a,b)=>{
                for (const childNode of a.childNodes) {
+                  console.log(childNode);
 
-                  if (childNode.dataset.type === event.target.dataset.id) {
+                  if (childNode.dataset.type === criteria) {
                     var aData = childNode;
                     break;
                   }
                 }
                for (const childNode of b.childNodes) {
-                  if (childNode.dataset.type === event.target.dataset.id) { 
+                  if (childNode.dataset.type === criteria) { 
                      var bData = childNode;
                      break;
                   }
