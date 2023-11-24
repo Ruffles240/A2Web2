@@ -212,10 +212,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       th.addEventListener('click', (event) => {
          if(event.target.classList.contains('rearrange')){
             var tbody = document.querySelector(`#${event.target.dataset.table}`);
-            console.log(tbody.dataset.id);
+            console.log(tbody.id);
             var rows = Array.from(tbody.childNodes);
             var criteria = event.target.dataset.id;
-            console.log(criteria);
             rows.sort((a,b)=>{
                for (const childNode of a.childNodes) {
 
