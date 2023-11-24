@@ -339,6 +339,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
             playlist.push(thisSong);
 
             localStorage.setItem('playlist', JSON.stringify(playlist));
+            populateTable(document.querySelector('#playlistTable'), playlist);
+
             console.log(thisSong.title + playlist );
 
          }
