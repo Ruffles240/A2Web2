@@ -10,8 +10,6 @@ console.log('this is secure');
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
-
-
    var playlist = localStorage.getItem('playlist');
 
    if(playlist ===null){
@@ -47,17 +45,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-
-
    var yearList = music.toSorted((a,b) => { return b.year - a.year});
    var genreList = music.toSorted((a,b) => {return a.genre.name.localeCompare(b.genre.name)});
-   var artistList = music.toSorted((a,b) => {return a.artist.name.localeCompare(b.artist.name)});
-   
+   var artistList = music.toSorted((a,b) => {return a.artist.name.localeCompare(b.artist.name)});   
    var titleList = music.toSorted((a,b) => { return a.title.localeCompare(b.title)});
    var selectedSort = music;
-
-
-
 
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
@@ -81,7 +73,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       select.appendChild(option);
    }
   }
-
    
   function popupText(text){
       let popup = document.querySelector('#popupElement')
@@ -95,8 +86,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          popup.style.display = "none";
          
       }, 5000);
-
-
 
   };
   
@@ -116,15 +105,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
      });
 
    }
-
-  
    
    );
    const selectBars = Array.from(document.querySelectorAll(".select"));
 
    document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
-
-
 
       if(event.target.type==="radio"){
          populateTable(document.querySelector('#searchList'), selectedSort);
@@ -132,41 +117,25 @@ addEventListener("DOMContentLoaded", async (event) =>{
          resetBoxes(selectBars);
          document.querySelector(`#${event.target.dataset.id}`).disabled = false;
 
-
-
-      }
-      
+      }      
 
    })});
 
    populateTable(document.querySelector('#searchList'), selectedSort);
 
-
-   
-
    document.querySelector("#listSongs").addEventListener("click", (event) =>{
-      
          event.stopPropagation();
          const thisSearch = selectBars.find((bar) => {
-
-
             return bar.disabled === false;
          });
-
          if(thisSearch!=null){
             let searchedValue = thisSearch.id;
-
             if(searchedValue.value=''){
                alert('Please choose an option.')
-
-
             }
             else{
-
-            populateTable(searchTable, selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}
-            
+            populateTable(searchList, selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));}  
          }
-
          else{
 
             alert('Please choose a search option.')
@@ -210,19 +179,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(table.id ==="searchList"){
             type = 'class= "addPlaylist playlist">Add';
 
-
-
          }
 
          else if(table.id==="playlistTable"){
 
             type = 'class= "removePlaylist">Remove';
 
-
-
          }
-
-
 
          var newRow = document.createElement("tr");
          var shortenedTitle= song.title.substring(0,24);
@@ -241,9 +204,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
         table.appendChild(newRow);
      }
 
-
-     
-
    }
 
    var tables = document.querySelectorAll('table');
@@ -261,25 +221,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    
    ));
-
-
    document.querySelectorAll('thead').forEach((th) => {
-
       console.log('code executing 0');
-
       th.addEventListener('click', (event) => {
             console.log('code executing 1');
-
-
          if(event.target.classList.contains('rearrange')){
-
             document.querySelectorAll('.rearrange').forEach((background) => {background.classList.remove('selectedSort')})
-
             event.target.classList.add('selectedSort');
-
-
-
-
             console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
                if(selectedSort===titleList){
@@ -307,31 +255,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   selectedSort = artistList.toReversed();
                }
                else{
-
                selectedSort = artistList;}
             }
 
+
+            if(event.target.dataset.table===""){}
             populateTable(document.querySelector(`#${event.target.dataset.table}`), selectedSort);
-
-
          }
-
-
-
-
-
-
       } 
-
       )
-
    })
 
    const tbodies = document.querySelectorAll('table');
-
-
-
-
    tbodies.forEach((table) =>{
    
    
@@ -378,13 +313,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
          localStorage.setItem('playlist', JSON.stringify(playlist));
          populateTable(document.querySelector('#playlistTable'), playlist);
          }
-
    }
-   
-   
+      
    );})
-
-
 
    function resetBoxes(resetted){
 
@@ -398,7 +329,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       
    }
 
-
    console.log(topSongs);
 
    function populateTopTable(table, list){
@@ -407,9 +337,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
-         
-         if(typeof list[i] === "object"){
 
+                  
+         if(typeof list[i] === "object"){
+            
             newRow.innerHTML = `${list[i]['title']}`;
 
          }
@@ -419,8 +350,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
      }
    }
 
-  
-
    var topArtists = findFreq('artist','name');
 
    var topGenres = findFreq('genre','name');
@@ -428,21 +357,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
    let popularitySort= music.toSorted((a,b) => {
       return b.details.popularity - a.details.popularity;
 
-
    })
 
    populateTopTable(document.querySelector('#topArtists'), topArtists);
    populateTopTable(document.querySelector('#topGenres'), topGenres);
    populateTopTable(document.querySelector('#topSongs'), popularitySort);
 
-
-
-
-
    function findFreq(discriminator, location) {
       let freqs = {};
-      
-    
+
       for (let song of music) {
 
          if (freqs[song[discriminator][location]] === undefined) { 
@@ -450,8 +373,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          } else {
             freqs[song[discriminator][location]] += 1;
          }
-   }
-      
+      }
 
       let frequencyArray = [];
       for (key in freqs) {
