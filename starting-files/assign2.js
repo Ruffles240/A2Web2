@@ -327,7 +327,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    })
 
-   const tbodies = document.querySelectorAll('tbody');
+   const tbodies = document.querySelectorAll('table');
 
 
 
