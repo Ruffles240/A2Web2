@@ -239,6 +239,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
                     break;
                   }
                 }
+               console.log(bData);
+               console.log(aData);
 
                if(Number.isInteger(bData.dataset.id)){
                   return a.dataset.id - b.dataset.id;
