@@ -336,16 +336,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    
    table.addEventListener('click', (event) =>{
+
+      const thisSong =music.find((song) =>{
+      
+         return song.song_id == event.target.dataset.id}
+         
+         );
+
     
       if(event.target.classList.contains("addPlaylist")){
 
 
-         const thisSong =music.find((song) =>{
-      
-            return song.song_id == event.target.dataset.id}
-            
-            );
-
+        
          if(typeof (playlist.find((playlistSong) => 
          {
 
@@ -369,7 +371,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
  
          playlist = playlist.filter((song)=>{
 
-            return !(thisSong.id == song.song_id);
+            return !(thisSong.song_id == song.song_id);
          })
 
          populateTable(document.querySelector('#playlistTable', playlist));
