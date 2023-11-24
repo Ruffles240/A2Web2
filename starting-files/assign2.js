@@ -10,7 +10,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var playlist = localStorage.getItem('playlist');
 
-
+   populateTable(document.querySelector('#playlist'), playlist);
    if(playlist ===null){
 
       playlist = [];

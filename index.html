@@ -243,7 +243,7 @@
             .section{
                 flex-basis: 100%; /* Each item takes full width on small screens */
                 max-width: 100%;}
-            #browseDiv{
+            .browseDiv{
                 max-height: 400px;
 
                 flex:1;
@@ -257,11 +257,7 @@
             
             }
 
-            #browseDiv{
-                max-height: 400px;
-                flex:1;
-            }
-
+           
             
             h2{
                 font-size: 80%;
@@ -319,7 +315,7 @@
             
             }
 
-            #browseDiv{
+            .browseDiv{
                 max-height: 400px;
                 flex:1;
             }
@@ -361,7 +357,7 @@
 
         }
 
-        #browseDiv{
+        .browseDiv{
             max-height: 600px;
             flex:2;
         }
@@ -398,6 +394,35 @@
     </header>
 
     <main>
+
+        <div data-id="playlist">
+
+                
+            <div style=" min-width:60%; overflow-y:scroll; max-height: 450px;" class="section browseDiv" >
+                <h2>Playlist</h2>
+                <table style="width: 90%; max-height: 400px; ">
+                <thead>
+                    <tr>
+                        <th><h3 data-id="title" data-table="searchList" class="rearrange">Title<img src="./images/arrow.png" alt="arrow" class="arrow"></h3></th>
+                        <th><h3 data-id="artist" data-table="searchList" class="rearrange">Artist<img src="./images/arrow.png" alt="arrow" class="arrow"></h3></th>
+                        <th><h3 data-id="genre" data-table="searchList" class="rearrange">Genre<img src="./images/arrow.png" alt="arrow" class="arrow"></h3></th>
+                        <th><h3 data-id="year" data-table="searchList" class="rearrange">Year<img src="./images/arrow.png" alt="arrow" class="arrow"></h3></th>
+                    </tr>
+                </thead>
+                <tbody id="playList" style="max-height: 300px;  ">
+                    
+                </tbody>
+                </table>
+
+            </div>
+
+
+
+
+
+
+
+        </div>
 
         <div data-id = "home" >
             <div id="homeView" class="view">
@@ -478,7 +503,7 @@
 
             </div>
             
-            <div style=" min-width:60%; overflow-y:scroll; max-height: 450px;" class="section" id="browseDiv">
+            <div style=" min-width:60%; overflow-y:scroll; max-height: 450px;" class="section browseDiv" >
                 <h2>Results</h2>
                 <table style="width: 90%; max-height: 400px; ">
                 <thead>
