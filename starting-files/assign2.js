@@ -337,7 +337,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    table.addEventListener('click', (event) =>{
 
-      if(target.type="button"){
+      if(event.target.type="button"){
 
       const thisSong =music.find((song) =>{
          return song.song_id == event.target.dataset.id}
