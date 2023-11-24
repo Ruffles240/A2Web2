@@ -204,7 +204,26 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       table.innerHTML="";
 
+      var type= ''
+
       for(song of list){
+         if(table.id ==="searchList"){
+            type = 'class= "addPlaylist playlist">Add';
+
+
+
+         }
+
+         else if(table.id==="playlistTable"){
+
+            type = 'class= "removePlaylist">Remove';
+
+
+
+         }
+
+
+
          var newRow = document.createElement("tr");
          var shortenedTitle= song.title.substring(0,24);
          if(song.title.length>25){
@@ -216,7 +235,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          <td>${song.artist.name}</td>
          <td>${song.genre.name}</td>
          <td>${song.year}</td>
-         <td><button type= 'button' data-id = '${song.song_id}' class= 'addPlaylist'>Add</button></td>
+         <td><button type= 'button' data-id = '${song.song_id}' ${type} </button></td>
 
         `;
         table.appendChild(newRow);
@@ -308,7 +327,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    })
 
-   document.querySelector('#searchList').addEventListener('click', (event) =>{
+   const tbodies = document.querySelectorAll('tbody');
+
+
+
+
+   tbodies.forEach((table) =>{
+   
+   
+   table.addEventListener('click', (event) =>{
+
+      
 
       if(event.target.classList.contains("addPlaylist")){
 
@@ -329,10 +358,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
 
          else{
-            const thisSong = music.find((song) =>{
-
-               return song.song_id == event.target.dataset.id;
-            })
+           
 
             playlist.push(thisSong);
 
@@ -343,10 +369,26 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          }
 
-      }}
+      }
+      else if(event.target.classList.contains('removePlaylist')){
+
+         
+         playlist = playlist.filter((song)=>{
+
+
+            return !(thisSong.id == song.song_id);
+         })
+
+         
+      }
    
    
-   );
+   
+   
+   }
+   
+   
+   );})
 
 
 
