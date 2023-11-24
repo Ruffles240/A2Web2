@@ -181,7 +181,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var shortenedTitle= song.title.substring(0,24);
          if(song.title.length>25){
             shortenedTitle = shortenedTitle.substring(0, 23);
-            shortenedTitle += `<button type='button' class="titleEllipse" data-id = ${song.song_id}>`+ '&hellip;'+ '</button>';
+            shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
          }
 
          newRow.dataset.id = song.song_id;
@@ -220,7 +220,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
                   if (childNode.nodeType ==="td" && childNode.dataset.type == event.target.dataset.id) {
 
-                     console.log(childNode.dataset.id);
+                     console.log(childNode.dataset.type);
 
                     var aData = childNode;
                     break;
@@ -229,7 +229,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
         
                 for (const childNode of b.childNodes) {
                   if (childNode.nodeType ==="td" && childNode.dataset.type == event.target.dataset.id) {
-                     console.log(childNode.dataset.id);
+                     console.log(childNode.dataset.type);
 
                     var bData = childNode;
                     break;
