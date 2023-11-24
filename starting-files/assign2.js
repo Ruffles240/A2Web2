@@ -11,7 +11,6 @@ console.log('this is secure');
 addEventListener("DOMContentLoaded", async (event) =>{
 
 
-   localStorage.clear();
 
    var playlist = localStorage.getItem('playlist');
 
