@@ -186,10 +186,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          newRow.dataset.id = song.song_id;
          newRow.innerHTML = `
-         <td data-type = "title">${shortenedTitle}</td>
-         <td data-type = "artist">${song.artist.name}</td>
-         <td data-type = "genre">${song.genre.name}</td>
-         <td data-type = "year">${song.year}</td>
+         <td data-type = "title" data-id="${song.title}">${shortenedTitle}</td>
+         <td data-type = "artist" data-id="${song.artist.id}">${song.artist.name}</td>
+         <td data-type = "genre" data-id="${song.genre.id}">${song.genre.name}</td>
+         <td data-type = "year" data="${song.year}">${song.year}</td>
          <td data-type="button"><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>
         `;
         table.appendChild(newRow);
@@ -224,22 +224,24 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
                for (const childNode of a.childNodes) {
 
-                  if (childNode.nodeType ==="td" && childNode.dataset.type == event.target.dataset.id) {
+                  if (childNode.nodeType ==="td" && childNode.dataset.type === event.target.dataset.id) {
 
-                    a = childNode;
+                     console.log(childNode.dataset.type);
+
+                    var aData = childNode;
                     break;
                   }
                 }
         
                 for (const childNode of b.childNodes) {
                   if (childNode.nodeType ==="td" && childNode.dataset.type === event.target.dataset.id) {
-                    b = childNode;
+                    var bData = childNode;
                     break;
                   }
                 }
 
-               if(Number.isInteger(a.textContent)){
-                  return b.textContent - a.textContent;
+               if(Number.isInteger(bData.dataset.id)){
+                  return a.dataset.id - b.dataset.id;
                }
                else{
 
