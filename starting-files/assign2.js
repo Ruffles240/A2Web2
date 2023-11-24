@@ -215,14 +215,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
             console.log(criteria);
             rows.sort((a,b)=>{
 
-
                for (const childNode of a.childNodes) {
                   console.log(childNode);
 
                   if (childNode.dataset.type === event.target.dataset.id) {
-                     
-                     console.log(childNode.dataset.type);
-
                     var aData = childNode;
                     break;
                   }
@@ -231,7 +227,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 for (const childNode of b.childNodes) {
                   if (childNode.dataset.type === event.target.dataset.id) {
                      console.log(childNode.dataset.type);
-
                     var bData = childNode;
                     break;
                   }
@@ -240,18 +235,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
                console.log(aData);
 
                if(Number.isInteger(bData.dataset.id)){
-                  return a.dataset.id - b.dataset.id;
+                  return aData.dataset.id - bData.dataset.id;
                }
                else{
-
-                  return a.dataset.id.localeCompare(b.dataset.id);
+                  return aData.dataset.id.localeCompare(bData.dataset.id);
                }
             })
-
             tbody.innerHTML-'';
 
             for(var row of rows){
-
                tbody.appendChild(row);
             }
          }
