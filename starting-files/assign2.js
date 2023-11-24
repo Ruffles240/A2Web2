@@ -214,7 +214,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var tables = document.querySelectorAll('table');
 
-   tables.foreach((table)=>  
+   tables.forEach((table)=>  
       table.addEventListener('click', (event)=>
       
       {
