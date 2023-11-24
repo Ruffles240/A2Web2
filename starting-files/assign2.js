@@ -212,20 +212,21 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-   var searchTable = document.querySelector('#searchList');
+   var tables = document.querySelectorAll('table');
 
-   searchTable.addEventListener('click', (event)=>
+   tables.foreach((table)=>  
+      table.addEventListener('click', (event)=>
+      
+      {
+            if(event.target.classList.contains('titleEllipse'))
+            {
+               const thisSong = music.find((song) => {
+                  return song.song_id == event.target.dataset.id});
+               alert(`${thisSong.title}`);
+            }
+      }
    
-   {
-         if(event.target.classList.contains('titleEllipse'))
-         {
-            const thisSong = music.find((song) => {
-               return song.song_id == event.target.dataset.id});
-            alert(`${thisSong.title}`);
-         }
-   }
-   
-   );
+   ));
 
 
    document.querySelectorAll('thead').forEach((th) => {
@@ -247,48 +248,30 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
             console.log('code executing 2');
             if(event.target.dataset.id ==='title'){
-
                if(selectedSort===titleList){
-
                   selectedSort = titleList.toReversed();
                }
-
                else{
-
                selectedSort = titleList;}
             }
             else if(event.target.dataset.id ==='genre'){
-
                if(selectedSort===genreList){
-                  
-
                   selectedSort = genreList.toReversed();
                }
                else{
                selectedSort = genreList;}
             }
-
             else if(event.target.dataset.id ==='year'){
-
                if(selectedSort===yearList){
-
-
-
                   selectedSort = yearList.toReversed();
                }
-
                else{
-
                selectedSort = yearList;}
             }
             else if(event.target.dataset.id ==='artist'){
-               
                if(selectedSort===artistList){
-
-
                   selectedSort = artistList.toReversed();
                }
-
                else{
 
                selectedSort = artistList;}
