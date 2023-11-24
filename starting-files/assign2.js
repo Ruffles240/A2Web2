@@ -130,7 +130,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          });
          if(thisSearch!=null){
             let searchedValue = thisSearch.id;
-            if(thisSearch.value=''){
+            if(thisSearch.value===''){
                alert('Please choose an option.')
             }
             else{
