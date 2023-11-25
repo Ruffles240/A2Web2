@@ -129,7 +129,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          event.stopPropagation();
         
          if(currentFilter!=null){
-            let searchedValue = thisSearch.id;
+            let searchedValue = currentFilter.id;
             if(thisSearch.value===''){
                alert('Please choose an option.')
             }
