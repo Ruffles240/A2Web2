@@ -27,6 +27,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var music = await localStorage.getItem("data");
    var artists = await fetchData("./starting-files/artists.json");
    var genres = await fetchData("./starting-files/genres.json");
+   var currentFilter;
 
    if(music ===null){
       music = await fetchData(api);
@@ -40,12 +41,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
    var sortingFunctions = {
-
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
       'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
+
+
 
    var selectedSort = music;
 
@@ -111,7 +113,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(event.target.type==="radio"){
 
          resetBoxes(selectBars);
-         document.querySelector(`#${event.target.dataset.id}`).disabled = false;
+         
+         currentFilter = document.querySelector(`#${event.target.dataset.id}`);
+         currentFilter.disabled = false;
 
       }      
 
@@ -123,20 +127,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    listButtons.addEventListener("click", (event) =>{
          event.stopPropagation();
-         const thisSearch = selectBars.find((bar) => {
-            return bar.disabled === false;
-         });
+        
          if(thisSearch!=null){
             let searchedValue = thisSearch.id;
             if(thisSearch.value===''){
                alert('Please choose an option.')
             }
             else{
-
-
-               
-            populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
-               
+            populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
          }  
          }
          else{
@@ -260,7 +258,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
             var criteria = event.target.dataset.id;
             
             if(tbody.id =='searchList'){
-               selectedSort.sort(sortingFunctions[`${criteria}`]);
+               selectedSort.sort(
+                  sortingFunctions[`${criteria}`]);
                
                populateTable(tbody, selectedSort);
             }
