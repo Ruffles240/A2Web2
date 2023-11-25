@@ -11,56 +11,73 @@ console.log('this is secure');
 addEventListener("DOMContentLoaded", async (event) =>{
 
    var playlist = localStorage.getItem('playlist');
-
-   if(playlist ===null){
-
-      playlist = [];
-   }
-
-   else{
-
-      playlist = JSON.parse(playlist);
-   }
-   populateTable(document.querySelector('#playlistTable'), playlist);
-
-
+   const selectBars = Array.from(document.querySelectorAll(".select"));
    var music = await localStorage.getItem("data");
    var artists = await fetchData("./starting-files/artists.json");
    var genres = await fetchData("./starting-files/genres.json");
    var currentFilter;
-
-   if(music ===null){
-      music = await fetchData(api);
-      localStorage.setItem("data", JSON.stringify(music));
-
-   }
-
-   else {
-      music = JSON.parse(music);
-
-   }
-
    var sortingFunctions = {
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
       'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
-
-
-
+   var pages = Array.from(document.querySelector("main").children);
    var selectedSort = music;
+   var listButtons = document.querySelector("#listSongs");
+   var topArtists = findFreq('artist');
+   var tables = document.querySelectorAll('table');
+   var topGenres = findFreq('genre');
+   var tableHeads= document.querySelectorAll('thead');
+   const popularitySort= music.toSorted((a,b) => {
+      return b.details.popularity - a.details.popularity;
+
+   })
+
+
+   initialize();
 
 
 
+
+   async function initialize(){
+      if(playlist ===null){
+
+         playlist = [];
+      }
+
+      else{
+
+         playlist = JSON.parse(playlist);
+      }
+
+
+      populateTable(document.querySelector('#playlistTable'), playlist);
+
+      if(music ===null){
+         music = await fetchData(api);
+         localStorage.setItem("data", JSON.stringify(music));
+
+      }
+
+      else {
+         music = JSON.parse(music);
+
+      }
+
+      populateTable(document.querySelector('#searchList'), selectedSort);
+      populateTopTable(document.querySelector('#topArtists'), topArtists);
+      populateTopTable(document.querySelector('#topGenres'), topGenres);
+      populateTopTable(document.querySelector('#topSongs'), popularitySort);
+      populateSelect(genres ,document.querySelector('#genre'));
+      populateSelect(artists ,document.querySelector('#artist'));
+      
+   }
 
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
       return response;
   }
-
-   populateSelect(genres ,document.querySelector('#genre'));
-   populateSelect(artists ,document.querySelector('#artist'));
 
   function populateSelect(populator, select){
 
@@ -88,7 +105,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
   };
   
-   var pages = Array.from(document.querySelector("main").children);
 
    document.querySelector("#homeButtons").addEventListener("click", (event) => {
 
@@ -106,7 +122,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
    
    );
-   const selectBars = Array.from(document.querySelectorAll(".select"));
 
    document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
 
@@ -121,9 +136,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    })});
 
-   populateTable(document.querySelector('#searchList'), selectedSort);
 
-   var listButtons = document.querySelector("#listSongs");
 
    listButtons.addEventListener("click", (event) =>{
          event.stopPropagation();
@@ -206,7 +219,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return newRow;
    }
 
-   var tables = document.querySelectorAll('table');
 
    tables.forEach((table)=>  
       table.addEventListener('click', (event)=>
@@ -250,7 +262,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    
    ));
-   var tableHeads= document.querySelectorAll('thead')
    
    tableHeads.forEach((th) => {
       th.addEventListener('click', (event) => {
@@ -330,19 +341,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    document.querySelectorAll('.mainList');
 
-   var topArtists = findFreq('artist');
-
-   var topGenres = findFreq('genre');
-
-   let popularitySort= music.toSorted((a,b) => {
-      return b.details.popularity - a.details.popularity;
-
-   })
-
-   populateTopTable(document.querySelector('#topArtists'), topArtists);
-   populateTopTable(document.querySelector('#topGenres'), topGenres);
-   populateTopTable(document.querySelector('#topSongs'), popularitySort);
-
+  
+  
+   
    function findFreq(discriminator, location) {
       let freqs = {};
 
