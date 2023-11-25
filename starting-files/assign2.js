@@ -314,17 +314,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var newRow = document.createElement("li");
 
                   
-         if(list[i]['name'] !== undefined){
+         if(typeof list[i]==='object'){
             
-            newRow.innerHTML = list[i]['name'];
-            newRow.dataset.id = list[i]['id'];
-
+            newRow.innerHTML = list[i]['title'];
+            newRow.dataset.id = list[i]['title'];
          }
-         else{
-         newRow.innerHTML = list[i]['title'];
-         newRow.dataset.id = list[i]['title'];
-      
-      }
+
+
         table.appendChild(newRow);
      }
    }
@@ -346,10 +342,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
       let freqs = {};
 
       for (let song of music) {
-         if (freqs[song[discriminator]] === undefined) { 
-            freqs[song[discriminator]] = 1; 
+         if (freqs[song[discriminator]['name']] === undefined) { 
+            freqs[song[discriminator]['name']] = 1; 
          } else {
-            freqs[song[discriminator]] += 1;
+            freqs[song[discriminator]['name']] += 1;
          }
       }
       let frequencyArray = [];
