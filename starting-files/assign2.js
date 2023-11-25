@@ -39,10 +39,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-   var yearList = music.toSorted((a,b) => { return b.year - a.year});
-   var genreList = music.toSorted((a,b) => {return a.genre.name.localeCompare(b.genre.name)});
-   var artistList = music.toSorted((a,b) => {return a.artist.name.localeCompare(b.artist.name)});   
-   var titleList = music.toSorted((a,b) => { return a.title.localeCompare(b.title)});
+   var sortingFunctions = {
+
+      'year' : function (a,b) {return b.year - a.year},
+      'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
+      'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
+      'title' :  function (a,b) { return a.title.localeCompare(b.title)}
+   }
+
    var selectedSort = music;
 
 
@@ -105,7 +109,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
    document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
 
       if(event.target.type==="radio"){
-         populateTable(document.querySelector('#searchList'), selectedSort);
 
          resetBoxes(selectBars);
          document.querySelector(`#${event.target.dataset.id}`).disabled = false;
@@ -129,6 +132,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
                alert('Please choose an option.')
             }
             else{
+
+
+               
             populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
                
          }  
@@ -250,45 +256,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       th.addEventListener('click', (event) => {
          if(event.target.classList.contains('rearrange')){
             var tbody = document.querySelector(`#${event.target.dataset.table}`);
-            console.log(tbody.id);
-            var rows = Array.from(tbody.childNodes);
+          
             var criteria = event.target.dataset.id;
-            rows.sort((a,b)=>{
-               for (const childNode of a.childNodes) {
-
-                  if (childNode.dataset.type === criteria) {
-                     console.log(childNode);
-
-                    var aData = childNode;
-                    break;
-                  }
-                }
-               for (const childNode of b.childNodes) {
-                  if (childNode.dataset.type === criteria) { 
-                     console.log(childNode);
-
-                     var bData = childNode;
-                     break;
-                  }
-               }
-
-               console.log(aData);
-
-               console.log(bData);
-
-               if(Number.isInteger(bData.dataset.id)){
-                  return aData.dataset.id - bData.dataset.id;
-               }
-               else{
-                  return aData.dataset.id.localeCompare(bData.dataset.id);
-               }
-            })
-
-            console.log(rows);
-            tbody.innerHTML-'';
-
-            for(var row of rows){
-               tbody.appendChild(row);
+            
+            if(tbody.id =='searchList'){
+               selectedSort.sort(a,b => sortingFunctions[`${criteria}`](a,b));
+               
+               populateTable(tbody, selectedSort);
             }
          }
       } 
@@ -329,14 +303,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.innerHTML = splitWord[0];
 
             newRow.dataset.id = splitWord[1]; 
-
-
          }
 
 
         table.appendChild(newRow);
      }
    }
+
+   document.querySelectorAll('.mainList');
 
    var topArtists = findFreq('artist');
 
