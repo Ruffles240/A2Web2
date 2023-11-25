@@ -348,10 +348,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
       let freqs = {};
 
       for (let song of music) {
-         if (freqs[song[discriminator]['name']] === undefined) { 
-            freqs[song[discriminator]['name']] = 1; 
+         if (freqs[`${song[discriminator]['name']}|${[song[discriminator]]['id']}`] === undefined) { 
+            freqs[`${song[discriminator]['name']}|${[song[discriminator]]['id']}`] = 1; 
          } else {
-            freqs[song[discriminator]['name']] += 1;
+            freqs[`${song[discriminator]['name']}|${[song[discriminator]]['id']}`] += 1;
          }
       }
       let frequencyArray = [];
