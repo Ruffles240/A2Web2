@@ -165,7 +165,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
       for(song of list){
-         var newRow = makeRow(table, row);
+         var newRow = makeRow(table, song);
         
          table.appendChild(newRow);
       }
@@ -173,7 +173,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
 
-   function makeRow(table, row){
+   function makeRow(table, song){
 
       var type= ''
 
@@ -196,9 +196,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
 
-      row.dataset.id = song.song_id;
+      newRow.dataset.id = song.song_id;
       newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
-      return row;
+      return newRow;
    }
 
    var tables = document.querySelectorAll('table');
