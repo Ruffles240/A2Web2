@@ -262,10 +262,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
             if(tbody.id =='searchList'){
                selectedSort.sort(
                   sortingFunctions[`${criteria}`]);
-                  currentSongs=selectedSort;
+                  var currentSongs=selectedSort;
 
                   if(currentFilter!=null && currentFilter.value !=''){
-                     var currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
+                      currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
 
                   }
 
