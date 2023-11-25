@@ -116,7 +116,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    populateTable(document.querySelector('#searchList'), selectedSort);
 
-   document.querySelector("#listSongs").addEventListener("click", (event) =>{
+   var listButtons = document.querySelector("#listSongs");
+
+   listButtons.addEventListener("click", (event) =>{
          event.stopPropagation();
          const thisSearch = selectBars.find((bar) => {
             return bar.disabled === false;
@@ -128,7 +130,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             }
             else{
             populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(thisSearch.value, song[searchedValue])));
-         
+               
          }  
          }
          else{
@@ -293,8 +295,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       )
    })
 
-  
- 
    function resetBoxes(resetted){
 
       resetted.forEach(function(option)
@@ -314,20 +314,24 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var newRow = document.createElement("li");
 
                   
-         if(typeof list[i] === "object"){
+         if(list[i]['name'] !== undefined){
             
-            newRow.innerHTML = `${list[i]['title']}`;
+            newRow.innerHTML = list[i]['name'];
+            newRow.dataset.id = list[i]['id'];
 
          }
          else{
-         newRow.innerHTML = `${list[i]}`;}
+         newRow.innerHTML = list[i]['title'];
+         newRow.dataset.id = list[i]['title'];
+      
+      }
         table.appendChild(newRow);
      }
    }
 
-   var topArtists = findFreq('artist','name');
+   var topArtists = findFreq('artist');
 
-   var topGenres = findFreq('genre','name');
+   var topGenres = findFreq('genre');
 
    let popularitySort= music.toSorted((a,b) => {
       return b.details.popularity - a.details.popularity;
@@ -342,23 +346,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
       let freqs = {};
 
       for (let song of music) {
-
-         if (freqs[song[discriminator][location]] === undefined) { 
-            freqs[song[discriminator][location]] = 1; 
+         if (freqs[song[discriminator]] === undefined) { 
+            freqs[song[discriminator]] = 1; 
          } else {
-            freqs[song[discriminator][location]] += 1;
+            freqs[song[discriminator]] += 1;
          }
       }
-
       let frequencyArray = [];
       for (key in freqs) {
           frequencyArray.push([freqs[key], key]);
       }
-
       frequencyArray.sort((a, b) => {
          return b[0] - a[0];
      });
-     
      mostFreq = [];
      for (let i = 0; i < 15; i++) {
          mostFreq.push(frequencyArray[i][1]);
