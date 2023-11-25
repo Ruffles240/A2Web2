@@ -320,6 +320,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.dataset.id = list[i]['title'];
          }
 
+         else{
+            newRow.innerHTML = list[i];
+
+
+         }
+
 
         table.appendChild(newRow);
      }
