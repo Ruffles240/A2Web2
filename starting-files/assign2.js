@@ -128,7 +128,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    listButtons.addEventListener("click", (event) =>{
          event.stopPropagation();
         
-         if(thisSearch!=null){
+         if(currentFilter!=null){
             let searchedValue = thisSearch.id;
             if(thisSearch.value===''){
                alert('Please choose an option.')
@@ -274,6 +274,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       {
       
          option.disabled = true;
+         currentFilter =null;
          
       })
       
