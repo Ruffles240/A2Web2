@@ -318,10 +318,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
             
             newRow.innerHTML = list[i]['title'];
             newRow.dataset.id = list[i]['title'];
+
+
          }
 
          else{
-            newRow.innerHTML = list[i];
+
+            let splitWord = list[i].split('|')
+
+            newRow.innerHTML = splitWord[0];
+
+            newRow.dataset.id = splitWord[1]; 
 
 
          }
