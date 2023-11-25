@@ -213,6 +213,44 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   return song.song_id == event.target.dataset.id});
                popupText(`${thisSong.title}`);
             }
+
+
+            const thisSong =music.find((song) =>{
+               return song.song_id == event.target.dataset.id}
+               );
+            if(event.target.classList.contains("addPlaylist")){
+               if(typeof (playlist.find((playlistSong) => 
+               {
+                  return playlistSong.song_id == event.target.dataset.id
+               }
+               )) !== 'undefined'){
+                  alert('This song is already in the playlist');
+               }
+               else{
+                  playlist.push(thisSong);
+   
+                  localStorage.setItem('playlist', JSON.stringify(playlist));
+                  populateTable(document.querySelector('#playlistTable'), playlist);
+               }
+            }
+   
+   
+            else if(event.target.classList.contains('removePlaylist')){
+               playlist = playlist.filter((song)=>{
+                  return !(thisSong.song_id == song.song_id);
+               })
+            }
+            else if(event.target.classList.contains('clearPlaylist')){
+               playlist = [];
+            }
+            localStorage.setItem('playlist', JSON.stringify(playlist));
+            populateTable(document.querySelector('#playlistTable'), playlist);
+
+
+
+
+
+
       }
    
    ));
@@ -267,49 +305,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       )
    })
 
-   const tables = document.querySelectorAll('table');
-   tables.forEach((table) =>{
-   
-   table.addEventListener('click', (event) =>{
-      
-
-      if(event.target.type="button"){
-
-         const thisSong =music.find((song) =>{
-            return song.song_id == event.target.dataset.id}
-            );
-         if(event.target.classList.contains("addPlaylist")){
-            if(typeof (playlist.find((playlistSong) => 
-            {
-               return playlistSong.song_id == event.target.dataset.id
-            }
-            )) !== 'undefined'){
-               alert('This song is already in the playlist');
-            }
-            else{
-               playlist.push(thisSong);
-
-               localStorage.setItem('playlist', JSON.stringify(playlist));
-               populateTable(document.querySelector('#playlistTable'), playlist);
-            }
-         }
-
-
-         else if(event.target.classList.contains('removePlaylist')){
-            playlist = playlist.filter((song)=>{
-               return !(thisSong.song_id == song.song_id);
-            })
-         }
-         else if(event.target.classList.contains('clearPlaylist')){
-            playlist = [];
-         }
-         localStorage.setItem('playlist', JSON.stringify(playlist));
-         populateTable(document.querySelector('#playlistTable'), playlist);
-         }
-   }
-      
-   );})
-
+  
+ 
    function resetBoxes(resetted){
 
       resetted.forEach(function(option)
