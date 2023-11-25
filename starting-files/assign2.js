@@ -260,7 +260,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             var criteria = event.target.dataset.id;
             
             if(tbody.id =='searchList'){
-               selectedSort.sort(a,b => sortingFunctions[`${criteria}`](a,b));
+               selectedSort.sort(sortingFunctions[`${criteria}`]);
                
                populateTable(tbody, selectedSort);
             }
