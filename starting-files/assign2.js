@@ -130,7 +130,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
         
          if(currentFilter!=null){
             let searchedValue = currentFilter.id;
-            if(thisSearch.value===''){
+            if(currentFilter.value===''){
                alert('Please choose an option.')
             }
             else{
@@ -160,7 +160,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       event.stopPropagation();
   
             resetBoxes(selectBars);
-            populateTable(document.querySelector('#searchList'), selectedSort);
+            selectedSort=music;
+            populateTable(document.querySelector('#searchList'), music);
+
          
       }
    )
