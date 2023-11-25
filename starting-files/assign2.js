@@ -348,6 +348,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       let freqs = {};
 
       for (let song of music) {
+
+         console.log([song[discriminator]]['id']);
          if (freqs[`${song[discriminator]['name']}|${[song[discriminator]]['id']}`] === undefined) { 
             freqs[`${song[discriminator]['name']}|${[song[discriminator]]['id']}`] = 1; 
          } else {
