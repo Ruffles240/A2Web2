@@ -163,32 +163,42 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       table.innerHTML="";
 
-      var type= ''
 
       for(song of list){
-         if(table.id ==="searchList"){
-            type = 'class= "addPlaylist playlist">Add';
+         var newRow = makeRow(table, row);
+        
+         table.appendChild(newRow);
+      }
 
-         }
+   }
 
-         else if(table.id==="playlistTable"){
 
-            type = 'class= "removePlaylist">Remove';
+   function makeRow(table, row){
 
-         }
+      var type= ''
 
-         var newRow = document.createElement("tr");
-         var shortenedTitle= song.title.substring(0,24);
-         if(song.title.length>25){
-            shortenedTitle = shortenedTitle.substring(0, 23);
-            shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
-         }
 
-         newRow.dataset.id = song.song_id;
-         newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
-        table.appendChild(newRow);
-     }
+      if(table.id ==="searchList"){
+         type = 'class= "addPlaylist playlist">Add';
 
+      }
+
+      else if(table.id==="playlistTable"){
+
+         type = 'class= "removePlaylist">Remove';
+
+      }
+
+      var newRow = document.createElement("tr");
+      var shortenedTitle= song.title.substring(0,24);
+      if(song.title.length>25){
+         shortenedTitle = shortenedTitle.substring(0, 23);
+         shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
+      }
+
+      row.dataset.id = song.song_id;
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
+      return row;
    }
 
    var tables = document.querySelectorAll('table');
@@ -257,10 +267,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
       )
    })
 
-   const tbodies = document.querySelectorAll('table');
-   tbodies.forEach((table) =>{
+   const tables = document.querySelectorAll('table');
+   tables.forEach((table) =>{
    
    table.addEventListener('click', (event) =>{
+      
 
       if(event.target.type="button"){
 
@@ -273,7 +284,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                return playlistSong.song_id == event.target.dataset.id
             }
             )) !== 'undefined'){
-
                alert('This song is already in the playlist');
             }
             else{
@@ -281,13 +291,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
                localStorage.setItem('playlist', JSON.stringify(playlist));
                populateTable(document.querySelector('#playlistTable'), playlist);
-
             }
          }
+
+
          else if(event.target.classList.contains('removePlaylist')){
-
             playlist = playlist.filter((song)=>{
-
                return !(thisSong.song_id == song.song_id);
             })
          }
