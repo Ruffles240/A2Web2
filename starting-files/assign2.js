@@ -260,8 +260,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             var criteria = event.target.dataset.id;
             
             if(tbody.id =='searchList'){
-               selectedSort.sort(
-                  sortingFunctions[`${criteria}`]);
+               selectedSort.sort(sortingFunctions[`${criteria}`]);
                   var currentSongs=selectedSort;
 
                   if(currentFilter!=null && currentFilter.value !=''){
@@ -270,6 +269,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   }
 
                   populateTable(tbody, currentSongs);
+
+           
+               
+            }
+            else if(tbody.id =='playlistTable'){
+
+               playlist.sort(sortingFunctions[`${criteria}`]);
+
+               populateTable(tbody, playlist);
 
                
             }
