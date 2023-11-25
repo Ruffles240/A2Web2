@@ -163,7 +163,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       table.innerHTML="";
 
-
       for(song of list){
          var newRow = makeRow(table, song);
         
@@ -172,11 +171,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-
    function makeRow(table, song){
 
       var type= ''
-
 
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
@@ -214,7 +211,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                popupText(`${thisSong.title}`);
             }
 
-
             const thisSong =music.find((song) =>{
                return song.song_id == event.target.dataset.id}
                );
@@ -233,8 +229,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   populateTable(document.querySelector('#playlistTable'), playlist);
                }
             }
-   
-   
             else if(event.target.classList.contains('removePlaylist')){
                playlist = playlist.filter((song)=>{
                   return !(thisSong.song_id == song.song_id);
@@ -245,12 +239,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
             }
             localStorage.setItem('playlist', JSON.stringify(playlist));
             populateTable(document.querySelector('#playlistTable'), playlist);
-
-
-
-
-
-
       }
    
    ));
@@ -379,15 +367,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
      return mostFreq;
 
    }
-
-
-
-
-
-
-
-
-
    /**
     * 
     * Place code below
