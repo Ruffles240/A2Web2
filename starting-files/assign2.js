@@ -290,13 +290,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
    
-   function rearrangeSearchTable(criteria, tbody, checkFilter){
+   function rearrangeSearchTable(criteria, tbody, checkSelected){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
       var currentSongs=selectedSort;
       if(currentFilter!=null && currentFilter.value !=''){
             currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
-      if(checkFilter){
+      if(checkSelected){
          currentSongs = currentSongs.reverse();
       }
       populateTable(tbody, currentSongs);   
