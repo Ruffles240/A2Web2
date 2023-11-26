@@ -144,6 +144,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    if(event.target.type==="radio"){
       resetBoxes(selectBars);
       currentFilter = document.querySelector(`#${event.target.dataset.id}`);
+
+      console.log(`${event.target.dataset.id}`);
       currentFilter.disabled = false;
    }      
 };
