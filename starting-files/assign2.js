@@ -31,7 +31,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
    initialize();
-
+   makeListeners();
 
 
 
@@ -77,6 +77,66 @@ addEventListener("DOMContentLoaded", async (event) =>{
       populateSelect(artists ,document.querySelector('#artist'));
       
    }
+   
+   
+
+
+   async function makeListeners(){
+
+      document.querySelector("#clear").addEventListener("click", (event) =>{
+
+         event.stopPropagation();
+     
+               resetBoxes(selectBars);
+               selectedSort=music;
+               populateTable(document.querySelector('#searchList'), music);
+   
+            
+         }
+      )
+
+      listButtons.addEventListener("click", (event) =>{
+         event.stopPropagation();
+        
+         if(currentFilter!=null){
+            let searchedValue = currentFilter.id;
+            if(currentFilter.value===''){
+               alert('Please choose an option.')
+            }
+            else{
+            populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
+         }  
+         }
+         else{
+
+            alert('Please choose a search option.');
+         }
+
+         })
+
+      document.querySelectorAll("input[type='radio']").forEach((radio) => radio.addEventListener("change", (event)=>{radioListener(event)}))
+      tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
+      
+
+      document.querySelector("#homeButtons").addEventListener("click", (event) => {
+
+         pages.forEach(function(page) {
+
+            if(event.target.classList.contains("header-div")){
+            if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
+            
+            
+            (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
+               page.classList.toggle("hide");
+            }}
+      });
+
+      }
+   
+   );
+
+
+   }
 
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
@@ -110,57 +170,28 @@ addEventListener("DOMContentLoaded", async (event) =>{
   };
   
 
-   document.querySelector("#homeButtons").addEventListener("click", (event) => {
+  
 
-      pages.forEach(function(page) {
-
-         if(event.target.classList.contains("header-div")){
-         if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
-         
-         
-         (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
-            page.classList.toggle("hide");
-         }}
-     });
-
-   }
    
-   );
+  function radioListener(event){
 
-   document.querySelectorAll("input[type='radio']").forEach((radio) =>  {radio.addEventListener("change", (event)=>{
+   if(event.target.type==="radio"){
 
-      if(event.target.type==="radio"){
+      resetBoxes(selectBars);
+      
+      currentFilter = document.querySelector(`#${event.target.dataset.id}`);
+      currentFilter.disabled = false;
 
-         resetBoxes(selectBars);
-         
-         currentFilter = document.querySelector(`#${event.target.dataset.id}`);
-         currentFilter.disabled = false;
+   }      
 
-      }      
-
-   })});
+};
 
 
+   
 
-   listButtons.addEventListener("click", (event) =>{
-         event.stopPropagation();
-        
-         if(currentFilter!=null){
-            let searchedValue = currentFilter.id;
-            if(currentFilter.value===''){
-               alert('Please choose an option.')
-            }
-            else{
-            populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
-         }  
-         }
-         else{
 
-            alert('Please choose a search option.')
-         }
 
-         }
-   )
+  
 
    function checkFilter(value, filter) {
       if(typeof filter ==='object'){
@@ -172,17 +203,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return filter.toLowerCase().includes(value.toLowerCase());
     }
       
-   document.querySelector("#clear").addEventListener("click", (event) =>{
-
-      event.stopPropagation();
-  
-            resetBoxes(selectBars);
-            selectedSort=music;
-            populateTable(document.querySelector('#searchList'), music);
-
-         
-      }
-   )
+   
 
    function populateTable(table, list){
 
@@ -224,10 +245,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
 
-   tables.forEach((table)=>  
-      table.addEventListener('click', (event)=>
-      
-      {
+   
+      function tableListener (event){
             if(event.target.classList.contains('titleEllipse'))
             {
                const thisSong = music.find((song) => {
@@ -265,7 +284,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             populateTable(document.querySelector('#playlistTable'), playlist);
       }
    
-   ));
+   
    
    tableHeads.forEach((th) => {
       th.addEventListener('click', (event) => {
@@ -348,7 +367,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
   
   
    
-   function findFreq(discriminator, location) {
+   function findFreq(discriminator) {
       let freqs = {};
 
       for (let song of music) {
