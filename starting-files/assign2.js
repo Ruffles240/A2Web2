@@ -10,31 +10,45 @@ console.log('this is secure');
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
-   var playlist = localStorage.getItem('playlist');
    const selectBars = Array.from(document.querySelectorAll(".select"));
-   var music = await localStorage.getItem("data");
-   var artists = await fetchData("./starting-files/artists.json");
-   var genres = await fetchData("./starting-files/genres.json");
-   var currentFilter;
+   const music = await localStorage.getItem("data");
+   const artists = await fetchData("./starting-files/artists.json");
+   const genres = await fetchData("./starting-files/genres.json");
+   const pages = Array.from(document.querySelector("main").children);
+   const topLists = Array.from(document.querySelectorAll('.mainList'));
+
+
+   var listButtons = document.querySelector("#listSongs");
+   var tables = document.querySelectorAll('table');
+   var tableHeads= document.querySelectorAll('thead');
+   var playlist = localStorage.getItem('playlist');
    var sortingFunctions = {
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
       'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
-   var pages = Array.from(document.querySelector("main").children);
+
+   var currentFilter;
    var selectedSort;
-   var listButtons = document.querySelector("#listSongs");
-   var tables = document.querySelectorAll('table');
-   var tableHeads= document.querySelectorAll('thead');
+
    
 
 
-   initialize();
+   main();
 
 
 
-   async function initialize(){
+   async function main(){
+      init();
+      makeTables();
+      makeListeners();
+
+      
+   }
+
+   async function init(){
+
       if(playlist ===null){
          playlist = [];
       }
@@ -49,23 +63,22 @@ addEventListener("DOMContentLoaded", async (event) =>{
          music = JSON.parse(music);
          selectedSort = music;
       }
-      makeTables();
-      makeListeners();
-
-      
    }
+
+
    
    
 
 
    async function makeListeners(){
-
       document.querySelector("#clear").addEventListener("click", (event) =>clear(event))
       listButtons.addEventListener("click", (event) => filterSearch(event));
       document.querySelectorAll("input[type='radio']").forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)))
       tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
       document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
       tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
+      topLists.forEach((list) => {list.addEventListener('click', (event)  => redirect(event.target))})
+
    }
 
    async function fetchData(URL) {
@@ -83,6 +96,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       select.appendChild(option);
    }
+  }
+
+  function redirect(target){
+      if(target.)
+
+
+
   }
    
   function popupText(text){
@@ -184,7 +204,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
    function makeRow(table, song){
-      var type= ''
+      var type= '';
+      let order =['title', 'artist', 'genre', 'year'];
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
       }
@@ -198,7 +219,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= 
+      "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
+      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button'
+       data-id = '${song.song_id}' ${type} </button></td>`;
       return newRow;
    }
 
@@ -207,7 +231,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function tableListener (event){
          const target = event.target;
          const thisSong = findSong(music, target);
-
+         
          if(event.target.classList.contains('titleEllipse'))
          {
             showName(song);
@@ -217,21 +241,27 @@ addEventListener("DOMContentLoaded", async (event) =>{
                alert('This song is already in the playlist');}
             else{
                playlist.push(thisSong);
-
-               localStorage.setItem('playlist', JSON.stringify(playlist));
-               populateTable(document.querySelector('#playlistTable'), playlist);
             }
          }
          else if(event.target.classList.contains('removePlaylist')){
-            playlist = playlist.filter((song)=>{
-               return !(thisSong.song_id == song.song_id);
-            })
+            playlist = removeSong(thisSong);
          }
          else if(event.target.classList.contains('clearPlaylist')){
             playlist = [];
          }
-         localStorage.setItem('playlist', JSON.stringify(playlist));
-         populateTable(document.querySelector('#playlistTable'), playlist);
+         updatePlaylist();
+   }
+
+   function updatePlaylist(){
+      localStorage.setItem('playlist', JSON.stringify(playlist));
+      populateTable(document.querySelector('#playlistTable'), playlist);
+
+   }
+
+   function removeSong(thisSong){
+     return playlist.filter((song)=>{
+         return !(thisSong.song_id == song.song_id);
+      });
    }
 
    function showName(song){
@@ -257,15 +287,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
                      currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
                }
                populateTable(tbody, currentSongs);     
-            
          }
          else if(tbody.id =='playlistTable'){
-
             playlist.sort(sortingFunctions[`${criteria}`]);
-
             populateTable(tbody, playlist);
-
-            
          }
       }
    } 
@@ -279,20 +304,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
    function populateTopTable(table, list){
-
       table.innerHTML="";
-
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
          if(typeof list[i]==='object'){
-            
             newRow.innerHTML = list[i]['title'];
             newRow.dataset.id = list[i]['title'];
+            newRow.dataset.type = 'title';
          }
          else{
             let splitWord = list[i].split('|')
             newRow.innerHTML = splitWord[0];
             newRow.dataset.id = splitWord[1]; 
+            newRow.dataset.type = splitWord[2];
          }
         table.appendChild(newRow);
      }
@@ -301,10 +325,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function findFreq(discriminator) {
       let freqs = {};
       for (let song of music) {
-         if (freqs[`${song[discriminator]['name']}|${song[discriminator]['id']}`] === undefined) { 
-            freqs[`${song[discriminator]['name']}|${song[discriminator]['id']}`] = 1; 
-         } else {
-            freqs[`${song[discriminator]['name']}|${song[discriminator]['id']}`] += 1;
+         let songString = `${song[discriminator]['name']}|${song[discriminator]['id']}|${discriminator}` 
+         if (freqs[songString] === undefined) { 
+            freqs[songString] = 1; 
+         } 
+         else {
+            freqs[songString] += 1;
          }
       }
       let frequencyArray = [];
