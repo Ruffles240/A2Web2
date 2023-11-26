@@ -9,6 +9,7 @@ console.log('this is secure');
 
 
 addEventListener("DOMContentLoaded", async (event) =>{
+   initialize();
 
    var playlist = localStorage.getItem('playlist');
    const selectBars = Array.from(document.querySelectorAll(".select"));
@@ -25,17 +26,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
    var pages = Array.from(document.querySelector("main").children);
    var selectedSort = music;
    var listButtons = document.querySelector("#listSongs");
-   var topArtists = findFreq('artist');
    var tables = document.querySelectorAll('table');
-   var topGenres = findFreq('genre');
    var tableHeads= document.querySelectorAll('thead');
-   const popularitySort= music.toSorted((a,b) => {
-      return b.details.popularity - a.details.popularity;
-
-   })
+   
 
 
-   initialize();
 
 
 
@@ -64,6 +59,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
          music = JSON.parse(music);
 
       }
+
+      const topGenres = findFreq('genre');
+      const topArtists = findFreq('artist');
+      const popularitySort= music.toSorted((a,b) => {
+         return b.details.popularity - a.details.popularity;
+   
+      })
+
+
 
       populateTable(document.querySelector('#searchList'), selectedSort);
       populateTopTable(document.querySelector('#topArtists'), topArtists);
