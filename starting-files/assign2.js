@@ -9,7 +9,6 @@ console.log('this is secure');
 
 
 addEventListener("DOMContentLoaded", async (event) =>{
-   initialize();
 
    var playlist = localStorage.getItem('playlist');
    const selectBars = Array.from(document.querySelectorAll(".select"));
@@ -31,6 +30,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
 
 
+   initialize();
 
 
 
