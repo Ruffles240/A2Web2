@@ -205,18 +205,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    
    function tableListener (event){
+         const target = event.target;
+         const thisSong = findSong(music, target);
+
          if(event.target.classList.contains('titleEllipse'))
          {
-            const thisSong = music.find((song) => {
-               return song.song_id == event.target.dataset.id});
-            popupText(`${thisSong.title}`);
+            showName(song);
          }
-
-         const thisSong =music.find((song) =>{
-            return song.song_id == event.target.dataset.id}
-            );
-         if(event.target.classList.contains("addPlaylist")){
-            if(typeof (playlist.find((playlistSong) => {return playlistSong.song_id == event.target.dataset.id})) !== 'undefined'){
+         if(target.classList.contains("addPlaylist")){
+            if(typeof (findSong(playlist, target)) !== 'undefined'){
                alert('This song is already in the playlist');}
             else{
                playlist.push(thisSong);
@@ -235,6 +232,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          localStorage.setItem('playlist', JSON.stringify(playlist));
          populateTable(document.querySelector('#playlistTable'), playlist);
+   }
+
+   function showName(song){
+      popupText(`${song.title}`);
+   }
+
+   function findSong(list, item){
+
+      return list.find((song)=>{
+
+         return song.song_id == item.dataset.id
+      })
    }
 
    function rearrangeTable(event){
