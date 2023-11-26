@@ -23,7 +23,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
    var pages = Array.from(document.querySelector("main").children);
-   var selectedSort = music;
+   var selectedSort;
    var listButtons = document.querySelector("#listSongs");
    var tables = document.querySelectorAll('table');
    var tableHeads= document.querySelectorAll('thead');
@@ -57,7 +57,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       else {
          music = JSON.parse(music);
-
+         selectedSort = music;
       }
 
       const topGenres = findFreq('genre');
