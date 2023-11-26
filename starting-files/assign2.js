@@ -281,7 +281,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var criteria = event.target.dataset.id;
          var checkSelected = event.target.classList.contains('selectedSort');
          if(tbody.id =='searchList'){
-            rearrangeSearchTable(criteria, tbody, checkSelected);
+            rearrangeSearchTable(criteria, tbody, checkSelected, event.target);
          }
          else if(tbody.id =='playlistTable'){
             playlist.sort(sortingFunctions[`${criteria}`]);
@@ -290,7 +290,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
    
-   function rearrangeSearchTable(criteria, tbody, checkSelected){
+   function rearrangeSearchTable(criteria, tbody, checkSelected, header){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
       var currentSongs=selectedSort;
       if(currentFilter!=null && currentFilter.value !=''){
@@ -298,6 +298,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       if(checkSelected){
          currentSongs = currentSongs.reverse();
+      }
+      else{
+         header.classList.add('selectedSort');
       }
       populateTable(tbody, currentSongs);   
    }
