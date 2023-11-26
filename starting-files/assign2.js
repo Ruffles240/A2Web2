@@ -16,7 +16,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const genres = await fetchData("./starting-files/genres.json");
    const pages = Array.from(document.querySelector("main").children);
    const topLists = Array.from(document.querySelectorAll('.mainList'));
-   const radioBtns = Array.from(document.querySelector('input[type="radio"]'));
+   const radioBtns = Array.from(document.querySelectorAll('input[type="radio"]'));
    const listButtons = document.querySelector("#listSongs");
    const tables = document.querySelectorAll('table');
    const tableHeads= document.querySelectorAll('thead');
@@ -70,9 +70,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
    async function makeListeners(){
-      document.querySelector("#clear").addEventListener("click", (event) =>clear(event))
+      document.querySelector("#clear").addEventListener("click", (event) =>clear(event));
       listButtons.addEventListener("click", (event) => filterSearch(event));
-      radioBtns.forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)))
+      radioBtns.forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)));
       tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
       document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
       tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
