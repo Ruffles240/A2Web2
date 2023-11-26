@@ -279,20 +279,28 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(event.target.classList.contains('rearrange')){
          var tbody = document.querySelector(`#${event.target.dataset.table}`);
          var criteria = event.target.dataset.id;
+         var checkSelected = event.target.classList.contains('selectedSort');
          if(tbody.id =='searchList'){
-            selectedSort.sort(sortingFunctions[`${criteria}`]);
-               var currentSongs=selectedSort;
-               if(currentFilter!=null && currentFilter.value !=''){
-                     currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
-               }
-               populateTable(tbody, currentSongs);     
+            rearrangeSearchTable(criteria, tbody, checkSelected);
          }
          else if(tbody.id =='playlistTable'){
             playlist.sort(sortingFunctions[`${criteria}`]);
             populateTable(tbody, playlist);
          }
       }
-   } 
+   }
+   
+   function rearrangeSearchTable(criteria, tbody, checkFilter){
+      selectedSort.sort(sortingFunctions[`${criteria}`]);
+      var currentSongs=selectedSort;
+      if(currentFilter!=null && currentFilter.value !=''){
+            currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
+      }
+      if(checkFilter){
+         currentSongs = currentSongs.reverse();
+      }
+      populateTable(tbody, currentSongs);   
+   }
       
    function resetBoxes(resetted){
       resetted.forEach(function(option)
