@@ -16,13 +16,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const genres = await fetchData("./starting-files/genres.json");
    const pages = Array.from(document.querySelector("main").children);
    const topLists = Array.from(document.querySelectorAll('.mainList'));
-
-
-   var listButtons = document.querySelector("#listSongs");
-   var tables = document.querySelectorAll('table');
-   var tableHeads= document.querySelectorAll('thead');
-   var playlist = localStorage.getItem('playlist');
-   var sortingFunctions = {
+   const radioBtns = Array.from(document.querySelector('input[type="radio"]'));
+   const listButtons = document.querySelector("#listSongs");
+   const tables = document.querySelectorAll('table');
+   const tableHeads= document.querySelectorAll('thead');
+   const playlist = localStorage.getItem('playlist');
+   const sortingFunctions = {
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
       'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
@@ -73,7 +72,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    async function makeListeners(){
       document.querySelector("#clear").addEventListener("click", (event) =>clear(event))
       listButtons.addEventListener("click", (event) => filterSearch(event));
-      document.querySelectorAll("input[type='radio']").forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)))
+      radioBtns.forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)))
       tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
       document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
       tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
@@ -99,12 +98,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
   }
 
   function redirect(target){
-      if(target.)
+      var selectRadio= document.querySelector(`${target.dataset.type}Rad`); 
+      if(target.dataset.type =='artist' || target.dataset.type =='genre'){
+         document.querySelector('#browse').click();
+         selectRadio.click();
+         currentFilter.value= target.dataset.id;
+         document.querySelector('#listSongs').click();
 
-
-
+      }
   }
-   
+
   function popupText(text){
       let popup = document.querySelector('#popupElement')
 
@@ -136,7 +139,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          selectedSort=music;
          populateTable(document.querySelector('#searchList'), music);
    }
-
    
   function radioListener(event){
    if(event.target.type==="radio"){
@@ -145,8 +147,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       currentFilter.disabled = false;
    }      
 };
-
-
    
    function pageSwitch(event){
 
@@ -178,9 +178,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          alert('Please choose a search option.');
       }
    }
-
-
-  
 
    function checkFilter(value, filter) {
       if(typeof filter ==='object'){
