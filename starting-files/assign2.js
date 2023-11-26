@@ -31,50 +31,27 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
    initialize();
-   makeListeners();
 
 
 
    async function initialize(){
       if(playlist ===null){
-
          playlist = [];
       }
-
       else{
-
          playlist = JSON.parse(playlist);
       }
-
-
-      populateTable(document.querySelector('#playlistTable'), playlist);
-
       if(music ===null){
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
-
       }
-
       else {
          music = JSON.parse(music);
          selectedSort = music;
       }
+      makeTables();
+      makeListeners();
 
-      const topGenres = findFreq('genre');
-      const topArtists = findFreq('artist');
-      const popularitySort= music.toSorted((a,b) => {
-         return b.details.popularity - a.details.popularity;
-   
-      })
-
-
-
-      populateTable(document.querySelector('#searchList'), selectedSort);
-      populateTopTable(document.querySelector('#topArtists'), topArtists);
-      populateTopTable(document.querySelector('#topGenres'), topGenres);
-      populateTopTable(document.querySelector('#topSongs'), popularitySort);
-      populateSelect(genres ,document.querySelector('#genre'));
-      populateSelect(artists ,document.querySelector('#artist'));
       
    }
    
@@ -83,65 +60,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    async function makeListeners(){
 
-      document.querySelector("#clear").addEventListener("click", (event) =>{
-
-         event.stopPropagation();
-     
-               resetBoxes(selectBars);
-               selectedSort=music;
-               populateTable(document.querySelector('#searchList'), music);
-   
-            
-         }
-      )
-
-      listButtons.addEventListener("click", (event) =>{
-         event.stopPropagation();
-        
-         if(currentFilter!=null){
-            let searchedValue = currentFilter.id;
-            if(currentFilter.value===''){
-               alert('Please choose an option.')
-            }
-            else{
-            populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
-         }  
-         }
-         else{
-
-            alert('Please choose a search option.');
-         }
-
-         })
-
-      document.querySelectorAll("input[type='radio']").forEach((radio) => radio.addEventListener("change", (event)=>{radioListener(event)}))
+      document.querySelector("#clear").addEventListener("click", (event) =>clear(event))
+      listButtons.addEventListener("click", (event) => filterSearch(event));
+      document.querySelectorAll("input[type='radio']").forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)))
       tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
-      
-
-      document.querySelector("#homeButtons").addEventListener("click", (event) => {
-
-         pages.forEach(function(page) {
-
-            if(event.target.classList.contains("header-div")){
-            if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
-            
-            
-            (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
-               page.classList.toggle("hide");
-            }}
-      });
-
-      }
-   
-   );
-
-
+      document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
+      tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
    }
 
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
       return response;
   }
+
 
   function populateSelect(populator, select){
 
@@ -159,36 +90,74 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       popup.textContent=text;
       popup.style.display = "block";
-
-
       setTimeout(() => {
-
          popup.style.display = "none";
-         
       }, 5000);
 
   };
+
+   function makeTables(){
+      const topGenres = findFreq('genre');
+      const topArtists = findFreq('artist');
+      const popularitySort= music.toSorted((a,b) => {return b.details.popularity - a.details.popularity;})
+      populateTable(document.querySelector('#playlistTable'), playlist);
+      populateTable(document.querySelector('#searchList'), selectedSort);
+      populateTopTable(document.querySelector('#topArtists'), topArtists);
+      populateTopTable(document.querySelector('#topGenres'), topGenres);
+      populateTopTable(document.querySelector('#topSongs'), popularitySort);
+      populateSelect(genres ,document.querySelector('#genre'));
+      populateSelect(artists ,document.querySelector('#artist'));
+   }
   
 
-  
+  function clear(event){
+      event.stopPropagation();
+         resetBoxes(selectBars);
+         selectedSort=music;
+         populateTable(document.querySelector('#searchList'), music);
+   }
 
    
   function radioListener(event){
-
    if(event.target.type==="radio"){
-
       resetBoxes(selectBars);
-      
       currentFilter = document.querySelector(`#${event.target.dataset.id}`);
       currentFilter.disabled = false;
-
    }      
-
 };
 
 
    
+   function pageSwitch(event){
 
+      pages.forEach(function(page) {
+
+         if(event.target.classList.contains("header-div")){
+         if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
+         
+         
+         (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
+            page.classList.toggle("hide");
+         }}
+   });
+
+}
+
+   function filterSearch(){
+      event.stopPropagation();
+      if(currentFilter!=null){
+         let searchedValue = currentFilter.id;
+         if(currentFilter.value===''){
+            alert('Please choose an option.')
+         }
+         else{
+         populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
+      }  
+      }
+      else{
+         alert('Please choose a search option.');
+      }
+   }
 
 
   
@@ -206,39 +175,28 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
 
    function populateTable(table, list){
-
       table.innerHTML="";
 
       for(song of list){
          var newRow = makeRow(table, song);
-        
          table.appendChild(newRow);
       }
-
    }
 
    function makeRow(table, song){
-
       var type= ''
-
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
-
       }
-
       else if(table.id==="playlistTable"){
-
          type = 'class= "removePlaylist">Remove';
-
       }
-
       var newRow = document.createElement("tr");
       var shortenedTitle= song.title.substring(0,24);
       if(song.title.length>25){
          shortenedTitle = shortenedTitle.substring(0, 23);
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
-
       newRow.dataset.id = song.song_id;
       newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}</td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button' data-id = '${song.song_id}' ${type} </button></td>`;
       return newRow;
@@ -246,90 +204,69 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
    
-      function tableListener (event){
-            if(event.target.classList.contains('titleEllipse'))
-            {
-               const thisSong = music.find((song) => {
-                  return song.song_id == event.target.dataset.id});
-               popupText(`${thisSong.title}`);
-            }
+   function tableListener (event){
+         if(event.target.classList.contains('titleEllipse'))
+         {
+            const thisSong = music.find((song) => {
+               return song.song_id == event.target.dataset.id});
+            popupText(`${thisSong.title}`);
+         }
 
-            const thisSong =music.find((song) =>{
-               return song.song_id == event.target.dataset.id}
-               );
-            if(event.target.classList.contains("addPlaylist")){
-               if(typeof (playlist.find((playlistSong) => 
-               {
-                  return playlistSong.song_id == event.target.dataset.id
-               }
-               )) !== 'undefined'){
-                  alert('This song is already in the playlist');
-               }
-               else{
-                  playlist.push(thisSong);
-   
-                  localStorage.setItem('playlist', JSON.stringify(playlist));
-                  populateTable(document.querySelector('#playlistTable'), playlist);
-               }
-            }
-            else if(event.target.classList.contains('removePlaylist')){
-               playlist = playlist.filter((song)=>{
-                  return !(thisSong.song_id == song.song_id);
-               })
-            }
-            else if(event.target.classList.contains('clearPlaylist')){
-               playlist = [];
-            }
-            localStorage.setItem('playlist', JSON.stringify(playlist));
-            populateTable(document.querySelector('#playlistTable'), playlist);
-      }
-   
-   
-   
-   tableHeads.forEach((th) => {
-      th.addEventListener('click', (event) => {
-         if(event.target.classList.contains('rearrange')){
-            var tbody = document.querySelector(`#${event.target.dataset.table}`);
-          
-            var criteria = event.target.dataset.id;
-            
-            if(tbody.id =='searchList'){
-               selectedSort.sort(sortingFunctions[`${criteria}`]);
-                  var currentSongs=selectedSort;
+         const thisSong =music.find((song) =>{
+            return song.song_id == event.target.dataset.id}
+            );
+         if(event.target.classList.contains("addPlaylist")){
+            if(typeof (playlist.find((playlistSong) => {return playlistSong.song_id == event.target.dataset.id})) !== 'undefined'){
+               alert('This song is already in the playlist');}
+            else{
+               playlist.push(thisSong);
 
-                  if(currentFilter!=null && currentFilter.value !=''){
-                      currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
-
-                  }
-
-                  populateTable(tbody, currentSongs);
-
-           
-               
-            }
-            else if(tbody.id =='playlistTable'){
-
-               playlist.sort(sortingFunctions[`${criteria}`]);
-
-               populateTable(tbody, playlist);
-
-               
+               localStorage.setItem('playlist', JSON.stringify(playlist));
+               populateTable(document.querySelector('#playlistTable'), playlist);
             }
          }
-      } 
-      )
-   })
+         else if(event.target.classList.contains('removePlaylist')){
+            playlist = playlist.filter((song)=>{
+               return !(thisSong.song_id == song.song_id);
+            })
+         }
+         else if(event.target.classList.contains('clearPlaylist')){
+            playlist = [];
+         }
+         localStorage.setItem('playlist', JSON.stringify(playlist));
+         populateTable(document.querySelector('#playlistTable'), playlist);
+   }
 
+   function rearrangeTable(event){
+      if(event.target.classList.contains('rearrange')){
+         var tbody = document.querySelector(`#${event.target.dataset.table}`);
+         var criteria = event.target.dataset.id;
+         if(tbody.id =='searchList'){
+            selectedSort.sort(sortingFunctions[`${criteria}`]);
+               var currentSongs=selectedSort;
+               if(currentFilter!=null && currentFilter.value !=''){
+                     currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
+               }
+               populateTable(tbody, currentSongs);     
+            
+         }
+         else if(tbody.id =='playlistTable'){
+
+            playlist.sort(sortingFunctions[`${criteria}`]);
+
+            populateTable(tbody, playlist);
+
+            
+         }
+      }
+   } 
+      
    function resetBoxes(resetted){
-
       resetted.forEach(function(option)
       {
-      
          option.disabled = true;
-         currentFilter =null;
-         
-      })
-      
+         currentFilter =null; 
+      })   
    }
 
    function populateTopTable(table, list){
@@ -338,40 +275,23 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
-
-                  
          if(typeof list[i]==='object'){
             
             newRow.innerHTML = list[i]['title'];
             newRow.dataset.id = list[i]['title'];
-
-
          }
-
          else{
-
             let splitWord = list[i].split('|')
-
             newRow.innerHTML = splitWord[0];
-
             newRow.dataset.id = splitWord[1]; 
          }
-
-
         table.appendChild(newRow);
      }
-   }
+   }   
 
-   document.querySelectorAll('.mainList');
-
-  
-  
-   
    function findFreq(discriminator) {
       let freqs = {};
-
       for (let song of music) {
-
          if (freqs[`${song[discriminator]['name']}|${song[discriminator]['id']}`] === undefined) { 
             freqs[`${song[discriminator]['name']}|${song[discriminator]['id']}`] = 1; 
          } else {
@@ -379,20 +299,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
       }
       let frequencyArray = [];
-      for (key in freqs) {
-          frequencyArray.push([freqs[key], key]);
-      }
-      frequencyArray.sort((a, b) => {
-         return b[0] - a[0];
-     });
+      for (key in freqs) {frequencyArray.push([freqs[key], key]);}
+      frequencyArray.sort((a, b) => {return b[0] - a[0];});
      mostFreq = [];
-     for (let i = 0; i < 15; i++) {
-         mostFreq.push(frequencyArray[i][1]);
-     }
-     
+     for (let i = 0; i < 15; i++) {mostFreq.push(frequencyArray[i][1]);}
      return mostFreq;
-
    }
+
+
+
+
+
    /**
     * 
     * Place code below
