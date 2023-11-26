@@ -11,7 +11,7 @@ console.log('this is secure');
 addEventListener("DOMContentLoaded", async (event) =>{
 
    const selectBars = Array.from(document.querySelectorAll(".select"));
-   const music = await localStorage.getItem("data");
+   var music = await localStorage.getItem("data");
    const artists = await fetchData("./starting-files/artists.json");
    const genres = await fetchData("./starting-files/genres.json");
    const pages = Array.from(document.querySelector("main").children);
@@ -20,7 +20,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const listButtons = document.querySelector("#listSongs");
    const tables = document.querySelectorAll('table');
    const tableHeads= document.querySelectorAll('thead');
-   const playlist = localStorage.getItem('playlist');
+   var playlist = localStorage.getItem('playlist');
    const sortingFunctions = {
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
