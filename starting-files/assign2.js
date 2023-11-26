@@ -98,7 +98,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
   }
 
   function redirect(target){
-      var selectRadio= document.querySelector(`${target.dataset.type}Rad`); 
+      var selectRadio= document.querySelector(`#${target.dataset.type}Rad`); 
       if(target.dataset.type =='artist' || target.dataset.type =='genre'){
          document.querySelector('#browse').click();
          selectRadio.click();
