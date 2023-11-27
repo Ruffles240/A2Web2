@@ -272,19 +272,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(event.target.classList.contains('rearrange')){
          var tbody = document.querySelector(`#${event.target.dataset.table}`);
          var criteria = event.target.dataset.id;
-         var checkSelected = event.target.classList.contains('selectedSort');
          if(tbody.id =='searchList'){
-            rearrangeSearchTable(criteria, tbody, checkSelected, event.target, selectedSort);
+            rearrangeSearchTable(criteria, tbody, event.target, selectedSort);
          }
          else if(tbody.id =='playlistTable'){
-            rearrangeSearchTable(criteria, tbody, checkSelected, event.target, playlist);
+            rearrangeSearchTable(criteria, tbody, event.target, playlist);
 
          }
       }
    }
    
-   function rearrangeSearchTable(criteria, tbody, checkSelected, header, list){
+   function rearrangeSearchTable(criteria, tbody, header, list){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
+      var checkSelected = header.classList.contains('selectedSort');
       var currentSongs=list;
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
@@ -305,6 +305,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       for(var colHead of tableHead.children){
          console.log('working');
          colHead.classList.remove('selectedSort');
+         console.log(colHead.dataset.id);
          colHead.firstChild.classList.remove('rotated');
       }
    };
