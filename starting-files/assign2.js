@@ -351,7 +351,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
     * 
     */
 
-
+    // JS for Credit Popup hover 
+    const contentPopup = document.querySelector("#creditContents");
+    const credit = document.querySelector("#credits");
+    
+    credit.addEventListener('mouseover', function(){
+        contentPopup.classList.remove("creditPopup");
+        setTimeout( () => 
+        {contentPopup.classList.add("creditPopup")}, 5000);
+        console.log("Got here");
+    });
 
 
 
