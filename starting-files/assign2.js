@@ -287,19 +287,26 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.firstChild.classList.toggle('rotated');
       }
       else{
-         for(let colHead of header.parentElement.children){
-            console.log('working');
-            colHead.classList.remove('selected');
-            colHead.firstChild.classList.remove('rotated');
-         }
-         
+         resetSorts(document.querySelector(`${header.dataset.table}Head`));
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
    }
 
 
-  
+   function resetSorts(tableHead){
+      for(let colHead of tableHead.children){
+         console.log('working');
+         console.log(colHead.dataset.id);
+         console.log(colHead.dataset.table);
+         colHead.classList.add('selected');
+         console.log(colHead.classList);
+         console.log(colHead.dataset.table);
+         colHead.firstChild.classList.remove('rotated');
+      }
+      
+   };
+      
    function resetBoxes(resetted){
       resetted.forEach(function(option)
       {
