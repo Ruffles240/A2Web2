@@ -316,7 +316,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       })   
    }
 
-   async function populateTopTable(table, list){
+   function populateTopTable(table, list){
       table.innerHTML="";
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
@@ -335,7 +335,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
      }
    }   
 
-   async function findFreq(discriminator) {
+  function findFreq(discriminator) {
       let freqs = {};
       for (let song of music) {
          let songString = `${song[discriminator]['name']}|${song[discriminator]['id']}|${discriminator}` 
