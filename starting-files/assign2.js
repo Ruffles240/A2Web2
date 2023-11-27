@@ -134,7 +134,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       event.stopPropagation();
          resetBoxes(selectBars);
          selectedSort=music;
-         resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
+         resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
          populateTable(document.querySelector('#searchList'), music);
    }
    
@@ -189,11 +189,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return filter.toLowerCase().includes(value.toLowerCase());
     }
    
-   async function populateTable(nestedList, list){
+   async function populateTable(table, list){
+      table.innerHTML="";
 
       for(song of list){
-         var newRow = makeRow(nestedList, song);
-         nestedList.appendChild(newRow);
+         var newRow = makeRow(table, song);
+         table.appendChild(newRow);
       }
    }
 
@@ -212,10 +213,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<tr><td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= 
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= 
       "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
       </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button'
-       data-id = '${song.song_id}' ${type} </button></td></tr>`;
+       data-id = '${song.song_id}' ${type} </button></td>`;
       return newRow;
    }
 
