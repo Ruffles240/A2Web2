@@ -304,7 +304,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function resetSorts(tableHead){
       for(var colHead of tableHead.children){
          console.log('working');
-         colHead.classList.remove('rotated', 'selectedSort');
+         colHead.classList.remove('selectedSort');
+         colHead.firstChild.classList.remove('rotated');
       }
    };
       
