@@ -212,7 +212,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             else{
                playlist.push(thisSong);}
          }
-         else if(event.target.classList.contains('removePlaylist')){laylist = removeSong(thisSong);}
+         else if(event.target.classList.contains('removePlaylist')){playlist = removeSong(thisSong);}
          else if(event.target.classList.contains('clearPlaylist')){playlist = [];
             currentPlaylistSort = null;
             resetSorts(document.querySelectorAll('.playlistTableHead'));
