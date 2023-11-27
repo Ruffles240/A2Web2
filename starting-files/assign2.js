@@ -292,6 +292,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
+      if(list===selectedSort){
+         selectedSort= currentSongs;
+      }
    }
 
 
