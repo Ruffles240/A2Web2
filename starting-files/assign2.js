@@ -190,7 +190,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
     }
    
    async function populateTable(table, list){
-      let innerList= table.firstChild;
+      let innerList= table.firstElementChild;
 
       console.log(innerList);
       innerList.innerHTML="";
