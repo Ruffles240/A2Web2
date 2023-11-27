@@ -189,15 +189,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return filter.toLowerCase().includes(value.toLowerCase());
     }
    
-   async function populateTable(table, list){
-      let innerList= table.firstElementChild;
-
-      console.log(innerList);
-      innerList.innerHTML="";
+   async function populateTable(nestedList, list){
 
       for(song of list){
-         var newRow = makeRow(table, song);
-         innerList.appendChild(newRow);
+         var newRow = makeRow(nestedList, song);
+         nestedList.appendChild(newRow);
       }
    }
 
