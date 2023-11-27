@@ -58,7 +58,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(music ===null){
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
-         selectedSort=music;
+         selectedSort=structuredClone(music);
       }
       else {
          music = JSON.parse(music);
@@ -133,9 +133,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
   function clear(event){
       event.stopPropagation();
          resetBoxes(selectBars);
-         selectedSort=music;
+         selectedSort=structuredClone(music);
          resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
-         populateTable(document.querySelector('#searchList'), music);
+         populateTable(document.querySelector('#searchList'), selectedSort);
    }
    
   function radioListener(event){
@@ -172,7 +172,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          else{
          populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
-         resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
       }  
       }
       else{
@@ -280,7 +279,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
    function rearrangeSearchTable(criteria, tbody, header, list){
       var checkSelected = header.classList.contains('selected');
-      var currentSongs=list.sort(sortingFunctions[`${criteria}`]);;
+      var currentSongs=list.toSorted(sortingFunctions[`${criteria}`]);
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
