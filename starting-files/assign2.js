@@ -222,8 +222,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
-      
-     
+      if(currentPlaylistSort!==null){
+         playlist.sort(sortingFunctions[criteria]);
+         let sortOrder = document.querySelector('.rearrange.playlistTableHead.selected');
+         if(typeof sortOrder !='undefined' && sortOrder.firstChild.classList.contains('rotated')){
+            playlist.reverse();
+         }
+      }
       populateTable(document.querySelector('#playlistTable'), playlist);
 
    }
@@ -255,7 +260,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          else if(tbody.id =='playlistTable'){
             rearrangeSearchTable(criteria, tbody, event.target, playlist);
-            currentPlaylistSort = [criteria, false];
+            currentPlaylistSort = [criteria];
          }
       }
    }
@@ -269,7 +274,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs.reverse();
          header.firstChild.classList.toggle('rotated');
-         currentPlaylistSort = [criteria, true];
       }
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
