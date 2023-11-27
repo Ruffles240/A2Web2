@@ -42,8 +42,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    async function main(){
       await init();
-      makeTables();
-      makeListeners();
+      await makeTables();
+      await makeListeners();
 
       
    }
