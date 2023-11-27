@@ -294,9 +294,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
 
-   function resetSorts(tableHead){
-      console.log(tableHead);
-      for(let colHead of tableHead.children){
+   function resetSorts(tableHeads){
+      console.log(tableHeads);
+      for(let colHead of tableHeads){
          console.log('working');
          console.log(colHead.dataset.id);
          console.log(colHead.dataset.table);
