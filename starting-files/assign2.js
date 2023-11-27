@@ -289,8 +289,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentFilter!=null && currentFilter.value !=''){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
-      if(checkSelected){
+      if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
+         header.firstChild.classList.toggle('rotated');
       }
       else{
          header.classList.add('selectedSort');
