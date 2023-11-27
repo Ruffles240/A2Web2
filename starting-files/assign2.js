@@ -134,7 +134,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       event.stopPropagation();
          resetBoxes(selectBars);
          selectedSort=music;
-         resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
+         resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
          populateTable(document.querySelector('#searchList'), music);
    }
    
@@ -172,7 +172,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          else{
          populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
-         resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
+         resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
       }  
       }
       else{
