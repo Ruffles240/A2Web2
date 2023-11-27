@@ -31,19 +31,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var currentFilter;
    var selectedSort;
-
-   
-
+   var currentPlaylistSort;
 
    await main();
-
-
 
    async function main(){
       await init();
       await makeListeners();
       await makeTables();
-
       
    }
 
@@ -82,14 +77,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return response;
   }
 
-
   async function populateSelect(populator, select){
 
    for(item of populator){
       let option = document.createElement('option');
       option.innerHTML=item.name;
       option.value=item.id;
-
       select.appendChild(option);
    }
   }
@@ -100,14 +93,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
          document.querySelector('#browse').click();
          selectRadio.click();
          currentFilter.value= target.dataset.id;
-         document.querySelector('#listSongs').click();
-
-      }
+         document.querySelector('#listSongs').click();}
   }
 
   function popupText(text){
       let popup = document.querySelector('#popupElement')
-
       popup.textContent=text;
       popup.style.display = "block";
       setTimeout(() => {
@@ -142,7 +132,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
    if(event.target.type==="radio"){
       resetBoxes(selectBars);
       currentFilter = document.querySelector(`#${event.target.dataset.id}`);
-
       console.log(`${event.target.dataset.id}`);
       currentFilter.disabled = false;
    }      
@@ -151,14 +140,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function pageSwitch(event){
 
       pages.forEach(function(page) {
-
          if(event.target.classList.contains("header-div")){
-         if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||
-         
-         
-         (page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
-            page.classList.toggle("hide");
-         }}
+         if (((page.dataset.id === event.target.id)&& (page.classList.contains("hide"))) ||(page.dataset.id != event.target.id)&& (!page.classList.contains("hide"))) {
+            page.classList.toggle("hide");}}
    });
 
 }
@@ -168,16 +152,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentFilter!=null){
          let searchedValue = currentFilter.id;
          if(currentFilter.value===''){
-            alert('Please choose an option.')
-         }
+            alert('Please choose an option.')}
          else{
-         populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));
-      }  
-      }
+         populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));}  }
       else{
-         alert('Please choose a search option.');
-      }
-   }
+         alert('Please choose a search option.');}}
 
    function checkFilter(value, filter) {
       if(typeof filter ==='object'){
@@ -231,16 +210,21 @@ addEventListener("DOMContentLoaded", async (event) =>{
             if(typeof (findSong(playlist, target)) !== 'undefined'){
                alert('This song is already in the playlist');}
             else{
-               playlist.push(thisSong);
-            }
+               playlist.push(thisSong);}
          }
          else if(event.target.classList.contains('removePlaylist')){laylist = removeSong(thisSong);}
-         else if(event.target.classList.contains('clearPlaylist')){playlist = [];}
+         else if(event.target.classList.contains('clearPlaylist')){playlist = [];
+            currentPlaylistSort = null;
+            resetSorts(document.querySelectorAll('.playlistTableHead'));
+         }
          updatePlaylist();
    }
 
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
+      if(currentPlaylistSort!=null){
+         playlist.sort(sortingFunctions[criteria])
+      }
       populateTable(document.querySelector('#playlistTable'), playlist);
 
    }
@@ -272,29 +256,24 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          else if(tbody.id =='playlistTable'){
             rearrangeSearchTable(criteria, tbody, event.target, playlist);
-
+            currentPlaylistSort = criteria;
          }
       }
    }
    
    function rearrangeSearchTable(criteria, tbody, header, list){
       var checkSelected = header.classList.contains('selected');
-      var currentSongs=list.sort(sortingFunctions[`${criteria}`]);
+      var currentSongs=list.sort(sortingFunctions[criteria]);
    
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
-            currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
-      }
+            currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));}
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
-         header.firstChild.classList.toggle('rotated');
-
-      }
+         header.firstChild.classList.toggle('rotated');}
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
-         header.classList.add('selected');
-      }
-      populateTable(tbody, currentSongs);   
-   }
+         header.classList.add('selected');}
+      populateTable(tbody, currentSongs);}
 
 
    function resetSorts(tableHeads){
