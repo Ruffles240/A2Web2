@@ -10,7 +10,6 @@ console.log('this is secure');
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
-   localStorage.clear();
 
    const selectBars = Array.from(document.querySelectorAll(".select"));
    var music = await localStorage.getItem("data");
