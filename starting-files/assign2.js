@@ -280,21 +280,24 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeSearchTable(criteria, tbody, header, list){
       var checkSelected = header.classList.contains('selected');
       var currentSongs=list.sort(sortingFunctions[`${criteria}`]);;
-      if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
-            currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
-      }
+      
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
          header.firstChild.classList.toggle('rotated');
+      }
+      if(list === selectedSort){
+         selectedSort = currentSongs;
+      }
+
+      if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
+         currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
-      if(list===selectedSort){
-         selectedSort= currentSongs;
-      }
+      
    }
 
 
