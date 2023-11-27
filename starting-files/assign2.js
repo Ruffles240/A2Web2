@@ -62,7 +62,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       else {
          music = JSON.parse(music);
-         selectedSort = music;
+         selectedSort = structuredClone(music);
       }
    }
 
