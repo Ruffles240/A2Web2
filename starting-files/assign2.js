@@ -225,6 +225,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentPlaylistSort!==null){
          playlist.sort[sortingFunctions[currentPlaylistSort[0]]];
          console.log('doing the thing');
+         console.log(currentPlaylistSort);
          if(currentPlaylistSort[1]){
             playlist.reverse();
          }
@@ -275,7 +276,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs.reverse();
          header.firstChild.classList.toggle('rotated');
-         currentPlaylistSort = [criteria, true];
+         currentPlaylistSort[1] = true;
       }
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
