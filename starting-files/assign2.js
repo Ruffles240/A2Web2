@@ -134,6 +134,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       event.stopPropagation();
          resetBoxes(selectBars);
          selectedSort=music;
+         resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
          populateTable(document.querySelector('#searchList'), music);
    }
    
