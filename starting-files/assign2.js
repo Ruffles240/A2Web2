@@ -283,7 +283,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
    
-   function rearrangeSearchTable(criteria, tbody, checkSelected, header, list, checkReverse){
+   function rearrangeSearchTable(criteria, tbody, checkSelected, header, list){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
       var currentSongs=list;
       if(currentFilter!=null && currentFilter.value !=''){
@@ -294,10 +294,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.firstChild.classList.toggle('rotated');
       }
       else{
+         resetSorts(header.parentElement);
          header.classList.add('selectedSort');
       }
       populateTable(tbody, currentSongs);   
    }
+
+
+   function resetSorts(tableHead){
+      for(var colHead of tableHead.children){
+         colHead.classList.remove('rotated', 'selectedSort');
+      }
+   };
       
    function resetBoxes(resetted){
       resetted.forEach(function(option)
