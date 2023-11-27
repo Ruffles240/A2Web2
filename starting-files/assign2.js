@@ -289,7 +289,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentFilter!=null && currentFilter.value !=''){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
-      if(checkSelected && ){
+      if(checkSelected){
          currentSongs = currentSongs.reverse();
       }
       else{
