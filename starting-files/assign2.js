@@ -295,22 +295,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
 
    function resetSorts(tableHead){
-      for(var colHead of tableHead.children){
+      for(let colHead of tableHead.children){
          console.log('working');
          console.log(colHead.dataset.id);
          console.log(colHead.dataset.table);
          colHead.classList.remove("selected");
+         console.log(colHead.classList);
          colHead.firstChild.classList.remove('rotated');
 
 
       }
-      for (let i = 0; i < tableHead.children.length; i++) {
-         tableHead.children[i].classList.remove('selected');
-         tableHead.children[i].classList.remove('rotated');
-         console.log(colHead.classList);
-
-
-     }
+      
    };
       
    function resetBoxes(resetted){
