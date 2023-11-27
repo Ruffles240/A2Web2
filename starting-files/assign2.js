@@ -284,11 +284,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
          header.firstChild.classList.toggle('rotated');
-         if(list === selectedSort){
-            selectedSort = currentSongs;
-         }
-      }
 
+      }
 
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
          currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
@@ -298,16 +295,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
-      
+     
    }
 
 
    function resetSorts(tableHeads){
       console.log(tableHeads);
       for(let colHead of tableHeads){
-
          colHead.classList.remove('selected');
-
          colHead.firstChild.classList.remove('rotated');
       }
       
