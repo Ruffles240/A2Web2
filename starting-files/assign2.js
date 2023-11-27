@@ -299,7 +299,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          console.log('working');
          console.log(colHead.dataset.id);
          console.log(colHead.dataset.table);
-         colHead.classList.toggle("selected");
+         colHead.classList.add("selected");
          console.log(colHead.classList);
          colHead.firstChild.classList.remove('rotated');
 
