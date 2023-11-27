@@ -10,6 +10,8 @@ console.log('this is secure');
 
 addEventListener("DOMContentLoaded", async (event) =>{
 
+   localStorage.clear();
+
    const selectBars = Array.from(document.querySelectorAll(".select"));
    var music = await localStorage.getItem("data");
    const artists = await fetchData("./starting-files/artists.json");
@@ -34,7 +36,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
 
 
-   main();
+   await main();
 
 
 
