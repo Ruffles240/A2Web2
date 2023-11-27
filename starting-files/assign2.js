@@ -225,8 +225,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentPlaylistSort!==null){
          playlist.sort(sortingFunctions[currentPlaylistSort]);
          let sortOrder = document.querySelector('.rearrange.playlistTableHead.selected');
-         if(typeof sortOrder !='undefined' && sortOrder.firstChild.classList.contains('rotated')){
-            playlist.reverse();
+         if(typeof sortOrder !== 'undefined'){
+            if(sortOrder.firstChild.classList.contains('rotated')){
+            playlist.reverse();}
          }
       }
       populateTable(document.querySelector('#playlistTable'), playlist);
