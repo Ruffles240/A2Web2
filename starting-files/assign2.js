@@ -121,7 +121,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       const topArtists = findFreq('artist');
       const popularitySort= music.toSorted((a,b) => {return b.details.popularity - a.details.popularity;})
       await populateTable(document.querySelector('#playlistTable'), playlist);
-      await populateTable(document.querySelector('#searchList'), selectedSort);
+      await populateTable(document.querySelector('#searchList'), music);
       await populateTopTable(document.querySelector('#topArtists'), topArtists);
       await populateTopTable(document.querySelector('#topGenres'), topGenres);
       await populateTopTable(document.querySelector('#topSongs'), popularitySort);
