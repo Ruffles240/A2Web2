@@ -287,7 +287,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.firstChild.classList.toggle('rotated');
       }
       else{
-         resetSorts(Array.from(document.querySelector(`#${header.dataset.table}Head`).firstChild));
+         resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
