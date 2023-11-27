@@ -286,7 +286,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeSearchTable(criteria, tbody, checkSelected, header, list){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
       var currentSongs=list;
-      if(currentFilter!=null && currentFilter.value !=''){
+      if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
