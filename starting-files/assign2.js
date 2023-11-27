@@ -31,7 +31,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    var currentFilter;
    var selectedSort;
-   var currentPlaylistSort;
+   var currentPlaylistSort = null;
 
    await main();
 
