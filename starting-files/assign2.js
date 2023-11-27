@@ -283,9 +283,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
    
    function rearrangeSearchTable(criteria, tbody, header, list){
-      selectedSort.sort(sortingFunctions[`${criteria}`]);
-      var checkSelected = header.classList.contains('selectedSort');
-      var currentSongs=list;
+      var checkSelected = header.classList.contains('selected');
+      var currentSongs=list.sort(sortingFunctions[`${criteria}`]);;
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
@@ -295,7 +294,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       else{
          resetSorts(header.parentElement);
-         header.classList.add('selectedSort');
+         header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
    }
@@ -306,6 +305,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
          console.log('working');
          colHead.classList.remove('selectedSort');
          console.log(colHead.dataset.id);
+         console.log(colHead.dataset.table);
+         console.log(colHead.classList);
+
          colHead.firstChild.classList.remove('rotated');
       }
    };
