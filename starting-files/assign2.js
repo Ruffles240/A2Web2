@@ -287,7 +287,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.firstChild.classList.toggle('rotated');
       }
       else{
-         for(let colHead of tableHead.parentElement.children){
+         for(let colHead of header.parentElement.children){
             console.log('working');
             colHead.classList.remove('selected');
             colHead.firstChild.classList.remove('rotated');
