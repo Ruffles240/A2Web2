@@ -223,7 +223,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
       if(currentPlaylistSort!==null){
-         playlist.sort[sortingFunctions[currentPlaylistSort[0]]]
+         playlist.sort[sortingFunctions[currentPlaylistSort[0]]];
+         console.log('doing the thing');
          if(currentPlaylistSort[1]){
             playlist.reverse();
          }
