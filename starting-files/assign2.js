@@ -57,7 +57,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          playlist = JSON.parse(playlist);
       }
       if(music ===null){
-         music = await fetchData(api);
+         music = await fetchData(api).then(response =>response.json());
          localStorage.setItem("data", JSON.stringify(music));
       }
       else {
@@ -199,7 +199,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    async function makeRow(table, song){
       var type= '';
-      let order =['title', 'artist', 'genre', 'year'];
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
       }
