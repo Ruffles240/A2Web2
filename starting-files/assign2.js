@@ -277,8 +277,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
             rearrangeSearchTable(criteria, tbody, checkSelected, event.target, selectedSort);
          }
          else if(tbody.id =='playlistTable'){
-            playlist.sort(sortingFunctions[`${criteria}`]);
-            populateTable(tbody, playlist);
+            rearrangeSearchTable(criteria, tbody, checkSelected, event.target, playlist);
+
          }
       }
    }
