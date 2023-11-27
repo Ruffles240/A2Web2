@@ -224,10 +224,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          const target = event.target;
          const thisSong = findSong(music, target);
          
-         if(event.target.classList.contains('titleEllipse'))
-         {
-            showName(song);
-         }
+         if(event.target.classList.contains('titleEllipse')){showName(song);}
          if(target.classList.contains("addPlaylist")){
             if(typeof (findSong(playlist, target)) !== 'undefined'){
                alert('This song is already in the playlist');}
@@ -235,12 +232,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
                playlist.push(thisSong);
             }
          }
-         else if(event.target.classList.contains('removePlaylist')){
-            playlist = removeSong(thisSong);
-         }
-         else if(event.target.classList.contains('clearPlaylist')){
-            playlist = [];
-         }
+         else if(event.target.classList.contains('removePlaylist')){laylist = removeSong(thisSong);}
+         else if(event.target.classList.contains('clearPlaylist')){playlist = [];}
          updatePlaylist();
    }
 
