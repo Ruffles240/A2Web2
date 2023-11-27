@@ -223,7 +223,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
       if(currentPlaylistSort!=null){
-         playlist.sort(sortingFunctions[criteria])
+         playlist.sort(sortingFunctions[currentPlaylistSort])
       }
       populateTable(document.querySelector('#playlistTable'), playlist);
 
