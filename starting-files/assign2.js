@@ -300,11 +300,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
          console.log(colHead.dataset.id);
          console.log(colHead.dataset.table);
          colHead.classList.remove("selected");
-         console.log(colHead.classList);
          colHead.firstChild.classList.remove('rotated');
 
 
       }
+      for (let i = 0; i < tableHead.children.length; i++) {
+         tableHead.children[i].classList.remove('selected');
+         tableHead.children[i].classList.remove('rotated');
+         console.log(colHead.classList);
+
+
+     }
    };
       
    function resetBoxes(resetted){
