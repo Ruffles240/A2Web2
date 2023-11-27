@@ -280,11 +280,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeSearchTable(criteria, tbody, header, list){
       var checkSelected = header.classList.contains('selected');
       var currentSongs=list.sort(sortingFunctions[`${criteria}`]);;
+      selectedSort = music.sort(sortingFunctions[`${criteria}`]);
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
+         selectedSort = selectSort.reverse();
          header.firstChild.classList.toggle('rotated');
       }
       else{
@@ -292,6 +294,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
          header.classList.add('selected');
       }
       populateTable(tbody, currentSongs);   
+      if(list===selectedSort){
+         
+      }
    }
 
 
