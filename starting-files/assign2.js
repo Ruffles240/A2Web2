@@ -59,6 +59,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(music ===null){
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
+         selectedSort=music;
       }
       else {
          music = JSON.parse(music);
