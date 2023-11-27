@@ -64,11 +64,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
 
-
-   
-   
-
-
    async function makeListeners(){
       document.querySelector("#clear").addEventListener("click", (event) =>clear(event));
       listButtons.addEventListener("click", (event) => filterSearch(event));
@@ -190,9 +185,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       return filter.toLowerCase().includes(value.toLowerCase());
     }
-      
    
-
    function populateTable(table, list){
       table.innerHTML="";
 
@@ -281,7 +274,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          var criteria = event.target.dataset.id;
          var checkSelected = event.target.classList.contains('selectedSort');
          if(tbody.id =='searchList'){
-            rearrangeSearchTable(criteria, tbody, checkSelected, event.target);
+            rearrangeSearchTable(criteria, tbody, checkSelected, event.target, selectedSort);
          }
          else if(tbody.id =='playlistTable'){
             playlist.sort(sortingFunctions[`${criteria}`]);
@@ -290,13 +283,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
    
-   function rearrangeSearchTable(criteria, tbody, checkSelected, header){
+   function rearrangeSearchTable(criteria, tbody, checkSelected, header, list, checkReverse){
       selectedSort.sort(sortingFunctions[`${criteria}`]);
-      var currentSongs=selectedSort;
+      var currentSongs=list;
       if(currentFilter!=null && currentFilter.value !=''){
-            currentSongs= selectedSort.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
+            currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));
       }
-      if(checkSelected){
+      if(checkSelected && ){
          currentSongs = currentSongs.reverse();
       }
       else{
