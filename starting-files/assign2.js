@@ -212,7 +212,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             else{
                playlist.push(thisSong);}
          }
-         else if(event.target.classList.contains('removePlaylist')){laylist = removeSong(thisSong);}
+         else if(event.target.classList.contains('removePlaylist')){removePlaylistSong(thisSong);}
          else if(event.target.classList.contains('clearPlaylist')){playlist = [];
             currentPlaylistSort = null;
             resetSorts(document.querySelectorAll('.playlistTableHead'));
@@ -233,8 +233,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
-   function removeSong(thisSong){
-     return playlist.filter((song)=>{
+   function removePlaylistSong(thisSong){
+      playlist= playlist.filter((song)=>{
          return !(thisSong.song_id == song.song_id);
       });
    }
