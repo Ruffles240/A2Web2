@@ -198,7 +198,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
 
-   async function makeRow(table, song){
+  function makeRow(table, song){
       var type= '';
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
