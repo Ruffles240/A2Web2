@@ -307,7 +307,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          console.log(colHead.dataset.table);
          console.log(colHead.classList);
          colHead.firstChild.classList.remove('rotated');
-         colHead.classList.remove('selected');
+         colHead.classList.remove("selected");
 
       }
    };
