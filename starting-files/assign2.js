@@ -223,7 +223,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
       if(currentPlaylistSort!==null){
-         playlist.sort(sortingFunctions[criteria]);
+         playlist.sort(sortingFunctions[currentPlaylistSort]);
          let sortOrder = document.querySelector('.rearrange.playlistTableHead.selected');
          if(typeof sortOrder !='undefined' && sortOrder.firstChild.classList.contains('rotated')){
             playlist.reverse();
