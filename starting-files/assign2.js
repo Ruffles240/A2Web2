@@ -42,8 +42,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    async function main(){
       await init();
-      await makeTables();
       await makeListeners();
+      await makeTables();
 
       
    }
@@ -83,7 +83,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
   }
 
 
-  function populateSelect(populator, select){
+  async function populateSelect(populator, select){
 
    for(item of populator){
       let option = document.createElement('option');
@@ -116,17 +116,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
   };
 
-   function makeTables(){
+   async function makeTables(){
       const topGenres = findFreq('genre');
       const topArtists = findFreq('artist');
       const popularitySort= music.toSorted((a,b) => {return b.details.popularity - a.details.popularity;})
-      populateTable(document.querySelector('#playlistTable'), playlist);
-      populateTable(document.querySelector('#searchList'), selectedSort);
-      populateTopTable(document.querySelector('#topArtists'), topArtists);
-      populateTopTable(document.querySelector('#topGenres'), topGenres);
-      populateTopTable(document.querySelector('#topSongs'), popularitySort);
-      populateSelect(genres ,document.querySelector('#genre'));
-      populateSelect(artists ,document.querySelector('#artist'));
+      await populateTable(document.querySelector('#playlistTable'), playlist);
+      await populateTable(document.querySelector('#searchList'), selectedSort);
+      await populateTopTable(document.querySelector('#topArtists'), topArtists);
+      await populateTopTable(document.querySelector('#topGenres'), topGenres);
+      await populateTopTable(document.querySelector('#topSongs'), popularitySort);
+      await populateSelect(genres ,document.querySelector('#genre'));
+      await populateSelect(artists ,document.querySelector('#artist'));
    }
   
 
@@ -188,7 +188,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return filter.toLowerCase().includes(value.toLowerCase());
     }
    
-   function populateTable(table, list){
+   async function populateTable(table, list){
       table.innerHTML="";
 
       for(song of list){
@@ -197,7 +197,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
 
-   function makeRow(table, song){
+   async function makeRow(table, song){
       var type= '';
       let order =['title', 'artist', 'genre', 'year'];
       if(table.id ==="searchList"){
@@ -316,7 +316,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       })   
    }
 
-   function populateTopTable(table, list){
+   async function populateTopTable(table, list){
       table.innerHTML="";
       for(let i = 0; i < 15; i++){
          var newRow = document.createElement("li");
@@ -335,7 +335,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
      }
    }   
 
-   function findFreq(discriminator) {
+   async function findFreq(discriminator) {
       let freqs = {};
       for (let song of music) {
          let songString = `${song[discriminator]['name']}|${song[discriminator]['id']}|${discriminator}` 
