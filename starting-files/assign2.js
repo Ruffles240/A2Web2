@@ -286,7 +286,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs = currentSongs.reverse();
-         selectedSort = selectSort.reverse();
+         selectedSort = selectedSort.reverse();
          header.firstChild.classList.toggle('rotated');
       }
       else{
