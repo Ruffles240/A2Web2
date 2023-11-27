@@ -192,7 +192,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}">${shortenedTitle}</td><td data-type = "artist" data-id= 
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
       "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
       </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button'
        data-id = '${song.song_id}' ${type} </button></td>`;
@@ -315,6 +315,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.dataset.id = splitWord[1]; 
             newRow.dataset.type = splitWord[2];
          }
+         newRow.classList.add('songLink');
         table.appendChild(newRow);
      }
    }   
