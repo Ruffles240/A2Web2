@@ -142,7 +142,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
   function popupText(text){
       let popup = document.querySelector('#popupElement')
-      popup.textContent=text;
+      popup.textContent= text;
       popup.style.display = "block";
       setTimeout(() => {
          popup.style.display = "none";
