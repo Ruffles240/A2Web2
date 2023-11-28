@@ -610,6 +610,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
         }
 
          console.log(`Putting ${song.title} into makeRadarChart`);
+         let existingChart = Chart.getChart(document.querySelector('#radarChart'));
+         if(existingChart){
+            existingChart.destroy();
+
+         }
+         
          makeRadarChart(song);
    }
 
