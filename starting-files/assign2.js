@@ -594,7 +594,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          for (let item of analysisData) {
             let li = document.createElement('li');
             li.style.backgroundColor = "rgba(99, 46, 222, 0.8)";
-            li.style.width = "250px";
+            li.style.width = "300px";
             li.innerHTML = `<div class="progressBar" style="width:${item[1] * 2}px;">${item[0]}: ${item[1]}</div>`;
             analysisDataList.appendChild(li);
         }
