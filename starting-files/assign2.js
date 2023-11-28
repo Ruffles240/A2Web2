@@ -578,14 +578,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
       
          let infoOrder= [['Title: ',song.title], ['Artist: ',song.artist.name], ['Year: ',song.year], ['Genre: ', song.genre.name],
           ['Duration: ', `${Math.floor(song.details.duration / 60)}:${(song.details.duration % 60)}`]];
-         let songInformationList = document.querySelector("$songInformation");
+         let songInformationList = document.querySelector("#songInformation");
          songInformationList.innerHTML=""
          for(item of infoOrder){
             let li = document.createElement('li');
             li.innerHTML= `${item[0]}${item[1]}`
             songInformationList.appendChild(li);
          }
-         let analysisDataList = document.querySelector("#analysisData");
+         let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML =
         `<li>BPMs:         ${song.details.bpm}</li>
          <li>Energy:       ${song.analytics.energy}</li>
@@ -602,7 +602,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    function makeRadarChart(song){
       const labels = ['Energy', 'Danceability', 'Liveness', 'Valence', 'Acoustic', 'Speechiness'];
-      const ctx = document.querySelector('#radarChart').getContext('2d');
+      const ctx = document.getElementById('radarChart').getContext('2d');
       const radarChart = new Chart(ctx, {
          type: 'radar',
          data: {
