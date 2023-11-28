@@ -188,7 +188,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       
       if(target.classList.contains('.songLink')){
 
-         document.querySelector('#singleSongViewer');
+         document.querySelector('#singleSongViewer').click();
 
       }
    }
