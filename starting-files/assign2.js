@@ -616,6 +616,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function makeRadarChart(song){
       const labels = ['Energy', 'Danceability', 'Liveness', 'Valence', 'Acoustic', 'Speechiness'];
       const ctx = document.getElementById('radarChart').getContext('2d');
+      
       const radarChart = new Chart(ctx, {
          type: 'radar',
          data: {
