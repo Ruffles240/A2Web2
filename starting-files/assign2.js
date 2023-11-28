@@ -639,7 +639,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
                     size: 17,
                     color: 'white'
                   }
-                }
+                },
+                grid: {
+                  color: 'white'  
+              }
                 
               }
             },
