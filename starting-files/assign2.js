@@ -1,5 +1,8 @@
-
-
+/**
+ * 
+ * 
+ * 
+ */
 
 /* url of song api --- https versions hopefully a little later this semester */	
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
@@ -188,16 +191,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
          populateTable(document.querySelector('#searchList'), selectedSort);
    }
 
-   function makeSongView(target){
-      
-      if(target.classList.contains('songLink')){
+/**
+ * 
+ * @param {*} target Contains either song.title or song.song_id for song of interest
+ * 
+ * Identifies and specifies data of a clicked songLink, then feeds the "song" object to singleSongViewer(thisSong)
+ */
 
+   function makeSongView(target){
+      if(target.classList.contains('songLink')){
          document.querySelector('#singleSongViewer').click();
          console.log('did the thing');
          const thisSong = findSong(music, target);
          singleSongViewer(thisSong);
-
-
       }
    }
    
@@ -549,38 +555,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
 
 
-
-
-
    /**
     * 
-    * Place code below
-    * 
-    * 
-    * 
+    * @param {*} song Contains song object based on target from makeSongView(target)
     */
-
-/*
-   	"details": {
-			"duration": 206,
-			"bpm": 147,
-			"popularity": 62,
-			"loudness": -5
-		},
-		"analytics": {
-			"energy": 59,
-			"danceability": 76,
-			"liveness": 18,
-			"valence": 81,
-			"acousticness": 8,
-			"speechiness": 23
-		}
-
-
- */
-
-
-
    function singleSongViewer(song) {
       let row = document.querySelectorAll("#song_title");
       
@@ -616,6 +594,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          makeRadarChart(song);
    }
 
+/**
+ * 
+ * @param {*} song Contains song object to make the radar chart for
+ * 
+ * Makes the radar chart from song object for Single Song Viewer, in particular the data from song.analytics
+ */
+
    function makeRadarChart(song){
       const labels = ['Energy', 'Danceability', 'Liveness', 'Valence', 'Acoustic', 'Speechiness'];
       const ctx = document.getElementById('radarChart').getContext('2d');
@@ -640,7 +625,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 pointLabels: {
                   font: {
                     size: 17,
-                    
                   },
                   color: 'white'
                 },
@@ -649,8 +633,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
               },
               angleLines: {
                color: 'white'
-               },
-                
+               },                
               }
             },
             plugins: {
@@ -662,27 +645,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
                        }
                    }
                }
-           }
-          }
-      
+            }
+         }
       });
       console.log(`Radar Chart created for ${song}`);              
     }
 });
-
- 
-   
-
-   
-
-
-
-
-
- 
-
-/* note: you may get a CORS error if you try fetching this locally (i.e., directly from a
-   local file). To work correctly, this needs to be tested on a local web server.  
-   Some possibilities: if using Visual Code, use Live Server extension; if Brackets,
-   use built-in Live Preview.
-*/
