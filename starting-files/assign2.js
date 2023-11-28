@@ -477,6 +477,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          currentFilter =null; 
       })   
    }
+   
 
    /**
     * 
