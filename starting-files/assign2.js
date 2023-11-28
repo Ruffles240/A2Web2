@@ -348,7 +348,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       if(currentPlaylistSort!==null){
          playlist.sort(sortingFunctions[currentPlaylistSort]);
          let sortOrder = document.querySelector('.rearrange.playlistTableHead.selected');
-         if(sortOrder != null && sortOrder.firstChild.firstChild.classList.contains('rotated')){
+         if(sortOrder != null && sortOrder.firstChild.classList.contains('rotated')){
             playlist.reverse();
          }
       }
@@ -433,9 +433,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
    
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));}
-      if(checkSelected && !(header.firstChild.firstChild.classList.contains('rotated'))){
+      if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs.reverse();
-         header.firstChild.firstChild.classList.toggle('rotated');
+         header.firstChild.classList.toggle('rotated');
       }
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
@@ -458,7 +458,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          colHead.classList.remove('selected');
 
-         colHead.firstChild.firstChild.classList.remove('rotated');
+         colHead.firstChild.classList.remove('rotated');
       }
       
    };
