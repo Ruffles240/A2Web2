@@ -4,15 +4,10 @@
 /* url of song api --- https versions hopefully a little later this semester */	
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
 
-console.log('this is secure');
-
-
-
 addEventListener("DOMContentLoaded", async (event) =>{
 
 
    const selectBars = Array.from(document.querySelectorAll(".select"));
-   var music = await localStorage.getItem("data");
    const artists = await fetchData("./starting-files/artists.json");
    const genres = await fetchData("./starting-files/genres.json");
    const pages = Array.from(document.querySelector("main").children);
@@ -21,26 +16,37 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const listButtons = document.querySelector("#listSongs");
    const tables = document.querySelectorAll('table');
    const tableHeads= document.querySelectorAll('thead');
-   var playlist = localStorage.getItem('playlist');
-   const sortingFunctions = {
+   const sortingFunctions = { //All the different types of sorts contained in a
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
       'artist' : function(a,b) {return a.artist.name.localeCompare(b.artist.name)},  
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
 
-   var currentFilter;
-   var selectedSort;
-   var currentPlaylistSort;
+   var music = await localStorage.getItem("data");
+   var playlist = localStorage.getItem('playlist');
+   var currentFilter;   // The current filter that is in the browsing table. So that only present song is being ordered
+   var selectedSort; //The kind of sort that the searching table is currently in. Holds the music as a copy in order to not affect the base array of music when it is being sorted and such
+   var currentPlaylistSort; // Holds the way the playlist is being sorted. This is so that I can add new songs in the proper order.
 
-   await main();
+   await main();//Begins the program
 
+   /**
+    * 
+    * 
+    * runs the programs and initial functions
+    */ 
    async function main(){
       await init();
       await makeListeners();
       await makeTables();
       
    }
+
+   /**
+    * 
+    * Initializes the required data, searches for what is already in local storage
+    */
 
    async function init(){
 
@@ -61,6 +67,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
    }
 
+   /**
+    * 
+    * Makes all my listeners.
+    */
+
    async function makeListeners(){
       document.querySelector("#clear").addEventListener("click", (event) =>clear(event));
       listButtons.addEventListener("click", (event) => filterSearch(event));
@@ -72,10 +83,26 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    }
 
+   /**
+    * 
+    * @param {} URL the JSON url
+    * @returns a file in JSON
+    * 
+    * This function returns me a JSON file from a URL
+    */
+
    async function fetchData(URL) {
       var response = await fetch(URL).then(response => response.json());
       return response;
   }
+
+  /**
+   * 
+   * @param {} populator The Array for the genre/artist
+   * @param {} select The select bar that is to be populated
+   * 
+   * This bar populates the select bars with the data from the JSON files provided.
+   */
 
   async function populateSelect(populator, select){
 
@@ -87,6 +114,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
   }
 
+  /**
+   * 
+   * @param {} target This is the song link that was clicked.
+   * This function redirects users to a different page.
+   */
+
   function redirect(target){
       var selectRadio= document.querySelector(`#${target.dataset.type}Rad`); 
       if(target.dataset.type =='artist' || target.dataset.type =='genre'){
@@ -95,6 +128,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          currentFilter.value= target.dataset.id;
          document.querySelector('#listSongs').click();}
   }
+
+  /**
+   * 
+   * @param {} text The text to appear
+   * 
+   * This function makes popups/snackbars appear and sets their message.
+   */
 
   function popupText(text){
       let popup = document.querySelector('#popupElement')
@@ -105,6 +145,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }, 5000);
 
   };
+
+
+  /**
+   * 
+   * THis function populates the tables and calls the functions populating each one, as well as finding the top genres and artists for the "Top" tables
+   * 
+   */
 
    async function makeTables(){
       const topGenres = findFreq('genre');
@@ -120,6 +167,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
    }
   
 
+   /**
+    * 
+    * @param {} event The click of the "clear" button
+    * 
+    * This function clears the search results and the select bars, as well as the header
+    */
   function clear(event){
       event.stopPropagation();
          resetBoxes(selectBars);
@@ -128,6 +181,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          populateTable(document.querySelector('#searchList'), selectedSort);
    }
    
+   /**
+    * 
+    * @param {} event The change of the radio button
+    * 
+    * This listener connects to each radio button, when it changes, it activates the connected search bar.
+    */
+
   function radioListener(event){
    if(event.target.type==="radio"){
       resetBoxes(selectBars);
@@ -136,6 +196,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       currentFilter.disabled = false;
    }      
 };
+
+/**
+ * 
+ * @param {} event the click or simulated click
+ * 
+ * This function switches page views.
+ */
    
    function pageSwitch(event){
 
@@ -146,6 +213,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
    });
 
 }
+
+/**
+ * 
+ * This activates the search protocols, checking to see if the user has actually inputted anything
+ */
 
    function filterSearch(){
       event.stopPropagation();
@@ -158,15 +230,30 @@ addEventListener("DOMContentLoaded", async (event) =>{
       else{
          alert('Please choose a search option.');}}
 
+   /**
+    * 
+    * @param {*} value the value of the search
+    * @param {*} filter the filtering property of the song
+    * 
+    * This function checks to see if a song meets certain criteria for the search
+    */
+
    function checkFilter(value, filter) {
       if(typeof filter ==='object'){
-
          filter = filter['id'];
          return filter==value;
       }
-
       return filter.toLowerCase().includes(value.toLowerCase());
     }
+
+    /**
+     * 
+     * @param {
+     * } table The table to be populated
+     * @param {*} list the list we're populating the table with
+     * 
+     * This function populates the tables in the playlist and browse tabs
+     */
    
    async function populateTable(table, list){
       table.innerHTML="";
@@ -176,6 +263,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
          table.appendChild(newRow);
       }
    }
+
+   /**
+    * 
+    * @param {*} table the table to add it to. (Checks what button type to add)
+    * @param {*} song The song that a row is being made for.
+    * @returns the row to be added
+    * 
+    * 
+    */
 
   function makeRow(table, song){
       var type= '';
@@ -199,7 +295,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
       return newRow;
    }
 
-
+   /**
+    * 
+    * @param {} event 
+    * 
+    * This listens the table body, handling each button through event delegation.
+    */
    
    function tableListener (event){
          const target = event.target;
@@ -220,6 +321,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
          updatePlaylist();
    }
 
+   /**
+    * 
+    * Keeps the playlist table up to date, makes sure it's in the order the user has currently specified.
+    */
+
    function updatePlaylist(){
       localStorage.setItem('playlist', JSON.stringify(playlist));
       if(currentPlaylistSort!==null){
@@ -230,8 +336,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
       }
       populateTable(document.querySelector('#playlistTable'), playlist);
-
    }
+
+   /**
+    * 
+    * @param {*} thisSong
+    * 
+    * removes a song from the playlist, returns the new playlist
+    */
 
    function removePlaylistSong(thisSong){
       playlist= playlist.filter((song)=>{
@@ -239,9 +351,23 @@ addEventListener("DOMContentLoaded", async (event) =>{
       });
    }
 
+   /**
+    * 
+    * @param {} song 
+    * 
+    * Shows the song name
+    */
+
    function showName(song){
       popupText(`${song.title}`);
    }
+
+   /**
+    * 
+    * @param {*} list the list of songs
+    * @param {*} item the trigger that has the song's id as its data id.
+    * @returns a song from the list.
+    */
 
    function findSong(list, item){
 
@@ -250,6 +376,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          return song.song_id == item.dataset.id
       })
    }
+
+   /**
+    * 
+    * @param {} event Listens to the head of the table for when an item in there is clicked
+    * 
+    * This listens to the head and associated items through event delegation. Then rearranges the table according to what needs to be ordered.
+    */
 
    function rearrangeTable(event){
       if(event.target.classList.contains('rearrange')){
@@ -264,6 +397,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
       }
    }
+
+
+   /**
+    * 
+    * @param {} criteria the criteria in which we are ordering (Such as "Artist")
+    * @param {*} tbody the body of the table we are changing
+    * @param {*} header the column header that triggered this function
+    * @param {*} list the playlist we are working with
+    * 
+    * 
+    * this function reorders a table, if a given header is clicked twice, then the table is reversed according to that order.
+    */
    
    function rearrangeSearchTable(criteria, tbody, header, list){
       var checkSelected = header.classList.contains('selected');
@@ -281,6 +426,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
       populateTable(tbody, currentSongs);}
 
 
+      /**
+       * 
+       * @param {} tableHeads 
+       * 
+       * 
+       * resets the sorting.
+       */
+
+
    function resetSorts(tableHeads){
       console.log(tableHeads);
       for(let colHead of tableHeads){
@@ -291,6 +445,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
       }
       
    };
+
+   /**
+    * 
+    * @param {*} resetted the box to reset.
+    * 
+    * Resets all input boxes.
+    */
       
    function resetBoxes(resetted){
       resetted.forEach(function(option)
@@ -299,6 +460,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
          currentFilter =null; 
       })   
    }
+
+   /**
+    * 
+    * @param {*} table the list
+    * @param {*} list the array we are using to fill the list
+    * 
+    * populates the "Top" lists on the main page
+    */
 
    function populateTopTable(table, list){
       table.innerHTML="";
@@ -319,6 +488,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
         table.appendChild(newRow);
      }
    }   
+
+   /**
+    * 
+    * @param {*} discriminator the property in each song we are looking at
+    * @returns a string to be parsed containing both the ID, and name of the genre/artist, and whether it is a genre or artist
+    * 
+    * This function orders an item by how many common songs have the same property.
+    */
 
   function findFreq(discriminator) {
       let freqs = {};
