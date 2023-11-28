@@ -633,7 +633,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 }
             }
         }
-    });
       
       });
       console.log(`Radar Chart created for ${song}`);              
