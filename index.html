@@ -453,6 +453,12 @@
             text-align: left;
 
         }
+
+        tr:nth-child(odd) td:nth-child(even),
+        tr:nth-child(even) td:nth-child(odd) {
+            background-color: rgba(116, 48, 141, 0.737); /* Checkerboard table from https://stackoverflow.com/questions/67460008/checkerboard-with-tables-in-html */
+        }
+    
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
