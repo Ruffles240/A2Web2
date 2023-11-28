@@ -632,21 +632,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
          },
       
          options: {
-            scale: {
+            scales: {
+              r: {
                 pointLabels: {
-                    font: {
-                        size: 18 // Adjust the font size for radar chart labels
-                    }
+                  font: {
+                    size: 100
+                  }
                 }
-            },
-            legend: {
-                labels: {
-                    font: {
-                        size: 24 // Adjust the font size for the dataset label (song title)
-                    }
-                }
+              }
             }
-        }
+          }
       
       });
       console.log(`Radar Chart created for ${song}`);              
