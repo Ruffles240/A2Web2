@@ -636,7 +636,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
               r: {
                 pointLabels: {
                   font: {
-                    size: 24
+                    size: 18
                   }
                 }
               }
