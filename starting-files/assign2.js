@@ -352,23 +352,78 @@ addEventListener("DOMContentLoaded", async (event) =>{
     */
 
     // JS for Credit Popup hover 
-    const contentPopup = document.querySelector("#creditContents");
-    const credit = document.querySelector("#credits");
-    
-    credit.addEventListener('mouseover', function(){
-        contentPopup.classList.remove("creditPopup");
-        setTimeout( () => 
-        {contentPopup.classList.add("creditPopup")}, 5000);
-        console.log("Got here");
-    });
-
-
-
-
-
-
-
+   document.querySelector("#credits").addEventListener('mouseover', () => {
+      document.querySelector("#creditContents").classList.remove("creditPopup");
+      setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
    });
+
+/*
+   	"details": {
+			"duration": 206,
+			"bpm": 147,
+			"popularity": 62,
+			"loudness": -5
+		},
+		"analytics": {
+			"energy": 59,
+			"danceability": 76,
+			"liveness": 18,
+			"valence": 81,
+			"acousticness": 8,
+			"speechiness": 23
+		}
+
+
+ */
+
+
+
+   function singleSongViewer(song) {
+      let row = document.querySelectorAll("#song_title");
+
+         let songInformationList = document.getElementById("songInformation");
+         songInformationList.innerHTML = 
+        `<li>Title:    ${song.title}</li>
+         <li>Artist:   ${song.artist.name}</li>
+         <li>Year:     ${song.year}</li>
+         <li>Genre:    ${song.genre.name}</li>
+         <li>Duration: ${(Math.floor(song.details.duration / 60))}:${(songData.details.duration % 60)}</li>`;
+
+         let analysisDataList = document.getElementById("analysisData");
+         analysisDataList.innerHTML =
+        `<li>BPMs:         ${song.details.bpm}</li>
+         <li>Energy:       ${song.analytics.energy}</li>
+         <li>Danceability: ${song.analytics.danceability}</li>
+         <li>Liveness:     ${song.analytics.liveness}</li>
+         <li>Valence:      ${song.analytics.valence}</li>
+         <li>Acoustic:     ${song.analytics.acousticness}</li>
+         <li>Speechiness:  ${song.analytics.speechiness}</li>
+         <li>Popularity:   ${song.details.popularity}</li>`;
+
+         console.log(`Putting ${song.title} into makeRadarChart`);
+         makeRadarChart(song);
+   }
+
+   function makeRadarChart(song){
+      const labels = ['Energy', 'Danceability', 'Liveness', 'Valence', 'Acoustic', 'Speechiness'];
+      const ctx = document.getElementById('radarChart').getContext('2d');
+      const radarChart = new Chart(ctx, {
+         type: 'radar',
+         data: {
+               labels: labels,
+               datasets: [{
+                  label: song.title,
+                  data: [song.analytic.energy, song.analytic.danceability,song.analytic.liveness,
+                        song.analytic.Valence, song.analytic.acousticness, song.analytic.speechiness],
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+               }]
+         },
+      });
+      console.log(`Radar Chart created for ${song}`);              
+    }
+});
 
  
    
