@@ -23,6 +23,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       'title' :  function (a,b) { return a.title.localeCompare(b.title)}
    }
 
+   const songViewers = document.querySelectorAll('.songViewer');
+
    var music = await localStorage.getItem("data");
    var playlist = localStorage.getItem('playlist');
    var currentFilter;   // The current filter that is in the browsing table. So that only present song is being ordered
@@ -80,6 +82,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
       tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
       topLists.forEach((list) => {list.addEventListener('click', (event)  => redirect(event.target))})
+
+      songViewers.forEach((songViewer).addEventListener('click', (event) => makeSongView(event.target)));
 
    }
 
@@ -179,6 +183,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
          selectedSort=structuredClone(music);
          resetSorts(Array.from(document.querySelectorAll(`.searchListHead`)));
          populateTable(document.querySelector('#searchList'), selectedSort);
+   }
+
+   function makeSongView(target){
+      
+      if(target.classList.contains('.songLink')){
+
+         document.querySelector('#singleSongViewer');
+
+      }
    }
    
    /**
@@ -288,7 +301,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
       "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
       </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button'
        data-id = '${song.song_id}' ${type} </button></td>`;
@@ -477,6 +490,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.innerHTML = list[i]['title'];
             newRow.dataset.id = list[i]['title'];
             newRow.dataset.type = 'title';
+            newRow.classList.add('songLink');
          }
          else{
             let splitWord = list[i].split('|')
@@ -484,7 +498,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
             newRow.dataset.id = splitWord[1]; 
             newRow.dataset.type = splitWord[2];
          }
-         newRow.classList.add('songLink');
+         newRow.classList.add('link');
         table.appendChild(newRow);
      }
    }   
