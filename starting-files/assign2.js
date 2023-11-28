@@ -390,7 +390,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
       return list.find((song)=>{
 
-         return song.song_id == item.dataset.id
+         return (song.song_id == item.dataset.id)||(song.title == item.dataset.id);
       })
    }
 
