@@ -362,7 +362,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    function checkIfReversed(tableHead){
       let reversed = document.querySelector(`.rearrange.${tableHead}.selected`);
-      return sortOrder != null && sortOrder.firstChild.classList.contains('rotated');
+      return reversed != null && reversed.firstChild.classList.contains('rotated');
 
    }
 
