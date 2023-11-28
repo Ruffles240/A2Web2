@@ -412,6 +412,15 @@
             display: flex;
             background-color:#c9860b;
         }
+
+        #singleSongViewer{
+
+            position:absolute;
+
+            left:1000000px;
+
+
+        }
     </style>
 
 
@@ -437,6 +446,10 @@
             <button class="header-div" id = "playlist">
                 Playlist
             </button>
+            <button class="header-div" id = "home">
+                Home
+            </button>
+
             <button class="header-div" id = "home">
                 Home
             </button>
@@ -577,7 +590,7 @@
         
         </div>
 
-        <div id="singleSongViewer" class="hide">
+        <div data-id="singleSongViewer" class="hide">
             <div id="single">
                 <h1> Song Information: </h1>
                 <ul id="songInformation"></ul>
@@ -589,7 +602,7 @@
             <div id="radar_chart">
                 <!-- need to use chart.js for this-->
                 <p><b>Radar Chart</b></p>
-                <canvas id="radarChart" width: "1080" height: "600"></canvas>
+                <canvas id="radarChart" style ="width: 1000px; height: 600px;"></canvas>
             </div>
         </div>            
 
