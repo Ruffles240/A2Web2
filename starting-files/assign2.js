@@ -333,7 +333,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                alert('This song is already in the playlist');}
             else{
                playlist.push(thisSong);
-               popupText(`${thisSong.title} \n Added to Playlist`)}
+               popupText(`${thisSong.title} Added to Playlist`)}
          }
          else if(event.target.classList.contains('removePlaylist')){removePlaylistSong(thisSong);}
          else if(event.target.classList.contains('clearPlaylist')){playlist = [];
