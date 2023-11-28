@@ -582,6 +582,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          for(item of infoOrder){
             let li = document.createElement('li');
             li.innerHTML= `${item[0]}${item[1]}`
+            songInformationList.appendChild(li);
          }
          let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML =
