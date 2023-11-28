@@ -582,7 +582,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          <li>Artist:   ${song.artist.name}</li>
          <li>Year:     ${song.year}</li>
          <li>Genre:    ${song.genre.name}</li>
-         <li>Duration: ${(Math.floor(song.details.duration / 60))}:${(songData.details.duration % 60)}</li>`;
+         <li>Duration: ${(Math.floor(song.details.duration / 60))}:${(song.details.duration % 60)}</li>`;
 
          let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML =
