@@ -616,6 +616,25 @@ addEventListener("DOMContentLoaded", async (event) =>{
                   borderWidth: 1
                }]
          },
+      
+         options: {
+            scale: {
+                pointLabels: {
+                    font: {
+                        size: 18 // Adjust the font size for radar chart labels
+                    }
+                }
+            },
+            legend: {
+                labels: {
+                    font: {
+                        size: 24 // Adjust the font size for the dataset label (song title)
+                    }
+                }
+            }
+        }
+    });
+      
       });
       console.log(`Radar Chart created for ${song}`);              
     }
