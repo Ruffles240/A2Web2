@@ -637,8 +637,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 pointLabels: {
                   font: {
                     size: 17,
-                    color: 'white'
-                  }
+                    
+                  },
+                  color: 'white'
                 },
                 grid: {
                   color: 'white'  
