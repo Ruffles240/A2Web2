@@ -586,17 +586,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
             li.innerHTML= `${item[0]}${item[1]}`
             songInformationList.appendChild(li);
          }
+         let analysisData = [['BPMs', song.details.bpm], ['Energy', song.analytics.energy], ['Danceability', song.analytics.danceability],
+            ['Liveness', song.analytics.liveness], ['Valence', song.analytics.valence], ['Acoustic', song.analytics.acousticness], ['Speechiness', song.analytics.speechiness],
+            ['Popularity', song.details.popularity]];
          let analysisDataList = document.getElementById("analysisData");
-         analysisDataList.innerHTML = `
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;"><div class="progressBar" style="width:${song.details.bpm * 2}px">BPMs: ${song.details.bpm}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.energy * 2}px">Energy: ${song.analytics.energy}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.danceability * 2}px">Danceability: ${song.analytics.danceability}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.liveness * 2}px">Liveness: ${song.analytics.liveness}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.valence * 2}px">Valence: ${song.analytics.valence}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.acousticness * 2}px">Acoustic: ${song.analytics.acousticness}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.analytics.speechiness * 2}px">Speechiness: ${song.analytics.speechiness}</div></li>
-            <li style= "background-color: rgba(46, 152, 222, 0.766); width:250px;><div class="progressBar" style="width:${song.details.popularity * 2}px">Popularity: ${song.details.popularity}</div></li>
-            `;
+         for (let item of analysisData) {
+            let li = document.createElement('li');
+            li.style.backgroundColor = "rgba(46, 152, 222, 0.766)";
+            li.style.width = "250px";
+            li.innerHTML = `<div class="progressBar" style="width:${item[1] * 2}px;">${item[0]}: ${item[1]}</div>`;
+            analysisDataList.appendChild(li);
+        }
 
          console.log(`Putting ${song.title} into makeRadarChart`);
          makeRadarChart(song);
