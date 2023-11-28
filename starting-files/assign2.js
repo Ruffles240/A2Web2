@@ -608,8 +608,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
                labels: labels,
                datasets: [{
                   label: song.title,
-                  data: [song.analytic.energy, song.analytic.danceability,song.analytic.liveness,
-                        song.analytic.Valence, song.analytic.acousticness, song.analytic.speechiness],
+                  data: [song.analytics.energy, song.analytics.danceability,song.analytics.liveness,
+                        song.analytics.Valence, song.analytics.acousticness, song.analytics.speechiness],
                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
                   borderColor: 'rgba(255, 99, 132, 1)',
                   borderWidth: 1
