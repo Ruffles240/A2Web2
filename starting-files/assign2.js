@@ -245,9 +245,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          else{
             let filtered =selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue]));
             if(checkIfReversed('searchListHead')){
-               filtered.reverse();
-            }
-            
+               filtered.reverse();}
             populateTable(document.querySelector('#searchList'), filtered);}  
       }
       else{
@@ -334,7 +332,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
             if(typeof (findSong(playlist, target)) !== 'undefined'){
                alert('This song is already in the playlist');}
             else{
-               playlist.push(thisSong);}
+               playlist.push(thisSong);
+               popupText(thisSong.title)}
          }
          else if(event.target.classList.contains('removePlaylist')){removePlaylistSong(thisSong);}
          else if(event.target.classList.contains('clearPlaylist')){playlist = [];
