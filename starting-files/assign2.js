@@ -587,7 +587,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML =
-        `<li>BPMs:         ${song.details.bpm}</li>
+        `<li><p>BPMs:         ${song.details.bpm}</p><div class="progressBar" style="length:${song.details.bpm * 2}px"></div></li>
          <li>Energy:       ${song.analytics.energy}</li>
          <li>Danceability: ${song.analytics.danceability}</li>
          <li>Liveness:     ${song.analytics.liveness}</li>
