@@ -243,7 +243,13 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(currentFilter.value===''){
             alert('Please choose an option.')}
          else{
-         populateTable(document.querySelector('#searchList'), selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue])));}  }
+            let filtered =selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue]));
+            if(checkIfReversed('searchListHead')){
+               filtered.reverse();
+            }
+            
+            populateTable(document.querySelector('#searchList'), );}  
+      }
       else{
          alert('Please choose a search option.');}}
 
@@ -347,12 +353,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
       localStorage.setItem('playlist', JSON.stringify(playlist));
       if(currentPlaylistSort!==null){
          playlist.sort(sortingFunctions[currentPlaylistSort]);
-         let sortOrder = document.querySelector('.rearrange.playlistTableHead.selected');
-         if(sortOrder != null && sortOrder.firstChild.classList.contains('rotated')){
+         if(checkIfReversed('playlistTableHead')){
             playlist.reverse();
          }
       }
       populateTable(document.querySelector('#playlistTable'), playlist);
+   }
+
+   function checkIfReversed(tableHead){
+      let reversed = document.querySelector(`.rearrange.${tableHead}.selected`);
+      return sortOrder != null && sortOrder.firstChild.classList.contains('rotated');
+
    }
 
    /**
