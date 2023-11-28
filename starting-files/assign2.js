@@ -191,6 +191,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
          document.querySelector('#singleSongViewer').click();
          console.log('did the thing');
+         const thisSong = findSong(music, target);
+         singleSongViewer(thisSong);
+
 
       }
    }
