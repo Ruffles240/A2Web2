@@ -83,7 +83,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
       tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
       topLists.forEach((list) => {list.addEventListener('click', (event)  => redirect(event.target))})
       songViewers.forEach((songViewer) => {songViewer.addEventListener('click', (event) => makeSongView(event.target))});
-
+      document.querySelector("#credits").addEventListener('mouseover', () => {
+         document.querySelector("#creditContents").classList.remove("creditPopup");
+         setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
+      });
 
    }
 
@@ -556,12 +559,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
     * 
     * 
     */
-
-    // JS for Credit Popup hover 
-   document.querySelector("#credits").addEventListener('mouseover', () => {
-      document.querySelector("#creditContents").classList.remove("creditPopup");
-      setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
-   });
 
 /*
    	"details": {
