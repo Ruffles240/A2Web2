@@ -588,12 +588,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
          let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML = `
             <li><p>BPMs:</p><div class="progressBar" style="width:${song.details.bpm * 2}px">${song.details.bpm}</div></li>
-            <li><p>Energy:</p><div class="progressBar" style="width:${song.analytics.energy * 100}px">${song.analytics.energy}</div></li>
-            <li><p>Danceability:</p><div class="progressBar" style="width:${song.analytics.danceability * 100}px">${song.analytics.danceability}</div></li>
-            <li><p>Liveness:</p><div class="progressBar" style="width:${song.analytics.liveness * 100}px">${song.analytics.liveness}</div></li>
-            <li><p>Valence:</p><div class="progressBar" style="width:${song.analytics.valence * 100}px">${song.analytics.valence}</div></li>
-            <li><p>Acoustic:</p><div class="progressBar" style="width:${song.analytics.acousticness * 100}px">${song.analytics.acousticness}</div></li>
-            <li><p>Speechiness:</p><div class="progressBar" style="width:${song.analytics.speechiness * 100}px">${song.analytics.speechiness}</div></li>
+            <li><p>Energy:</p><div class="progressBar" style="width:${song.analytics.energy * 2}px">${song.analytics.energy}</div></li>
+            <li><p>Danceability:</p><div class="progressBar" style="width:${song.analytics.danceability * 2}px">${song.analytics.danceability}</div></li>
+            <li><p>Liveness:</p><div class="progressBar" style="width:${song.analytics.liveness * 2}px">${song.analytics.liveness}</div></li>
+            <li><p>Valence:</p><div class="progressBar" style="width:${song.analytics.valence * 2}px">${song.analytics.valence}</div></li>
+            <li><p>Acoustic:</p><div class="progressBar" style="width:${song.analytics.acousticness * 2}px">${song.analytics.acousticness}</div></li>
+            <li><p>Speechiness:</p><div class="progressBar" style="width:${song.analytics.speechiness * 2}px">${song.analytics.speechiness}</div></li>
             <li><p>Popularity:</p><div class="progressBar" style="width:${song.details.popularity * 2}px">${song.details.popularity}</div></li>
             `;
 
