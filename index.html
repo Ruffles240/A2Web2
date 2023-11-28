@@ -25,18 +25,19 @@
           
            
             top: 0px;
-            padding-bottom: 3px;
+            padding-bottom: 8px;
             height: 15%;
             text-align: center;
+            
+            background-image: linear-gradient(to right, #8c2ede, #499eb1);
+            background-size: 120%;
         }
-        header, footer
-        
-        {
+        header, footer{
             background-color: #8c2ede;
             text-align: center;
         }
         footer {
-           
+            background-image: linear-gradient(to left, #8c2ede, #499eb1);
             
             position: fixed;
             bottom: 0;
@@ -79,12 +80,6 @@
 
         }
 
-        .selectedDirection{
-
-
-
-        }
-
 
         .hide{
 
@@ -96,7 +91,8 @@
             
             background-image:url(./images/https___cdn.evbuc.com_images_602106279_200284926746_1_original.jpg);
             min-height: 700px;
-            background-size: contain;
+            background-size: cover;
+            background-repeat: repeat-y;
             color:cornsilk;
         
             text-align: center;
@@ -404,7 +400,18 @@
 
         }
        
-       
+        .creditsHoverButton{
+            position: absolute;
+            top: 1%;
+            right: 5%;
+            }
+        .creditPopup{
+            display: none;
+        }
+        .creditPopup:hover{
+            display: flex;
+            background-color:#c9860b;
+        }
     </style>
 
 
@@ -433,6 +440,19 @@
             <button class="header-div" id = "home">
                 Home
             </button>
+        </div>
+
+        <!-- Credit Button, separated below -->
+        </div>
+        <div class = creditsHoverButton>
+            <button class="header-div" id="credits">
+                Credits
+            </button>
+                <div id="creditContents" class="creditPopup"> 
+                    <p>Rahpael K.</p>
+                    <p>Zachariah L.</p>
+                    <a href="https://github.com/Ruffles240/A2Web2"> GitHub Repo </a>
+                </div>            
         </div>
     </header>
     <div id="popupElement"></div>
@@ -556,6 +576,26 @@
             </div>
         
         </div>
+
+        <div id="singleSongViewer" class="hide">
+            <div id="single">
+                <h1> Song Information: </h1>
+                <ul id="songInformation"></ul>
+    
+                <h2>Analysis Data:</h2>
+                <ul id="analysisData"></ul>
+            </div>
+
+            <div id="radar_chart">
+                <!-- need to use chart.js for this-->
+                <p><b>Radar Chart</b></p>
+                <canvas id="radarChart" width: "1080" height: "600"></canvas>
+            </div>
+        </div>            
+
+        <!-- HTML for Song Details and Radar Chart -->
+
+        <!-- HTML for Song Details and Radar Chart -->
         
 
     </main>
