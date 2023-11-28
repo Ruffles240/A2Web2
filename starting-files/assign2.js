@@ -146,7 +146,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       popup.style.display = "block";
       setTimeout(() => {
          popup.style.display = "none";
-      }, 5000);
+      }, 6000);
 
   };
 
@@ -327,7 +327,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          const target = event.target;
          const thisSong = findSong(music, target);
          
-         if(event.target.classList.contains('titleEllipse')){showName(song);}
+         if(event.target.classList.contains('titleEllipse')){showName(thisSong);}
          if(target.classList.contains("addPlaylist")){
             if(typeof (findSong(playlist, target)) !== 'undefined'){
                alert('This song is already in the playlist');}
