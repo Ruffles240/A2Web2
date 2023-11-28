@@ -84,6 +84,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       topLists.forEach((list) => {list.addEventListener('click', (event)  => redirect(event.target))})
       songViewers.forEach((songViewer) => {songViewer.addEventListener('click', (event) => makeSongView(event.target))});
 
+      console.log(songViewers);
+
    }
 
    /**
