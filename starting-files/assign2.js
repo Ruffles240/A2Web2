@@ -248,7 +248,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                filtered.reverse();
             }
             
-            populateTable(document.querySelector('#searchList'), );}  
+            populateTable(document.querySelector('#searchList'), filtered);}  
       }
       else{
          alert('Please choose a search option.');}}
