@@ -575,15 +575,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    function singleSongViewer(song) {
       let row = document.querySelectorAll("#song_title");
-
+      
+         let infoOrder= [['Title: ',song.title], ['Artist: ',song.artist.name], ['Year: ',song.year], ['Genre: ', song.genre.name],
+          ['Duration: ', `${Math.floor(song.details.duration / 60)}:${(song.details.duration % 60)}`]];
          let songInformationList = document.getElementById("songInformation");
-         songInformationList.innerHTML = 
-        `<li>Title:    ${song.title}</li>
-         <li>Artist:   ${song.artist.name}</li>
-         <li>Year:     ${song.year}</li>
-         <li>Genre:    ${song.genre.name}</li>
-         <li>Duration: ${(Math.floor(song.details.duration / 60))}:${(song.details.duration % 60)}</li>`;
-
+         for(item of infoOrder){
+            let li = document.createElement('li');
+            li.innerHTML= `${item[0]}${item[1]}`
+         }
          let analysisDataList = document.getElementById("analysisData");
          analysisDataList.innerHTML =
         `<li>BPMs:         ${song.details.bpm}</li>
