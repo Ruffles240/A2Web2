@@ -636,12 +636,23 @@ addEventListener("DOMContentLoaded", async (event) =>{
               r: {
                 pointLabels: {
                   font: {
-                    size: 17
+                    size: 17,
+                    color: white
                   }
                 }
                 
               }
-            }
+            },
+            plugins: {
+               legend: {
+                   labels: {
+                       color: 'white', // Set legend text color to white
+                       font: {
+                           size: 24 // Increase size for the main label
+                       }
+                   }
+               }
+           }
           }
       
       });
