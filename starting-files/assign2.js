@@ -643,7 +643,10 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 },
                 grid: {
                   color: 'white'  
-              }
+              },
+              angleLines: {
+               color: 'white'
+               },
                 
               }
             },
