@@ -637,7 +637,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
                 pointLabels: {
                   font: {
                     size: 17,
-                    color: white
+                    color: 'white'
                   }
                 }
                 
@@ -646,9 +646,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
             plugins: {
                legend: {
                    labels: {
-                       color: 'white', // Set legend text color to white
+                       color: 'white', 
                        font: {
-                           size: 24 // Increase size for the main label
+                           size: 24 
                        }
                    }
                }
