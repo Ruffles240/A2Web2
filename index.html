@@ -381,15 +381,27 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 3%;
+            font-size: 200%;
+            border-radius: 20px;
 
+
+            transform: scale(0);
+            animation: growEffect 1s ease-out forwards;
             transition:ease-in-out 0.5s;
             color: white;
 
-            border-radius: 20px;
             background-color: rgba(169, 46, 222, 0.858);
 
-            font-size: 200%;
           }
+
+          @keyframes growEffect {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
 
           .rotated {
             transform: rotate(180deg);
