@@ -586,15 +586,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
             songInformationList.appendChild(li);
          }
          let analysisDataList = document.getElementById("analysisData");
-         analysisDataList.innerHTML =
-        `<li><p>BPMs:         ${song.details.bpm}</p><div class="progressBar" style="width:${song.details.bpm * 2}px"></div></li>
-         <li>Energy:       ${song.analytics.energy}</li>
-         <li>Danceability: ${song.analytics.danceability}</li>
-         <li>Liveness:     ${song.analytics.liveness}</li>
-         <li>Valence:      ${song.analytics.valence}</li>
-         <li>Acoustic:     ${song.analytics.acousticness}</li>
-         <li>Speechiness:  ${song.analytics.speechiness}</li>
-         <li>Popularity:   ${song.details.popularity}</li>`;
+         analysisDataList.innerHTML = `
+            <li><p>BPMs:</p><div class="progressBar" style="width:${song.details.bpm * 2}px">${song.details.bpm}</div></li>
+            <li><p>Energy:</p><div class="progressBar" style="width:${song.analytics.energy * 100}px">${song.analytics.energy}</div></li>
+            <li><p>Danceability:</p><div class="progressBar" style="width:${song.analytics.danceability * 100}px">${song.analytics.danceability}</div></li>
+            <li><p>Liveness:</p><div class="progressBar" style="width:${song.analytics.liveness * 100}px">${song.analytics.liveness}</div></li>
+            <li><p>Valence:</p><div class="progressBar" style="width:${song.analytics.valence * 100}px">${song.analytics.valence}</div></li>
+            <li><p>Acoustic:</p><div class="progressBar" style="width:${song.analytics.acousticness * 100}px">${song.analytics.acousticness}</div></li>
+            <li><p>Speechiness:</p><div class="progressBar" style="width:${song.analytics.speechiness * 100}px">${song.analytics.speechiness}</div></li>
+            <li><p>Popularity:</p><div class="progressBar" style="width:${song.details.popularity * 2}px">${song.details.popularity}</div></li>
+            `;
 
          console.log(`Putting ${song.title} into makeRadarChart`);
          makeRadarChart(song);
