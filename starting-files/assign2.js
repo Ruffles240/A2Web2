@@ -589,7 +589,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          let analysisData = [['BPMs', song.details.bpm], ['Energy', song.analytics.energy], ['Danceability', song.analytics.danceability],
             ['Liveness', song.analytics.liveness], ['Valence', song.analytics.valence], ['Acoustic', song.analytics.acousticness], ['Speechiness', song.analytics.speechiness],
             ['Popularity', song.details.popularity]];
-         let analysisDataList = document.getElementById("analysisData");
+         let analysisDataList = document.querySelector("#analysisData");
+         analysisDataList.innerHTML=""
          for (let item of analysisData) {
             let li = document.createElement('li');
             li.style.backgroundColor = "rgba(46, 152, 222, 0.766)";
