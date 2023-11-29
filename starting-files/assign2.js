@@ -28,11 +28,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    const songViewers = document.querySelectorAll('.songViewer');
 
-   var music = await localStorage.getItem("data");
-   var playlist = localStorage.getItem('playlist');
-   var currentFilter;   // The current filter that is in the browsing table. So that only present song is being ordered
-   var selectedSort; //The kind of sort that the searching table is currently in. Holds the music as a copy in order to not affect the base array of music when it is being sorted and such
-   var currentPlaylistSort; // Holds the way the playlist is being sorted. This is so that I can add new songs in the proper order.
+   let music = await localStorage.getItem("data");
+   let playlist = localStorage.getItem('playlist');
+   let currentFilter;   // The current filter that is in the browsing table. So that only present song is being ordered
+   let selectedSort; //The kind of sort that the searching table is currently in. Holds the music as a copy in order to not affect the base array of music when it is being sorted and such
+   let currentPlaylistSort; // Holds the way the playlist is being sorted. This is so that I can add new songs in the proper order.
 
    await main();//Begins the program
 
@@ -103,7 +103,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
     */
 
    async function fetchData(URL) {
-      var response = await fetch(URL).then(response => response.json());
+      let response = await fetch(URL).then(response => response.json());
       return response;
   }
 
@@ -132,7 +132,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    */
 
   function redirect(target){
-      var selectRadio= document.querySelector(`#${target.dataset.type}Rad`); 
+      let selectRadio= document.querySelector(`#${target.dataset.type}Rad`); 
       if(target.dataset.type =='artist' || target.dataset.type =='genre'){
          document.querySelector('#browse').click();
          selectRadio.click();
@@ -290,7 +290,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       table.innerHTML="";
 
       for(song of list){
-         var newRow = makeRow(table, song);
+         let newRow = makeRow(table, song);
          table.appendChild(newRow);
       }
    }
@@ -305,15 +305,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
     */
 
   function makeRow(table, song){
-      var type= '';
+      let type= '';
       if(table.id ==="searchList"){
          type = 'class= "addPlaylist playlist">Add';
       }
       else if(table.id==="playlistTable"){
          type = 'class= "removePlaylist">Remove';
       }
-      var newRow = document.createElement("tr");
-      var shortenedTitle= song.title.substring(0,24);
+      let newRow = document.createElement("tr");
+      let shortenedTitle= song.title.substring(0,24);
       if(song.title.length>25){
          shortenedTitle = shortenedTitle.substring(0, 23);
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
@@ -321,7 +321,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       newRow.dataset.id = song.song_id;
       newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
       "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
-      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" ><button  type= 'button'
+      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" >
+      <button  type= 'button'
        data-id = '${song.song_id}' ${type} </button></td>`;
       return newRow;
    }
@@ -387,7 +388,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          return !(thisSong.song_id == song.song_id);
       });
    }
-
    /**
     * 
     * @param {} song 
@@ -427,8 +427,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          target = target.parentElement;
       }
       if(target.classList.contains('rearrange')){
-         var tbody = document.querySelector(`#${target.dataset.table}`);
-         var criteria = target.dataset.id;
+         let tbody = document.querySelector(`#${target.dataset.table}`);
+         let criteria = target.dataset.id;
          if(tbody.id =='searchList'){
             rearrangeSearchTable(criteria, tbody, target, selectedSort);
          }
@@ -452,8 +452,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
     */
    
    function rearrangeSearchTable(criteria, tbody, header, list){
-      var checkSelected = header.classList.contains('selected');
-      var currentSongs=list.sort(sortingFunctions[criteria]);
+      let checkSelected = header.classList.contains('selected');
+      let currentSongs=list.sort(sortingFunctions[criteria]);
    
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));}
@@ -514,7 +514,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function populateTopTable(table, list){
       table.innerHTML="";
       for(let i = 0; i < 15; i++){
-         var newRow = document.createElement("li");
+         let newRow = document.createElement("li");
          if(typeof list[i]==='object'){
             newRow.innerHTML = list[i]['title'];
             newRow.dataset.id = list[i]['title'];
@@ -570,8 +570,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       document.querySelector("#creditContents").classList.remove("creditPopup");
       setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
     };
-
-
    /**
     * 
     * @param { } song the song to be shown
