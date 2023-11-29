@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raph's Music App</title>
+    <title>Raph and Zach's Music App</title>
     
     <style>
         body {
@@ -183,9 +183,6 @@
 
         }
         
-        .blah{
-            background-color: rgba(99, 46, 222, 0.766)
-        }
 
         .view{
 
@@ -404,6 +401,19 @@
             }
         }
 
+
+
+        @keyframes fillAnimation {
+            0% {
+                transform: scaleX(0); 
+            }
+            100% {
+                transform: scaleX(1); 
+            }
+        }
+
+
+
           .rotated {
             transform: rotate(180deg);
         }
@@ -457,9 +467,11 @@
             height: 20px;
             margin-top: 0px;
             background-color: rgba(196, 60, 198, 0.623);
-
             white-space: nowrap; 
             overflow: visible;
+            transform: scaleX(0); 
+            transform-origin: left; 
+            animation: fillAnimation 0.5s linear forwards; 
         }
 
         
@@ -712,6 +724,7 @@
             </div>
         
         </div>
+        <!-- HTML for Song Details and Radar Chart -->
 
         <div data-id="singleSongViewer" class="hide">
 
@@ -732,7 +745,6 @@
             </div>
         </div>            
 
-        <!-- HTML for Song Details and Radar Chart -->
 
         <!-- HTML for Song Details and Radar Chart -->
         
@@ -742,7 +754,7 @@
    
 
     <footer>
-        <p>&copy; 2023 Raphtastic Music</p>
+        <p>&copy; 2023 Fabtastic Music</p>
     </footer>
 
 </body>

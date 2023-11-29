@@ -45,7 +45,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
       await init();
       await makeListeners();
       await makeTables();}
-      
    /**
     * 
     * Initializes the required data, searches for what is already in local storage
