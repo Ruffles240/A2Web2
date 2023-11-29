@@ -522,6 +522,13 @@
         .listHead button{
             margin-left: 10%;
             height: 5%;}
+
+        #playlistDisplay{
+            width: 90%; 
+            max-height: 400px;
+
+        }
+        
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -531,9 +538,9 @@
 <body>
     <header>
         <div id="logoGroup">
-            <img src="./images/disc-jockey-phonograph-record-dj-mix-anime-scratching-anime-removebg-preview.png" id ="logo2">
-            <h1><img src="./images/image-removebg-preview.png" alt="Epic Music Hub Logo"></h1>
-            <img src="./images/anime_girl_dj_render_by_arshavlr-d763epy.png" id = "left">
+            <img src="./images/disc-jockey-phonograph-record-dj-mix-anime-scratching-anime-removebg-preview.png" alt = "Anime Girl with Headphones" id ="logo2">
+            <h1><img src="./images/image-removebg-preview.png" alt="Epic Music Hub Logo" alt = ></h1>
+            <img src="./images/anime_girl_dj_render_by_arshavlr-d763epy.png" alt = "Anime GIrl with headphones pointing" id = "left">
         </div>
         <div id = "homeButtons">
             <button class="header-div" id = "browse">
@@ -548,7 +555,7 @@
             <button class="header-div" id = "singleSongViewer"></button>
         </div>
         <!-- Credit Button, separated below -->
-        </div>
+        
         <div class = creditsHoverButton>
             <button class="header-div" id="credits">
                 Credits
@@ -566,7 +573,7 @@
             <div id="playlistView" class="view">
             <div id="searchDiv" class="section browseDiv" >
                 <h2>Playlist</h2>
-                <div style="width: 90%; max-height: 400px; " class="songDisplay">
+                <div class="songDisplay" id="playListDisplay">
                 <div class="listHead">
                         <h3 data-id="title" data-table="playlistTable" class="rearrange playlistTableHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Title</h3>
                         <h3 data-id="artist" data-table="playlistTable" class="rearrange playlistTableHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Artist</h3>
