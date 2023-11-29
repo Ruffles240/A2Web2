@@ -562,17 +562,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
      return mostFreq;
    }
 
-
-   /**
-    * 
-    * @param {*} song Contains song object based on target from makeSongView(target)
-    */
-
-    // JS for Credit Popup hover 
-    function creditsMaker(){
-      document.querySelector("#creditContents").classList.remove("creditPopup");
-      setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
-    };
    /**
     * 
     * @param { } song the song to be shown
@@ -608,7 +597,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
          let existingChart = Chart.getChart(document.querySelector('#radarChart'));
          if(existingChart){
             existingChart.destroy();
-
          }
          
          makeRadarChart(song);
@@ -620,7 +608,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
  * 
  * Makes the radar chart from song object for Single Song Viewer, in particular the data from song.analytics
  */
-
    function makeRadarChart(song){
       const labels = ['Energy', 'Danceability', 'Liveness', 'Valence', 'Acoustic', 'Speechiness'];
       const ctx = document.getElementById('radarChart').getContext('2d');
@@ -631,38 +618,28 @@ addEventListener("DOMContentLoaded", async (event) =>{
                labels: labels,
                datasets: [{
                   label: song.title,
-                  data: [song.analytics.energy, song.analytics.danceability,song.analytics.liveness,
-                        song.analytics.valence, song.analytics.acousticness, song.analytics.speechiness],
+                  data: [song.analytics.energy, song.analytics.danceability,song.analytics.liveness, song.analytics.valence, song.analytics.acousticness, song.analytics.speechiness],
                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
                   borderColor: 'rgba(255, 99, 132, 1)',
                   borderWidth: 1
                }]
          },
-      
          options: {
             scales: {
               r: {
-                pointLabels: {
-                  font: {
-                    size: 17,
-                  },
+                  pointLabels: {
+                  font: { size: 17,},
                   color: 'white'
-                },
-                grid: {
-                  color: 'white'  
-              },
-              angleLines: {
-               color: 'white'
-               },                
+                  },
+                  grid: {color: 'white'  },
+                  angleLines: {color: 'white'},                
               }
             },
             plugins: {
                legend: {
                    labels: {
                        color: 'white', 
-                       font: {
-                           size: 24 
-                       }
+                       font: {size: 24}
                    }
                }
             }
