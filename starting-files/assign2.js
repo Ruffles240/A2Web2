@@ -565,7 +565,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
     function creditsMaker(){
       document.querySelector("#creditContents").classList.remove("creditPopup");
       setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
-   });
+    };
 
 
    /**
