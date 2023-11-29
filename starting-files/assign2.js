@@ -312,18 +312,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
       else if(table.id==="playlistTable"){
          type = 'class= "removePlaylist">Remove';
       }
-      let newRow = document.createElement("li");
+      let newRow = document.createElement("tr");
       let shortenedTitle= song.title.substring(0,24);
       if(song.title.length>25){
          shortenedTitle = shortenedTitle.substring(0, 23);
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<tr><td data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
+      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
       "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
-      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><tr data-type = "button" >
+      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" >
       <button  type= 'button'
-       data-id = '${song.song_id}' ${type} </button></td></li>`;
+       data-id = '${song.song_id}' ${type} </button></td>`;
       return newRow;
    }
 
