@@ -44,10 +44,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    async function main(){
       await init();
       await makeListeners();
-      await makeTables();
+      await makeTables();}
       
-   }
-
    /**
     * 
     * Initializes the required data, searches for what is already in local storage
@@ -56,24 +54,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
    async function init(){
 
       if(playlist ===null){
-         playlist = [];
-      }
+         playlist = [];}
       else{
-         playlist = JSON.parse(playlist);
-      }
+         playlist = JSON.parse(playlist);}
       if(music ===null){
          console.log('Getting from API');
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
-         selectedSort=structuredClone(music);
-      }
+         selectedSort=structuredClone(music);}
       else {
          console.log('Getting from stored Data');
-
          music = JSON.parse(music);
-         selectedSort = structuredClone(music);
-      }
-   }
+         selectedSort = structuredClone(music);}}
 
    /**
     * 
@@ -91,11 +83,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
       songViewers.forEach((songViewer) => {songViewer.addEventListener('click', (event) => makeSongView(event.target))});
       document.querySelector("#credits").addEventListener('mouseover', () => {
          document.querySelector("#creditContents").classList.remove("creditPopup");
-         setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
-      });
-      document.querySelector("#credits").addEventListener('mouseover', () => creditsMaker());
-
-   }
+         setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);});
+      document.querySelector("#credits").addEventListener('mouseover', () => creditsMaker());}
 
    /**
     * 
@@ -107,8 +96,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
 
    async function fetchData(URL) {
       let response = await fetch(URL).then(response => response.json());
-      return response;
-  }
+      return response;}
 
   /**
    * 
@@ -124,9 +112,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       let option = document.createElement('option');
       option.innerHTML=item.name;
       option.value=item.id;
-      select.appendChild(option);
-   }
-  }
+      select.appendChild(option);}}
 
   /**
    * 
@@ -140,9 +126,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          document.querySelector('#browse').click();
          selectRadio.click();
          currentFilter.value= target.dataset.id;
-         document.querySelector('#listSongs').click();}
-  }
-
+         document.querySelector('#listSongs').click();}}
   /**
    * 
    * @param {} text The text to appear
@@ -156,17 +140,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
       popup.style.display = "block";
       setTimeout(() => {
          popup.style.display = "none";
-      }, 6000);
-
-  };
-
-
+      }, 6000);};
   /**
    * 
    * THis function populates the tables and calls the functions populating each one, as well as finding the top genres and artists for the "Top" tables
    * 
    */
-
    async function makeTables(){
       const topGenres = findFreq('genre');
       const topArtists = findFreq('artist');
@@ -177,10 +156,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       await populateTopTable(document.querySelector('#topGenres'), topGenres);
       await populateTopTable(document.querySelector('#topSongs'), popularitySort);
       await populateSelect(genres ,document.querySelector('#genre'));
-      await populateSelect(artists ,document.querySelector('#artist'));
-   }
-  
-
+      await populateSelect(artists ,document.querySelector('#artist'));}
    /**
     * 
     * @param {} event The click of the "clear" button
