@@ -316,9 +316,17 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';}
       let order = [shortenedTitle, song.artist.name, song.genre.name, song.year];
       newRow.dataset.id = song.song_id;
-      fillRow(song, order, row, buttonType);
+      fillRow(song, order, newRow, buttonType);
       return newRow;
    }
+
+   /**
+    * 
+    * @param {} song the song we are using
+    * @param {*} order The elements to be filled in each part
+    * @param {*} row the row to add to
+    * @param {*} buttonType the list holding the button types.
+    */
 
    function fillRow(song, order, row , buttonType){
       for(item of order){
@@ -334,8 +342,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       button.dataset.id = song.song_id;
       button.classList.add(`${buttonType[0]}`);
       buttonDiv.appendChild(button);
-      row.appendChild(buttonDiv);
-   };
+      row.appendChild(buttonDiv);};
 
    /**
     * 
@@ -569,8 +576,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          for(item of infoOrder){
             let li = document.createElement('li');
             li.innerHTML= `${item[0]}${item[1]}`
-            songInformationList.appendChild(li);
-         }
+            songInformationList.appendChild(li);}
          let analysisData = [['BPMs', song.details.bpm], ['Energy', song.analytics.energy], ['Danceability', song.analytics.danceability],
             ['Liveness', song.analytics.liveness], ['Valence', song.analytics.valence], ['Acoustic', song.analytics.acousticness], ['Speechiness', song.analytics.speechiness],
             ['Popularity', song.details.popularity]];
@@ -581,14 +587,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
             li.style.backgroundColor = "rgba(99, 46, 222, 0.8)";
             li.style.width = "90%";
             li.innerHTML = `<div class="progressBar" style="width:${item[1] / 2}%;">${item[0]}: ${item[1]}</div>`;
-            analysisDataList.appendChild(li);
-        }
+            analysisDataList.appendChild(li);}
          console.log(`Putting ${song.title} into makeRadarChart`);
          let existingChart = Chart.getChart(document.querySelector('#radarChart'));
          if(existingChart){
-            existingChart.destroy();
-         }
-         
+            existingChart.destroy();}
          makeRadarChart(song);
    }
 
