@@ -307,12 +307,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
     */
 
   function makeRow(table, song){
-      let type= '';
-      if(table.id ==="searchList"){
-         type = 'class= "addPlaylist playlist">Add';
-      }
-      else if(table.id==="playlistTable"){
-         type = 'class= "removePlaylist">Remove';
+      let buttonType= ["addPlaylist", "Add"] ;
+      if(table.id==="playlistTable"){
+         buttonType = ["removePlaylist", "Remove"];
       }
       let newRow = document.createElement("li");
       let shortenedTitle= song.title.substring(0,24);
@@ -320,12 +317,24 @@ addEventListener("DOMContentLoaded", async (event) =>{
          shortenedTitle = shortenedTitle.substring(0, 23);
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
+      let order = [shortenedTitle, song.artist.name, song.genre.name, song.year];
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<div data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</div><div data-type = "artist" data-id= 
-      "${song.artist.name}">${song.artist.name}</div><div data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
-      </div><div data-type = "year" data-id = "${song.year}">${song.year}</div><div data-type = "button" >
-      <button  type= 'button'
-       data-id = '${song.song_id}' ${type} </button></div>`;
+      
+      for(item of order){
+         let div = document.createElement('div');
+         div.innerHTML=item;
+         newRow.appendChild(div);
+      }
+      newRow.firstChild.dataset.id = song.title;
+      newRow.firstChild.classList.add("link", "songLink");
+      let button =document.createElement("button");
+      let buttonDiv = document.createElement('div');
+      button.innerText = buttonType[1];
+      button.type = "button";
+      button.dataset.id = song.song_id;
+      button.classList.add(`${buttonType[0]}`);
+      buttonDiv.appendChild(button);
+      newRow.appendChild(buttonDiv);
       return newRow;
    }
 
