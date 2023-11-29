@@ -563,29 +563,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
    });
 
-/*
-   	"details": {
-			"duration": 206,
-			"bpm": 147,
-			"popularity": 62,
-			"loudness": -5
-		},
-		"analytics": {
-			"energy": 59,
-			"danceability": 76,
-			"liveness": 18,
-			"valence": 81,
-			"acousticness": 8,
-			"speechiness": 23
-		}
-
-
- */
-
-
-
    function singleSongViewer(song) {
-      let row = document.querySelectorAll("#song_title");
       
          let infoOrder= [['Title: ',song.title], ['Artist: ',song.artist.name], ['Year: ',song.year], ['Genre: ', song.genre.name],
           ['Duration: ', `${Math.floor(song.details.duration / 60)}:${(song.details.duration % 60)}`]];
