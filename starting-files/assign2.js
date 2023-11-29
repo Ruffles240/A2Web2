@@ -332,9 +332,9 @@ addEventListener("DOMContentLoaded", async (event) =>{
       for(item of order){
          let div = document.createElement('div');
          div.innerHTML=item;
-         newRow.appendChild(div);}
-      newRow.firstChild.dataset.id = song.title;
-      newRow.firstChild.classList.add("link", "songLink");
+         row.appendChild(div);}
+      row.firstChild.dataset.id = song.title;
+      row.firstChild.classList.add("link", "songLink");
       let button =document.createElement("button");
       let buttonDiv = document.createElement('div');
       button.innerText = buttonType[1];
