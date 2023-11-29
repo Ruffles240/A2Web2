@@ -84,8 +84,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       songViewers.forEach((songViewer) => {songViewer.addEventListener('click', (event) => makeSongView(event.target))});
       document.querySelector("#credits").addEventListener('mouseover', () => {
          document.querySelector("#creditContents").classList.remove("creditPopup");
-         setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);});
-      document.querySelector("#credits").addEventListener('mouseover', () => creditsMaker());}
+         setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);});}
 
    /**
     * 
