@@ -461,9 +461,7 @@
 
             margin-top: 10px;
         }
-
         .progressBar{
-
             height: 20px;
             margin-top: 0px;
             background-color: rgba(196, 60, 198, 0.623);
@@ -471,99 +469,59 @@
             overflow: visible;
             transform: scaleX(0); 
             transform-origin: left; 
-            animation: fillAnimation 0.5s linear forwards; 
-        }
-
-        
-
+            animation: fillAnimation 0.5s linear forwards; }
         tr:nth-child(odd) td:nth-child(even),
         tr:nth-child(even) td:nth-child(odd) {
-            background-color: rgba(48, 67, 141, 0.737); /* Checkerboard table from https://stackoverflow.com/questions/67460008/checkerboard-with-tables-in-html */
-        }
-        
+            background-color: rgba(48, 67, 141, 0.737); /* Checkerboard table from https://stackoverflow.com/questions/67460008/checkerboard-with-tables-in-html */}
         canvas{
-
             width: 75%;
-            margin:0% auto; 
-
-        }
-       
+            margin:0% auto; }
         .topDisplay{
-
-            min-width: 22%;
-        }
-
+            min-width: 22%;}
         #topSongDiv{
 
-            min-width: 40%;
-        }
-
+            min-width: 40%;}
         #single{
             text-align: left; 
             min-width:25%; 
-            min-height: 25%
-        }
-
+            min-height: 25%}
         #radarChartDiv{
 
             min-width:55%;  
-            max-height: 575px;
-        }
-
+            max-height: 575px;}
         #radarChart{
 
             margin:0% auto; 
             width: 75%; 
             background-color: rgba(240, 248, 255, 0.2); 
-            border-radius: 20%;
-        }
-
+            border-radius: 20%;}
         #playlistSection{
 
             min-width:70%; 
             overflow-y:scroll; 
-            max-height: 450px;
-        }
+            max-height: 450px;}
         #searchDiv{
             min-width:60%; 
             overflow-y:scroll; 
-            max-height: 450px;
-        }
+            max-height: 450px;}
         #playlistSection table{
             width: 90%; 
-            max-height: 400px;
-        }
-
-
+            max-height: 400px;}
         .listHead{
 
-            display: flex;
-           
-        }
+            display: flex;}
         ul.songViewer li{
 
             display: flex;
-            text-align: left;
-        }
-        
-    
-
+            text-align: left;}
         ul.songViewer li div{
 
          width: 24%;
          margin-right: 9%;
-         margin-top: 5%;
-
-
-        }
-
+         margin-top: 5%;}
         .listHead button{
-
             margin-left: 10%;
-
-            height: 5%;
-        }
-        
+            height: 5%;}
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -571,13 +529,7 @@
     <script src="./starting-files/assign2.js"></script>
 </head>
 <body>
-
     <header>
-
-      
-
-       
-        
         <div id="logoGroup">
             <img src="./images/disc-jockey-phonograph-record-dj-mix-anime-scratching-anime-removebg-preview.png" id ="logo2">
             <h1><img src="./images/image-removebg-preview.png" alt="Epic Music Hub Logo"></h1>
@@ -593,10 +545,8 @@
             <button class="header-div" id = "home">
                 Home
             </button>
-
             <button class="header-div" id = "singleSongViewer"></button>
         </div>
-
         <!-- Credit Button, separated below -->
         </div>
         <div class = creditsHoverButton>
@@ -612,11 +562,8 @@
     </header>
     <div id="popupElement"></div>
     <main>
-
         <div data-id="playlist" class="hide">
-
             <div id="playlistView" class="view">
-                
             <div id="searchDiv" class="section browseDiv" >
                 <h2>Playlist</h2>
                 <div style="width: 90%; max-height: 400px; " class="songDisplay">
@@ -627,8 +574,7 @@
                         <h3 data-id="year" data-table="playlistTable" class="rearrange playlistTableHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Year</h3>
                         <button type="button" class="clearPlaylist">Clear</button>
                 </div>
-                <ul   id="playlistTable" class="songViewer fullSongList" style="max-height: 300px;  ">
-                   
+                <ul   id="playlistTable" class="songViewer fullSongList" style="max-height: 300px;  "> 
                 </ul>
                 </div>
             </div>
@@ -637,97 +583,67 @@
         <div data-id = "home" >
             <div id="homeView" class="view">
                 <div class="section topDisplay">
-
                     <h2>Top Artists</h2>
-
                     <ol id="topArtists" class="mainList">
                     </ol>
                 </div>
                 <div class="section topDisplay">
-
                     <h2 >Top Genres</h2>
                     <ol id="topGenres" class="mainList">
                     </ol>
-
                 </div>
                 <div id="topSongDiv" class="section">
                     <h2>Most Popular Songs</h2>
-
                     <ol id="topSongs" class="mainList songViewer">
                     </ol>
-
                 </div>
             </div>
         </div>
-            
         <div data-id ="browse" class="hide">
             <div class="view">
             <div style="min-width: 18%; flex:1" class="section">
-                
                 <h2>Search/Filter</h2>
-
                     <form id ="filter">
-
                         <div>
-
                             <input type="radio" data-id="genre" name="searchOption" id="genreRad">
                             <label for="genre">Genre</label><br>
                             <select name="genre" id="genre"  class="select" disabled>
                                 <option disabled selected  value="">Please Select a genre</option>
                             </select>
-
                         </div>
-                        
                         <div>
-
                             <input type="radio" data-id="artist" name="searchOption" id="artistRad">
                             <label for="artist">Artist</label><br>
                             <select name="artist" id="artist" class="select" disabled>
                                 <option disabled selected  value="">Please Select an artist</option>
                             </select>
-
                         </div>
-
                         <div>
-
                             <input type="radio" data-id="title" name="searchOption" id="titleRad">
                             <label for="title">Song Title</label><br>
                             <input type="text"  id="title"  class="select" disabled>
-                            
-                            
                         </div>
-
                         <button type="button" class="buttons" id="listSongs">Search</button>
                         <button id="clear" class= "buttons " type="reset">Clear</button>
-
                 </form>
-
             </div>
-            
             <div id="playlistSection" class="section browseDiv" >
                 <h2>Results</h2>
                 <div class="songDisplay">
                 <div class="listHead">
-                    
                         <h3 data-id="title" data-table="searchList" class="rearrange searchListHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Title</h3>
                         <h3 data-id="artist" data-table="searchList" class="rearrange searchListHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Artist</h3>
                         <h3 data-id="genre" data-table="searchList" class="rearrange searchListHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Genre</h3>
                         <h3 data-id="year" data-table="searchList" class="rearrange searchListHead"><img src="./images/arrow.png" alt="arrow" class="arrow">Year</h3>
                 </div>
                 <ul id="searchList" class="songViewer fullSongList" style="max-height: 300px;" >
-                
                 </ul>
                 </div>
-
             </div>
-
             </div>
-        
         </div>
         <!-- HTML for Song Details and Radar Chart -->
-
         <div data-id="singleSongViewer" class="hide">
-
             <div class="view" >
                 <div id="single" class="section" >
                     <h1> Song Information: </h1>
@@ -736,23 +652,14 @@
                     <h2>Analysis Data:</h2>
                     <ul id="analysisData" style="font-size:16px;"></ul>
                 </div>
-
                 <div id="radarChartDiv" class="section">
                     <!-- need to use chart.js for this-->
                     <canvas id="radarChart"></canvas>
-                    
                 </div>
             </div>
         </div>            
-
-
         <!-- HTML for Song Details and Radar Chart -->
-        
-
     </main>
-
-   
-
     <footer>
         <p>&copy; 2023 Fabtastic Music</p>
     </footer>

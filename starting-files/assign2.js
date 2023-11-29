@@ -1,9 +1,3 @@
-/**
- * 
- * 
- * 
- */
-
 /* url of song api --- https versions hopefully a little later this semester */	
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
 
@@ -34,7 +28,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    let selectedSort; //The kind of sort that the searching table is currently in. Holds the music as a copy in order to not affect the base array of music when it is being sorted and such
    let currentPlaylistSort; // Holds the way the playlist is being sorted. This is so that I can add new songs in the proper order.
 
-   await main();//Begins the program
+   main();//Begins the program
 
    /**
     * 
@@ -58,13 +52,19 @@ addEventListener("DOMContentLoaded", async (event) =>{
          playlist = JSON.parse(playlist);}
       if(music ===null){
          console.log('Getting from API');
+         try {
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
          selectedSort=structuredClone(music);}
+         catch(error){
+            alert('File not Found. Please Refresh the Page')
+
+         }
+      }
       else {
          console.log('Getting from stored Data');
          music = JSON.parse(music);
-         selectedSort = structuredClone(music);}}
+         selectedSort = structuredClone(music);}}}
 
    /**
     * 
@@ -545,7 +545,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function singleSongViewer(song) {
       
          let infoOrder= [['Title: ',song.title], ['Artist: ',song.artist.name], ['Year: ',song.year], ['Genre: ', song.genre.name],
-          ['Duration: ', `${Math.floor(song.details.duration / 60)}:${(song.details.duration % 60)}`]];
+          ['Duration: ', `${Math.floor(song.details.duration / 60)}m:${(song.details.duration % 60)}s`]];
          let songInformationList = document.querySelector("#songInformation");
          songInformationList.innerHTML=""
          for(item of infoOrder){
