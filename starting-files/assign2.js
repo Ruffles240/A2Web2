@@ -256,9 +256,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
          if(currentFilter.value===''){
             alert('Please choose an option.')}
          else{
-            let filtered =selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue]));
-            if(checkIfReversed('searchListHead')){
-               filtered.reverse();}
+            let filtered = selectedSort.filter((song) => checkFilter(currentFilter.value, song[searchedValue]));
+
             populateTable(document.querySelector('#searchList'), filtered);}  
       }
       else{
