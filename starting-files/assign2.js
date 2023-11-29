@@ -18,7 +18,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const radioBtns = Array.from(document.querySelectorAll('input[type="radio"]'));
    const listButtons = document.querySelector("#listSongs");
    const tables = document.querySelectorAll('table');
-   const tableHeads= document.querySelectorAll('thead');
+   const tableHeads= document.querySelectorAll('.listHead');
    const sortingFunctions = { //All the different types of sorts contained in a
       'year' : function (a,b) {return b.year - a.year},
       'genre' :  function (a,b){return a.genre.name.localeCompare(b.genre.name)},
