@@ -57,14 +57,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
          localStorage.setItem("data", JSON.stringify(music));
          selectedSort=structuredClone(music);}
          catch(error){
-            alert('File not Found. Please Refresh the Page')
+            alert('File not Found. Please Refresh the Page');
 
          }
       }
       else {
          console.log('Getting from stored Data');
          music = JSON.parse(music);
-         selectedSort = structuredClone(music);}}}
+         selectedSort = structuredClone(music);}
+      }
+      
 
    /**
     * 
