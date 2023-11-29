@@ -424,16 +424,16 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeTable(target){
 
       if(target.classList.contains('arrow')){
-
+         target = target.parentElement;
       }
       if(target.classList.contains('rearrange')){
          var tbody = document.querySelector(`#${event.target.dataset.table}`);
-         var criteria = event.target.dataset.id;
+         var criteria = target.dataset.id;
          if(tbody.id =='searchList'){
-            rearrangeSearchTable(criteria, tbody, event.target, selectedSort);
+            rearrangeSearchTable(criteria, tbody, target, selectedSort);
          }
          else if(tbody.id =='playlistTable'){
-            rearrangeSearchTable(criteria, tbody, event.target, playlist);
+            rearrangeSearchTable(criteria, tbody, target, playlist);
             currentPlaylistSort = [criteria];
          }
       }
