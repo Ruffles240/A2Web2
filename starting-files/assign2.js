@@ -83,7 +83,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
       radioBtns.forEach((radio) => radio.addEventListener("change", (event)=>radioListener(event)));
       tables.forEach((table)=>  table.addEventListener('click', (event)=>tableListener(event)));
       document.querySelector("#homeButtons").addEventListener("click", (event) => pageSwitch(event)); 
-      tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event))})
+      tableHeads.forEach((th) => {th.addEventListener('click', (event) => rearrangeTable(event.target))})
       topLists.forEach((list) => {list.addEventListener('click', (event)  => redirect(event.target))})
       songViewers.forEach((songViewer) => {songViewer.addEventListener('click', (event) => makeSongView(event.target))});
       document.querySelector("#credits").addEventListener('mouseover', () => {
@@ -421,8 +421,12 @@ addEventListener("DOMContentLoaded", async (event) =>{
     * This listens to the head and associated items through event delegation. Then rearranges the table according to what needs to be ordered.
     */
 
-   function rearrangeTable(event){
-      if(event.target.classList.contains('rearrange')){
+   function rearrangeTable(target){
+
+      if(target.classList.contains('arrow')){
+
+      }
+      if(target.classList.contains('rearrange')){
          var tbody = document.querySelector(`#${event.target.dataset.table}`);
          var criteria = event.target.dataset.id;
          if(tbody.id =='searchList'){
