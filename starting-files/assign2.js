@@ -90,6 +90,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          document.querySelector("#creditContents").classList.remove("creditPopup");
          setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
       });
+      document.querySelector("#credits").addEventListener('mouseover', () => creditsMaker());
 
    }
 
@@ -559,16 +560,21 @@ addEventListener("DOMContentLoaded", async (event) =>{
     * 
     * @param {*} song Contains song object based on target from makeSongView(target)
     */
-<<<<<<< HEAD
 
     // JS for Credit Popup hover 
-   document.querySelector("#credits").addEventListener('mouseover', () => {
+    function creditsMaker(){
       document.querySelector("#creditContents").classList.remove("creditPopup");
       setTimeout(() => {document.querySelector("#creditContents").classList.add("creditPopup");}, 3600);
    });
 
-=======
->>>>>>> 7f2fa7b71d010c771d8a9416e174cf14bd98260f
+
+   /**
+    * 
+    * @param { } song the song to be shown
+    * 
+    * This makes the layour of the single song view 
+    */
+
    function singleSongViewer(song) {
       
          let infoOrder= [['Title: ',song.title], ['Artist: ',song.artist.name], ['Year: ',song.year], ['Genre: ', song.genre.name],
