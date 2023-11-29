@@ -427,7 +427,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          target = target.parentElement;
       }
       if(target.classList.contains('rearrange')){
-         var tbody = document.querySelector(`#${event.target.dataset.table}`);
+         var tbody = document.querySelector(`#${target.dataset.table}`);
          var criteria = target.dataset.id;
          if(tbody.id =='searchList'){
             rearrangeSearchTable(criteria, tbody, target, selectedSort);
