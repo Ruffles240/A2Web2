@@ -309,22 +309,22 @@ addEventListener("DOMContentLoaded", async (event) =>{
   function makeRow(table, song){
       let buttonType= ["addPlaylist", "Add"] ;
       if(table.id==="playlistTable"){
-         buttonType = ["removePlaylist", "Remove"];
-      }
+         buttonType = ["removePlaylist", "Remove"];}
       let newRow = document.createElement("li");
-      let shortenedTitle= song.title.substring(0,24);
+      let shortenedTitle= song.title.substring(0,23);
       if(song.title.length>25){
-         shortenedTitle = shortenedTitle.substring(0, 23);
-         shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
-      }
+         shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';}
       let order = [shortenedTitle, song.artist.name, song.genre.name, song.year];
       newRow.dataset.id = song.song_id;
-      
+      fillRow(song, order, row, buttonType);
+      return newRow;
+   }
+
+   function fillRow(song, order, row , buttonType){
       for(item of order){
          let div = document.createElement('div');
          div.innerHTML=item;
-         newRow.appendChild(div);
-      }
+         newRow.appendChild(div);}
       newRow.firstChild.dataset.id = song.title;
       newRow.firstChild.classList.add("link", "songLink");
       let button =document.createElement("button");
@@ -334,15 +334,15 @@ addEventListener("DOMContentLoaded", async (event) =>{
       button.dataset.id = song.song_id;
       button.classList.add(`${buttonType[0]}`);
       buttonDiv.appendChild(button);
-      newRow.appendChild(buttonDiv);
-      return newRow;
-   }
+      row.appendChild(buttonDiv);
+   };
 
    /**
     * 
     * @param {} event 
     * 
-    * This listens the table body, handling each button through event delegation.
+    * This listens the table body, handling each button through event delegation. 
+    * Handles the buttons for ellipses, and for removing/adding/clearing the playlist.
     */
    
    function tableListener (event){
@@ -355,13 +355,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
                alert('This song is already in the playlist');}
             else{
                playlist.push(thisSong);
-               popupText(`${thisSong.title} Added to Playlist`)}
-         }
+               popupText(`${thisSong.title} Added to Playlist`)}}
          else if(event.target.classList.contains('removePlaylist')){removePlaylistSong(thisSong);}
          else if(event.target.classList.contains('clearPlaylist')){playlist = [];
             currentPlaylistSort = null;
-            resetSorts(document.querySelectorAll('.playlistTableHead'));
-         }
+            resetSorts(document.querySelectorAll('.playlistTableHead'));}
          updatePlaylist();
    }
 
@@ -436,8 +434,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeTable(target){
 
       if(target.classList.contains('arrow')){
-         target = target.parentElement;
-      }
+         target = target.parentElement;}
       if(target.classList.contains('rearrange')){
          let tbody = document.querySelector(`#${target.dataset.table}`);
          let criteria = target.dataset.id;
@@ -446,10 +443,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
          }
          else if(tbody.id =='playlistTable'){
             rearrangeSearchTable(criteria, tbody, target, playlist);
-            currentPlaylistSort = [criteria];
-         }
-      }
-   }
+            currentPlaylistSort = [criteria];}}}
 
 
    /**
@@ -466,13 +460,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function rearrangeSearchTable(criteria, tbody, header, list){
       let checkSelected = header.classList.contains('selected');
       let currentSongs=list.sort(sortingFunctions[criteria]);
-   
       if(currentFilter!=null && currentFilter.value !='' && tbody.id =="searchList"){
             currentSongs= list.filter((song) => checkFilter(currentFilter.value, song[currentFilter.id]));}
       if(checkSelected && !(header.firstChild.classList.contains('rotated'))){
          currentSongs.reverse();
-         header.firstChild.classList.toggle('rotated');
-      }
+         header.firstChild.classList.toggle('rotated');}
       else{
          resetSorts(Array.from(document.querySelectorAll(`.${header.dataset.table}Head`)));
          header.classList.add('selected');}
@@ -491,13 +483,8 @@ addEventListener("DOMContentLoaded", async (event) =>{
    function resetSorts(tableHeads){
       console.log(tableHeads);
       for(let colHead of tableHeads){
-
          colHead.classList.remove('selected');
-
-         colHead.firstChild.classList.remove('rotated');
-      }
-      
-   };
+         colHead.firstChild.classList.remove('rotated');}};
 
    /**
     * 
@@ -505,16 +492,11 @@ addEventListener("DOMContentLoaded", async (event) =>{
     * 
     * Resets all input boxes.
     */
-      
    function resetBoxes(resetted){
       resetted.forEach(function(option)
       {
          option.disabled = true;
-         currentFilter =null; 
-      })   
-   }
-
-
+         currentFilter =null; })   }
    /**
     * 
     * @param {*} table the list
@@ -601,7 +583,6 @@ addEventListener("DOMContentLoaded", async (event) =>{
             li.innerHTML = `<div class="progressBar" style="width:${item[1] / 2}%;">${item[0]}: ${item[1]}</div>`;
             analysisDataList.appendChild(li);
         }
-
          console.log(`Putting ${song.title} into makeRadarChart`);
          let existingChart = Chart.getChart(document.querySelector('#radarChart'));
          if(existingChart){
