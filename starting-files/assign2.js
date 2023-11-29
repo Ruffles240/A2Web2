@@ -17,7 +17,7 @@ addEventListener("DOMContentLoaded", async (event) =>{
    const topLists = Array.from(document.querySelectorAll('.mainList'));
    const radioBtns = Array.from(document.querySelectorAll('input[type="radio"]'));
    const listButtons = document.querySelector("#listSongs");
-   const tables = document.querySelectorAll('table');
+   const tables = document.querySelectorAll('.songDisplay');
    const tableHeads= document.querySelectorAll('.listHead');
    const sortingFunctions = { //All the different types of sorts contained in a
       'year' : function (a,b) {return b.year - a.year},
@@ -315,18 +315,18 @@ addEventListener("DOMContentLoaded", async (event) =>{
       else if(table.id==="playlistTable"){
          type = 'class= "removePlaylist">Remove';
       }
-      let newRow = document.createElement("tr");
+      let newRow = document.createElement("li");
       let shortenedTitle= song.title.substring(0,24);
       if(song.title.length>25){
          shortenedTitle = shortenedTitle.substring(0, 23);
          shortenedTitle += `<button type='button' class="titleEllipse" data-id = "${song.song_id}">`+ '&hellip;'+ '</button>';
       }
       newRow.dataset.id = song.song_id;
-      newRow.innerHTML = `<td data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</td><td data-type = "artist" data-id= 
-      "${song.artist.name}">${song.artist.name}</td><td data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
-      </td><td data-type = "year" data-id = "${song.year}">${song.year}</td><td data-type = "button" >
+      newRow.innerHTML = `<div data-type = "title" data-id="${song.title}" class="link songLink">${shortenedTitle}</div><div data-type = "artist" data-id= 
+      "${song.artist.name}">${song.artist.name}</div><div data-type = "genre" data-id="${song.genre.name}">${song.genre.name}
+      </div><div data-type = "year" data-id = "${song.year}">${song.year}</div><div data-type = "button" >
       <button  type= 'button'
-       data-id = '${song.song_id}' ${type} </button></td>`;
+       data-id = '${song.song_id}' ${type} </button></div>`;
       return newRow;
    }
 
