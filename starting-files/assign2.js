@@ -62,11 +62,14 @@ addEventListener("DOMContentLoaded", async (event) =>{
          playlist = JSON.parse(playlist);
       }
       if(music ===null){
+         console.log('Getting from API');
          music = await fetchData(api);
          localStorage.setItem("data", JSON.stringify(music));
          selectedSort=structuredClone(music);
       }
       else {
+         console.log('Getting from stored Data');
+
          music = JSON.parse(music);
          selectedSort = structuredClone(music);
       }
