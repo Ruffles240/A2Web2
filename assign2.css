@@ -16,8 +16,12 @@ button{
 
 button, input, h3{
     cursor: pointer;
+}
+
+button:hover, input:hover, h3:hover{
     border: 3px;
-    background-color: rgb(122, 55, 136);
+    border-color: rgb(122, 55, 136);
+
 }
 header {
     
