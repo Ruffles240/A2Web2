@@ -14,8 +14,10 @@ button{
 
 }
 
-button, input{
+button, input, h3{
     cursor: pointer;
+    border: 3px;
+    background-color: rgb(122, 55, 136);
 }
 header {
     
