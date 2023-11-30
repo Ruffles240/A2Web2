@@ -18,7 +18,7 @@ button, input, h3{
     cursor: pointer;
 }
 
-button:hover, input:hover, h3:hover, .songLink:hover{
+button:hover, input:hover, h3:hover, .link:hover{
   transform: scale(1.05);
 
 }
