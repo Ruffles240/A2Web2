@@ -18,9 +18,8 @@ button, input, h3{
     cursor: pointer;
 }
 
-button:hover, input:hover, h3:hover{
-    border: 3px;
-    border-color: rgb(122, 55, 136);
+button:hover, input:hover, h3:hover, .songLink:hover{
+  transform: scale(1.05);
 
 }
 header {
